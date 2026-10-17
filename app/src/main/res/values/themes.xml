@@ -1,0 +1,36 @@
+<resources>
+    <style name="Theme.ExpenseTracker" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/teal_primary</item>
+        <item name="colorOnPrimary">@color/text_inverse</item>
+        <item name="colorPrimaryContainer">@color/teal_dark</item>
+        <item name="colorOnPrimaryContainer">@color/teal_light</item>
+
+        <item name="colorSecondary">@color/transfer_blue</item>
+        <item name="colorOnSecondary">@color/text_inverse</item>
+
+        <item name="colorSurface">@color/surface_navy</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSurfaceVariant">@color/surface_navy_elevated</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+
+        <item name="colorOutline">@color/stroke_subtle</item>
+        <item name="android:statusBarColor">@color/bg_navy_dark</item>
+        <item name="android:navigationBarColor">@color/nav_bar_bg</item>
+        <item name="android:windowBackground">@color/bg_navy_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="CardViewCustom" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/surface_navy_elevated</item>
+        <item name="strokeColor">@color/stroke_subtle</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardCornerRadius">16dp</item>
+    </style>
+
+    <style name="ChipCustom" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/surface_navy</item>
+        <item name="chipStrokeColor">@color/stroke_subtle</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+</resources>

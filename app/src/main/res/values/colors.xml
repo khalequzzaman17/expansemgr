@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Backgrounds & Surfaces -->
+    <color name="bg_navy_dark">#0B1220</color>
+    <color name="surface_navy">#111B2D</color>
+    <color name="surface_navy_elevated">#151F30</color>
+    <color name="surface_card_highlight">#1E2C44</color>
+    <color name="stroke_subtle">#1E293B</color>
+    <color name="stroke_medium">#334155</color>
+    
+    <!-- Primary Accents -->
+    <color name="teal_primary">#2DD4BF</color>
+    <color name="teal_light">#5EEAD4</color>
+    <color name="teal_dark">#0D9488</color>
+    <color name="teal_glow">#332DD4BF</color>
+    
+    <!-- Semantic Financial Colors -->
+    <color name="income_green">#10B981</color>
+    <color name="income_green_bg">#1A10B981</color>
+    <color name="expense_red">#EF4444</color>
+    <color name="expense_red_bg">#1AEF4444</color>
+    <color name="transfer_blue">#38BDF8</color>
+    <color name="transfer_blue_bg">#1A38BDF8</color>
+    <color name="warning_amber">#F59E0B</color>
+    <color name="warning_amber_bg">#1AF59E0B</color>
+    <color name="savings_purple">#A855F7</color>
+    <color name="savings_purple_bg">#1AA855F7</color>
+    <color name="debt_orange">#FB923C</color>
+    <color name="debt_orange_bg">#1AFB923C</color>
+    
+    <!-- Typography -->
+    <color name="text_primary">#F8FAFC</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="text_muted">#64748B</color>
+    <color name="text_inverse">#0B1220</color>
+    
+    <!-- Navigation & Components -->
+    <color name="nav_bar_bg">#0E1726</color>
+    <color name="nav_item_unselected">#64748B</color>
+    <color name="nav_item_selected">#2DD4BF</color>
+    <color name="divider_color">#1E293B</color>
+    <color name="scrim_dark">#99000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>

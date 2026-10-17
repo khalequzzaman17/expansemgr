@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name=".ExpenseTrackerApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ExpenseTracker">
+
+        <activity
+            android:name=".ui.security.PinLockActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.addtransaction.AddEditTransactionActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.transactions.TransactionDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.budgets.BudgetsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.budgets.AddEditBudgetActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.accounts.AccountsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.accounts.AddEditAccountActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.accounts.TransferActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.savings.SavingsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.savings.AddEditSavingsGoalActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.savings.SavingsDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.debts.DebtsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.debts.AddEditDebtActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.debts.DebtDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.recurring.RecurringActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.recurring.AddEditRecurringActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.categories.CategoriesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.categories.AddEditCategoryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.export.ExportActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.backup.BackupRestoreActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.about.AboutActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.security.SetPinActivity"
+            android:exported="false" />
+
+    </application>
+
+</manifest>

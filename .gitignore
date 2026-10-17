@@ -1,0 +1,10 @@
+.gradle/
+.kotlin/
+build/
+*/build/
+.idea/
+local.properties
+*.iml
+.presentation_build/
+.presentation_output/
+

@@ -1,0 +1,222 @@
+<resources>
+    <string name="app_name">ব্যয় ট্র্যাকার</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">হোম</string>
+    <string name="nav_transactions">লেনদেন</string>
+    <string name="nav_add">যোগ করুন</string>
+    <string name="nav_reports">রিপোর্ট</string>
+    <string name="nav_more">আরও</string>
+
+    <!-- Financial Types -->
+    <string name="type_expense">খরচ</string>
+    <string name="type_income">আয়</string>
+    <string name="type_transfer">স্থানান্তর</string>
+
+    <!-- Dashboard -->
+    <string name="total_balance">মোট ব্যালেন্স</string>
+    <string name="total_income">মোট আয়</string>
+    <string name="total_expense">মোট ব্যয়</string>
+    <string name="net_cashflow">নেট ক্যাশ ফ্লো</string>
+    <string name="recent_transactions">সাম্প্রতিক লেনদেন</string>
+    <string name="see_all">সব দেখুন</string>
+    <string name="spending_breakdown">ব্যয়ের বিশ্লেষণ</string>
+    <string name="quick_actions">দ্রুত সেবা</string>
+    <string name="budget_overview">বাজেট অগ্রগতি</string>
+    <string name="accounts_summary">আমার অ্যাকাউন্টসমূহ</string>
+    <string name="savings_progress">সঞ্চয় লক্ষ্য</string>
+
+    <!-- Periods -->
+    <string name="period_today">আজ</string>
+    <string name="period_this_week">এই সপ্তাহ</string>
+    <string name="period_this_month">এই মাস</string>
+    <string name="period_last_month">গত মাস</string>
+    <string name="period_this_year">এই বছর</string>
+    <string name="period_custom">কাস্টম তারিখ</string>
+
+    <!-- Transactions -->
+    <string name="title_add_transaction">লেনদেন যোগ করুন</string>
+    <string name="title_edit_transaction">লেনদেন সম্পাদনা</string>
+    <string name="transaction_details">লেনদেনের বিস্তারিত</string>
+    <string name="hint_title">শিরোনাম / বিবরণ</string>
+    <string name="hint_amount">পরিমাণ</string>
+    <string name="hint_category">ক্যাটাগরি</string>
+    <string name="hint_account">অ্যাকাউন্ট / ওয়ালেট</string>
+    <string name="hint_to_account">প্রাপক অ্যাকাউন্ট</string>
+    <string name="hint_payment_method">পেমেন্ট মাধ্যম</string>
+    <string name="hint_date">তারিখ ও সময়</string>
+    <string name="hint_note">নোট (ঐচ্ছিক)</string>
+    <string name="hint_tags">ট্যাগ (কমা দিয়ে আলাদা করুন)</string>
+    <string name="search_transactions">লেনদেন খুঁজুন...</string>
+    <string name="no_transactions_found">কোনো লেনদেন পাওয়া যায়নি</string>
+    <string name="confirm_delete_title">মুছে ফেলার নিশ্চিতকরণ</string>
+    <string name="confirm_delete_msg">আপনি কি নিশ্চিত যে এই রেকর্ডটি মুছে ফেলতে চান? এটি ফিরিয়ে আনা সম্ভব নয়।</string>
+
+    <!-- Sort & Filters -->
+    <string name="sort_newest">নতুন আগে</string>
+    <string name="sort_oldest">পুরনো আগে</string>
+    <string name="sort_highest">সর্বোচ্চ পরিমাণ</string>
+    <string name="sort_lowest">সর্বনিম্ন পরিমাণ</string>
+    <string name="filter_all">সকল</string>
+    <string name="apply_filter">প্রয়োগ করুন</string>
+    <string name="clear_filter">মুছুন</string>
+
+    <!-- Accounts -->
+    <string name="accounts_title">অ্যাকাউন্ট ও ওয়ালেট</string>
+    <string name="add_account">অ্যাকাউন্ট যোগ করুন</string>
+    <string name="edit_account">অ্যাকাউন্ট সম্পাদনা</string>
+    <string name="account_name">অ্যাকাউন্টের নাম</string>
+    <string name="initial_balance">শুরুর ব্যালেন্স</string>
+    <string name="current_balance">বর্তমান ব্যালেন্স</string>
+    <string name="transfer_money">টাকা স্থানান্তর</string>
+    <string name="from_account">প্রেরক অ্যাকাউন্ট</string>
+    <string name="to_account">প্রাপক অ্যাকাউন্ট</string>
+
+    <!-- Categories -->
+    <string name="categories_title">ক্যাটাগরি সমূহ</string>
+    <string name="add_category">ক্যাটাগরি যোগ করুন</string>
+    <string name="edit_category">ক্যাটাগরি সম্পাদনা</string>
+    <string name="category_name">ক্যাটাগরির নাম</string>
+    <string name="category_type">ক্যাটাগরির ধরন</string>
+
+    <!-- Default Categories -->
+    <string name="cat_food">খাদ্য ও মুদি</string>
+    <string name="cat_transport">যাতায়াত</string>
+    <string name="cat_shopping">কেনাকাটা</string>
+    <string name="cat_bills">বিল ও সেবা</string>
+    <string name="cat_rent">বাসা ভাড়া</string>
+    <string name="cat_healthcare">চিকিৎসা ও ওষুধ</string>
+    <string name="cat_education">শিক্ষা</string>
+    <string name="cat_entertainment">বিনোদন</string>
+    <string name="cat_travel">ভ্রমণ</string>
+    <string name="cat_personal_care">ব্যক্তিগত যত্ন</string>
+    <string name="cat_family">পরিবার</string>
+    <string name="cat_other_expense">অন্যান্য খরচ</string>
+    <string name="cat_salary">বেতন</string>
+    <string name="cat_freelance">ফ্রিল্যান্সিং</string>
+    <string name="cat_business">ব্যবসা</string>
+    <string name="cat_investment">বিনিয়োগ লাভ</string>
+    <string name="cat_gifts">উপহার</string>
+    <string name="cat_other_income">অন্যান্য আয়</string>
+
+    <!-- Payment Methods -->
+    <string name="pm_cash">ক্যাশ</string>
+    <string name="pm_bank">ব্যাংক</string>
+    <string name="pm_card">কার্ড</string>
+    <string name="pm_bkash">বিকাশ</string>
+    <string name="pm_nagad">নগদ</string>
+    <string name="pm_other">অন্যান্য</string>
+
+    <!-- Budgets -->
+    <string name="budgets_title">বাজেট</string>
+    <string name="add_budget">বাজেট নির্ধারণ</string>
+    <string name="edit_budget">বাজেট পরিবর্তন</string>
+    <string name="monthly_budget">মাসিক মোট বাজেট</string>
+    <string name="category_budget">ক্যাটাগরি বাজেট</string>
+    <string name="budget_limit">ব্যয়ের সীমা</string>
+    <string name="spent">ব্যয় হয়েছে</string>
+    <string name="remaining">অবশিষ্ট</string>
+    <string name="over_budget">বাজেট অতিক্রম করেছে!</string>
+    <string name="budget_warning">সীমার কাছাকাছি (%1$d%% খরচ)</string>
+
+    <!-- Recurring -->
+    <string name="recurring_title">নিয়মিত লেনদেন</string>
+    <string name="add_recurring">নিয়মিত লেনদেন যোগ</string>
+    <string name="edit_recurring">সম্পাদনা</string>
+    <string name="frequency">পুনরাবৃত্তি</string>
+    <string name="freq_daily">প্রতিদিন</string>
+    <string name="freq_weekly">প্রতি সপ্তাহে</string>
+    <string name="freq_monthly">প্রতি মাসে</string>
+    <string name="freq_yearly">প্রতি বছর</string>
+    <string name="next_due">পরবর্তী তারিখ: %1$s</string>
+    <string name="status_active">সক্রিয়</string>
+    <string name="status_paused">স্থগিত</string>
+
+    <!-- Savings -->
+    <string name="savings_title">সঞ্চয় লক্ষ্য</string>
+    <string name="add_savings_goal">নতুন লক্ষ্য যোগ</string>
+    <string name="edit_savings_goal">লক্ষ্য সম্পাদনা</string>
+    <string name="goal_name">লক্ষ্যের নাম</string>
+    <string name="target_amount">কাঙ্ক্ষিত পরিমাণ</string>
+    <string name="current_saved">বর্তমান জমার পরিমাণ</string>
+    <string name="add_deposit">জমা করুন</string>
+    <string name="add_withdrawal">উত্তোলন করুন</string>
+    <string name="goal_completed">লক্ষ্য অর্জিত হয়েছে!</string>
+
+    <!-- Debts -->
+    <string name="debts_title">ধার ও দেনা-পাওনা</string>
+    <string name="add_debt">ধার রেকর্ড যোগ</string>
+    <string name="edit_debt">ধার সম্পাদনা</string>
+    <string name="debt_payable">আমার দেনা (দিতে হবে)</string>
+    <string name="debt_receivable">আমার পাওনা (পাব)</string>
+    <string name="person_organization">ব্যক্তি / প্রতিষ্ঠান</string>
+    <string name="outstanding_balance">বকেয়া পরিমাণ</string>
+    <string name="record_repayment">পরিশোধের হিসাব</string>
+    <string name="status_pending">চলমান</string>
+    <string name="status_paid">পরিশোধিত</string>
+    <string name="status_overdue">মেয়াদোত্তীর্ণ</string>
+
+    <!-- Reports -->
+    <string name="reports_title">আর্থিক রিপোর্ট</string>
+    <string name="income_vs_expense">আয় বনাম ব্যয়</string>
+    <string name="monthly_trends">মাসিক ট্রেন্ড</string>
+    <string name="expense_by_category">ক্যাটাগরি অনুযায়ী ব্যয়</string>
+    <string name="income_by_category">ক্যাটাগরি অনুযায়ী আয়</string>
+    <string name="daily_spending">দৈনিক ব্যয়</string>
+    <string name="budget_utilization">বাজেট ব্যবহার</string>
+    <string name="no_chart_data">এই সময়ের জন্য কোনো তথ্য পাওয়া যায়নি।</string>
+
+    <!-- Export & Backup -->
+    <string name="export_title">তথ্য এক্সপোর্ট</string>
+    <string name="export_csv">CSV ফাইল এক্সপোর্ট</string>
+    <string name="export_pdf">PDF রিপোর্ট তৈরি</string>
+    <string name="backup_restore_title">ব্যাকআপ ও রিস্টোর</string>
+    <string name="create_backup">লোকাল ব্যাকআপ তৈরি</string>
+    <string name="restore_backup">ব্যাকআপ থেকে রিস্টোর</string>
+    <string name="backup_success">সফলভাবে ব্যাকআপ সম্পন্ন হয়েছে!</string>
+    <string name="restore_success">তথ্য সফলভাবে পুনরুদ্ধার করা হয়েছে!</string>
+    <string name="export_success">ডাউনলোড ফোল্ডারে ফাইল সংরক্ষিত হয়েছে!</string>
+
+    <!-- Security & Settings -->
+    <string name="settings_title">সেটিংস</string>
+    <string name="app_lock">পিন লক</string>
+    <string name="biometric_auth">বায়োমেট্রিক আনলক</string>
+    <string name="set_pin">৪-ডিজিট পিন দিন</string>
+    <string name="change_pin">পিন পরিবর্তন</string>
+    <string name="enter_pin">অ্যাপ খুলতে পিন দিন</string>
+    <string name="confirm_pin">পিন নিশ্চিত করুন</string>
+    <string name="pin_mismatch">পিন মেলেনি, আবার চেষ্টা করুন।</string>
+    <string name="pin_wrong">ভুল পিন। বাকি চেষ্টা: %1$d</string>
+    <string name="pin_locked_timer">লক করা হয়েছে। অপেক্ষা করুন: %1$d সেকেন্ড</string>
+    <string name="currency">মুদ্রা (কারেন্সি)</string>
+    <string name="language">ভাষা (Language)</string>
+    <string name="english">English</string>
+    <string name="bangla">বাংলা (Bangla)</string>
+    <string name="notifications">বিজ্ঞপ্তি ও রিমাইন্ডার</string>
+    <string name="budget_alert_threshold">বাজেট সতর্কতা সীমা</string>
+
+    <!-- About Screen Requirements -->
+    <string name="about_title">ডেভেলপার সম্পর্কে</string>
+    <string name="developer_name">Developed by Khalequzzaman</string>
+    <string name="developer_phone">Phone: +8801710503837</string>
+    <string name="developer_email">Email: hello@sysninja.net</string>
+    <string name="developer_website">Website: https://sysninja.net/</string>
+    <string name="phone_raw">+8801710503837</string>
+    <string name="email_raw">hello@sysninja.net</string>
+    <string name="website_url">https://sysninja.net/</string>
+    <string name="app_version">সংস্করণ %1$s (বিল্ড %2$d)</string>
+    <string name="share_app">অ্যাপ শেয়ার করুন</string>
+    <string name="share_text">Expense Tracker দিয়ে সহজেই আপনার আয়-ব্যয় ট্র্যাক করুন! তৈরি করেছেন Khalequzzaman (https://sysninja.net/)</string>
+
+    <!-- Actions & Common -->
+    <string name="save">সংরক্ষণ করুন</string>
+    <string name="cancel">বাতিল</string>
+    <string name="delete">মুছুন</string>
+    <string name="edit">সম্পাদনা</string>
+    <string name="confirm">নিশ্চিত করুন</string>
+    <string name="error_required">এই ঘরটি পূরণ করা আবশ্যক</string>
+    <string name="error_invalid_amount">সঠিক ধনাত্মক সংখ্যা লিখুন</string>
+    <string name="error_insufficient_funds">পর্যাপ্ত ব্যালেন্স নেই</string>
+    <string name="error_same_account">প্রেরক এবং প্রাপক অ্যাকাউন্ট আলাদা হতে হবে</string>
+    <string name="saved_successfully">সফলভাবে সংরক্ষিত হয়েছে!</string>
+</resources>

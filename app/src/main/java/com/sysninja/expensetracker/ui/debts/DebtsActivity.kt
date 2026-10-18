@@ -1,4 +1,4 @@
-package com.expensetracker.ui.debts
+﻿package com.sysninja.expensetracker.ui.debts
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.expensetracker.ExpenseTrackerApp
-import com.expensetracker.R
-import com.expensetracker.domain.MoneyUtils
+import com.sysninja.expensetracker.ExpenseTrackerApp
+import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.domain.MoneyUtils
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.flow.first

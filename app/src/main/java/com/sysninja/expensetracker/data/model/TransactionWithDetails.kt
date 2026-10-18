@@ -1,10 +1,10 @@
-package com.expensetracker.data.model
+﻿package com.sysninja.expensetracker.data.model
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.expensetracker.data.local.entity.AccountEntity
-import com.expensetracker.data.local.entity.CategoryEntity
-import com.expensetracker.data.local.entity.TransactionEntity
+import com.sysninja.expensetracker.data.local.entity.AccountEntity
+import com.sysninja.expensetracker.data.local.entity.CategoryEntity
+import com.sysninja.expensetracker.data.local.entity.TransactionEntity
 
 data class TransactionWithDetails(
     @Embedded

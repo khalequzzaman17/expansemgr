@@ -1,4 +1,4 @@
-package com.expensetracker.ui.dashboard
+﻿package com.sysninja.expensetracker.ui.dashboard
 
 import android.content.Intent
 import android.graphics.Color
@@ -14,15 +14,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.expensetracker.R
-import com.expensetracker.data.model.PeriodType
-import com.expensetracker.databinding.FragmentDashboardBinding
-import com.expensetracker.domain.MoneyUtils
-import com.expensetracker.ui.addtransaction.AddEditTransactionActivity
-import com.expensetracker.ui.main.MainActivity
-import com.expensetracker.ui.settings.SettingsActivity
-import com.expensetracker.ui.transactions.TransactionListAdapter
-import com.expensetracker.ui.views.DonutChartView
+import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.data.model.PeriodType
+import com.sysninja.expensetracker.databinding.FragmentDashboardBinding
+import com.sysninja.expensetracker.domain.MoneyUtils
+import com.sysninja.expensetracker.ui.addtransaction.AddEditTransactionActivity
+import com.sysninja.expensetracker.ui.main.MainActivity
+import com.sysninja.expensetracker.ui.settings.SettingsActivity
+import com.sysninja.expensetracker.ui.transactions.TransactionListAdapter
+import com.sysninja.expensetracker.ui.views.DonutChartView
 import kotlinx.coroutines.launch
 
 class DashboardFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.expensetracker.domain
+﻿package com.sysninja.expensetracker.domain
 
 import java.text.SimpleDateFormat
 import java.util.Calendar

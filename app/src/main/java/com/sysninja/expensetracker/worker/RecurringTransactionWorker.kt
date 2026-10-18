@@ -1,10 +1,10 @@
-package com.expensetracker.worker
+﻿package com.sysninja.expensetracker.worker
 
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.expensetracker.data.local.AppDatabase
-import com.expensetracker.data.repository.ExpenseRepository
+import com.sysninja.expensetracker.data.local.AppDatabase
+import com.sysninja.expensetracker.data.repository.ExpenseRepository
 
 class RecurringTransactionWorker(
     private val context: Context,

@@ -1,4 +1,4 @@
-package com.expensetracker.ui.about
+﻿package com.sysninja.expensetracker.ui.about
 
 import android.content.Intent
 import android.net.Uri
@@ -8,8 +8,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.expensetracker.BuildConfig
-import com.expensetracker.R
+import com.sysninja.expensetracker.BuildConfig
+import com.sysninja.expensetracker.R
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 

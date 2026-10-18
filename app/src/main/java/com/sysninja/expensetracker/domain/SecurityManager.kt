@@ -1,4 +1,4 @@
-package com.expensetracker.domain
+﻿package com.sysninja.expensetracker.domain
 
 import android.util.Base64
 import java.security.MessageDigest

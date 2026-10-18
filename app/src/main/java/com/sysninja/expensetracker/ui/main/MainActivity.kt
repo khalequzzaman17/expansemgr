@@ -1,19 +1,19 @@
-package com.expensetracker.ui.main
+﻿package com.sysninja.expensetracker.ui.main
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.expensetracker.ExpenseTrackerApp
-import com.expensetracker.R
-import com.expensetracker.databinding.ActivityMainBinding
-import com.expensetracker.domain.SecurityManager
-import com.expensetracker.ui.addtransaction.AddEditTransactionActivity
-import com.expensetracker.ui.dashboard.DashboardFragment
-import com.expensetracker.ui.security.PinLockActivity
-import com.expensetracker.ui.settings.SettingsActivity
-import com.expensetracker.ui.transactions.TransactionsFragment
+import com.sysninja.expensetracker.ExpenseTrackerApp
+import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.databinding.ActivityMainBinding
+import com.sysninja.expensetracker.domain.SecurityManager
+import com.sysninja.expensetracker.ui.addtransaction.AddEditTransactionActivity
+import com.sysninja.expensetracker.ui.dashboard.DashboardFragment
+import com.sysninja.expensetracker.ui.security.PinLockActivity
+import com.sysninja.expensetracker.ui.settings.SettingsActivity
+import com.sysninja.expensetracker.ui.transactions.TransactionsFragment
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 

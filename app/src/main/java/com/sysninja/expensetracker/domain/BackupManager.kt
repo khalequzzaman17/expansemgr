@@ -1,7 +1,7 @@
-package com.expensetracker.domain
+﻿package com.sysninja.expensetracker.domain
 
-import com.expensetracker.data.local.AppDatabase
-import com.expensetracker.data.local.entity.*
+import com.sysninja.expensetracker.data.local.AppDatabase
+import com.sysninja.expensetracker.data.local.entity.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONArray

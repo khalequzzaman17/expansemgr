@@ -1,11 +1,11 @@
-package com.expensetracker.ui.dashboard
+﻿package com.sysninja.expensetracker.ui.dashboard
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.expensetracker.ExpenseTrackerApp
-import com.expensetracker.data.model.*
-import com.expensetracker.domain.DateUtils
+import com.sysninja.expensetracker.ExpenseTrackerApp
+import com.sysninja.expensetracker.data.model.*
+import com.sysninja.expensetracker.domain.DateUtils
 import kotlinx.coroutines.flow.*
 
 data class DashboardUiState(

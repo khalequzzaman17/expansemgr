@@ -1,4 +1,4 @@
-package com.expensetracker.ui.transactions
+﻿package com.sysninja.expensetracker.ui.transactions
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,9 +14,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.expensetracker.R
-import com.expensetracker.databinding.FragmentTransactionsBinding
-import com.expensetracker.ui.addtransaction.AddEditTransactionActivity
+import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.databinding.FragmentTransactionsBinding
+import com.sysninja.expensetracker.ui.addtransaction.AddEditTransactionActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 

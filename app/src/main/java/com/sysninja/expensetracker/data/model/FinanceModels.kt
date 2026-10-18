@@ -1,4 +1,4 @@
-package com.expensetracker.data.model
+﻿package com.sysninja.expensetracker.data.model
 
 enum class PeriodType {
     TODAY,

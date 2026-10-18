@@ -390,7 +390,7 @@
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
-                <com.expensetracker.ui.views.DonutChartView
+                <com.sysninja.expensetracker.ui.views.DonutChartView
                     android:id="@+id/donutChart"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"

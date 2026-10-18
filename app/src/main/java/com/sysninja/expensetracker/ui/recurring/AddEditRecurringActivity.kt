@@ -1,4 +1,4 @@
-package com.expensetracker.ui.recurring
+﻿package com.sysninja.expensetracker.ui.recurring
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -9,11 +9,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.expensetracker.ExpenseTrackerApp
-import com.expensetracker.R
-import com.expensetracker.data.local.entity.AccountEntity
-import com.expensetracker.data.local.entity.RecurringTransactionEntity
-import com.expensetracker.domain.MoneyUtils
+import com.sysninja.expensetracker.ExpenseTrackerApp
+import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.data.local.entity.AccountEntity
+import com.sysninja.expensetracker.data.local.entity.RecurringTransactionEntity
+import com.sysninja.expensetracker.domain.MoneyUtils
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.flow.first

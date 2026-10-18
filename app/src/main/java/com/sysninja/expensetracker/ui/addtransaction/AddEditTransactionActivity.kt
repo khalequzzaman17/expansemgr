@@ -1,4 +1,4 @@
-package com.expensetracker.ui.addtransaction
+﻿package com.sysninja.expensetracker.ui.addtransaction
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -8,14 +8,14 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.expensetracker.ExpenseTrackerApp
-import com.expensetracker.R
-import com.expensetracker.data.local.entity.AccountEntity
-import com.expensetracker.data.local.entity.CategoryEntity
-import com.expensetracker.data.local.entity.TransactionEntity
-import com.expensetracker.databinding.ActivityAddEditTransactionBinding
-import com.expensetracker.domain.DateUtils
-import com.expensetracker.domain.MoneyUtils
+import com.sysninja.expensetracker.ExpenseTrackerApp
+import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.data.local.entity.AccountEntity
+import com.sysninja.expensetracker.data.local.entity.CategoryEntity
+import com.sysninja.expensetracker.data.local.entity.TransactionEntity
+import com.sysninja.expensetracker.databinding.ActivityAddEditTransactionBinding
+import com.sysninja.expensetracker.domain.DateUtils
+import com.sysninja.expensetracker.domain.MoneyUtils
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.Calendar

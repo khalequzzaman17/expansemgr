@@ -1,14 +1,14 @@
-package com.expensetracker
+﻿package com.sysninja.expensetracker
 
 import android.app.Application
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import com.expensetracker.data.local.AppDatabase
-import com.expensetracker.data.preferences.UserPreferencesManager
-import com.expensetracker.data.repository.ExpenseRepository
-import com.expensetracker.worker.RecurringTransactionWorker
-import com.expensetracker.worker.ReminderNotificationHelper
+import com.sysninja.expensetracker.data.local.AppDatabase
+import com.sysninja.expensetracker.data.preferences.UserPreferencesManager
+import com.sysninja.expensetracker.data.repository.ExpenseRepository
+import com.sysninja.expensetracker.worker.RecurringTransactionWorker
+import com.sysninja.expensetracker.worker.ReminderNotificationHelper
 import java.util.concurrent.TimeUnit
 
 class ExpenseTrackerApp : Application() {

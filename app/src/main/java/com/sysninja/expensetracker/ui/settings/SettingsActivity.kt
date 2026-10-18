@@ -1,4 +1,4 @@
-package com.expensetracker.ui.settings
+﻿package com.sysninja.expensetracker.ui.settings
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,17 +6,17 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.expensetracker.R
-import com.expensetracker.ui.about.AboutActivity
-import com.expensetracker.ui.accounts.AccountsActivity
-import com.expensetracker.ui.backup.BackupRestoreActivity
-import com.expensetracker.ui.budgets.BudgetsActivity
-import com.expensetracker.ui.categories.CategoriesActivity
-import com.expensetracker.ui.debts.DebtsActivity
-import com.expensetracker.ui.export.ExportActivity
-import com.expensetracker.ui.recurring.RecurringActivity
-import com.expensetracker.ui.savings.SavingsActivity
-import com.expensetracker.ui.security.SetPinActivity
+import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.ui.about.AboutActivity
+import com.sysninja.expensetracker.ui.accounts.AccountsActivity
+import com.sysninja.expensetracker.ui.backup.BackupRestoreActivity
+import com.sysninja.expensetracker.ui.budgets.BudgetsActivity
+import com.sysninja.expensetracker.ui.categories.CategoriesActivity
+import com.sysninja.expensetracker.ui.debts.DebtsActivity
+import com.sysninja.expensetracker.ui.export.ExportActivity
+import com.sysninja.expensetracker.ui.recurring.RecurringActivity
+import com.sysninja.expensetracker.ui.savings.SavingsActivity
+import com.sysninja.expensetracker.ui.security.SetPinActivity
 import com.google.android.material.appbar.MaterialToolbar
 
 class SettingsActivity : AppCompatActivity() {

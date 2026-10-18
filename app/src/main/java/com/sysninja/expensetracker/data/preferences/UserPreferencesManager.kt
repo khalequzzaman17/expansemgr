@@ -1,4 +1,4 @@
-package com.expensetracker.data.preferences
+﻿package com.sysninja.expensetracker.data.preferences
 
 import android.content.Context
 import androidx.datastore.core.DataStore

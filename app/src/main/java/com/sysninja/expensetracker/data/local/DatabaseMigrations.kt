@@ -1,4 +1,4 @@
-package com.expensetracker.data.local
+﻿package com.sysninja.expensetracker.data.local
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase

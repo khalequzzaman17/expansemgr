@@ -1,7 +1,7 @@
-package com.expensetracker.data.local
+﻿package com.sysninja.expensetracker.data.local
 
-import com.expensetracker.data.local.entity.AccountEntity
-import com.expensetracker.data.local.entity.CategoryEntity
+import com.sysninja.expensetracker.data.local.entity.AccountEntity
+import com.sysninja.expensetracker.data.local.entity.CategoryEntity
 
 object PrepopulateData {
 

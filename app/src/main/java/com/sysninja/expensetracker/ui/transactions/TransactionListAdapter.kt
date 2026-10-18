@@ -1,4 +1,4 @@
-package com.expensetracker.ui.transactions
+﻿package com.sysninja.expensetracker.ui.transactions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,11 +6,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.expensetracker.R
-import com.expensetracker.data.model.TransactionWithDetails
-import com.expensetracker.databinding.ItemTransactionBinding
-import com.expensetracker.domain.DateUtils
-import com.expensetracker.domain.MoneyUtils
+import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.data.model.TransactionWithDetails
+import com.sysninja.expensetracker.databinding.ItemTransactionBinding
+import com.sysninja.expensetracker.domain.DateUtils
+import com.sysninja.expensetracker.domain.MoneyUtils
 
 class TransactionListAdapter(
     private var currencySymbol: String = "৳",

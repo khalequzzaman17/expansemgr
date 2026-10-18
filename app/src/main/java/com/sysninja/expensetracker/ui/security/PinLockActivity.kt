@@ -1,4 +1,4 @@
-package com.expensetracker.ui.security
+﻿package com.sysninja.expensetracker.ui.security
 
 import android.os.Bundle
 import android.view.Gravity
@@ -9,9 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.expensetracker.ExpenseTrackerApp
-import com.expensetracker.R
-import com.expensetracker.domain.SecurityManager
+import com.sysninja.expensetracker.ExpenseTrackerApp
+import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.domain.SecurityManager
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch

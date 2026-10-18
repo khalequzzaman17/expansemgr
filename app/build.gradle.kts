@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.expensetracker"
+    namespace = "com.sysninja.expensetracker"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.expensetracker"
+        applicationId = "com.sysninja.expensetracker"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

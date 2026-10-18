@@ -1,6 +1,6 @@
-package com.expensetracker.domain
+﻿package com.sysninja.expensetracker.domain
 
-import com.expensetracker.data.model.TransactionWithDetails
+import com.sysninja.expensetracker.data.model.TransactionWithDetails
 import java.io.OutputStream
 import java.io.OutputStreamWriter
 import java.nio.charset.StandardCharsets

@@ -1,8 +1,8 @@
-package com.expensetracker.data.local.dao
+﻿package com.sysninja.expensetracker.data.local.dao
 
 import androidx.room.*
-import com.expensetracker.data.local.entity.TransactionEntity
-import com.expensetracker.data.model.TransactionWithDetails
+import com.sysninja.expensetracker.data.local.entity.TransactionEntity
+import com.sysninja.expensetracker.data.model.TransactionWithDetails
 import kotlinx.coroutines.flow.Flow
 
 @Dao

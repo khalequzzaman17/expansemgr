@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.transactions
+package com.sysninja.expensetracker.ui.transactions
 
 import android.content.Intent
 import android.os.Bundle
@@ -81,7 +81,7 @@ class TransactionDetailActivity : AppCompatActivity() {
 
         val editBtn = MaterialButton(this).apply {
             text = getString(R.string.edit)
-            setBackgroundColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.text_inverse))
             setOnClickListener {
                 startActivity(Intent(this@TransactionDetailActivity, AddEditTransactionActivity::class.java).apply {

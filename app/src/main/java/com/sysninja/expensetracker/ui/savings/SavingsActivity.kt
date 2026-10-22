@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.savings
+package com.sysninja.expensetracker.ui.savings
 
 import android.content.Intent
 import android.os.Bundle
@@ -42,7 +42,7 @@ class SavingsActivity : AppCompatActivity() {
 
         val addBtn = MaterialButton(this).apply {
             text = getString(R.string.add_savings_goal)
-            setBackgroundColor(ContextCompat.getColor(this@SavingsActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@SavingsActivity, R.color.text_inverse))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,

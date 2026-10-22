@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.export
+package com.sysninja.expensetracker.ui.export
 
 import android.os.Bundle
 import android.os.Environment
@@ -49,7 +49,7 @@ class ExportActivity : AppCompatActivity() {
 
         val csvBtn = MaterialButton(this).apply {
             text = getString(R.string.export_csv)
-            setBackgroundColor(ContextCompat.getColor(this@ExportActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@ExportActivity, R.color.text_inverse))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,

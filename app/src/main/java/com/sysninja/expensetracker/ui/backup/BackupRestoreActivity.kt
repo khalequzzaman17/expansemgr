@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.backup
+package com.sysninja.expensetracker.ui.backup
 
 import android.os.Bundle
 import android.os.Environment
@@ -48,7 +48,7 @@ class BackupRestoreActivity : AppCompatActivity() {
 
         val backupBtn = MaterialButton(this).apply {
             text = getString(R.string.create_backup)
-            setBackgroundColor(ContextCompat.getColor(this@BackupRestoreActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@BackupRestoreActivity, R.color.text_inverse))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,

@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.security
+package com.sysninja.expensetracker.ui.security
 
 import android.os.Bundle
 import android.view.Gravity
@@ -60,7 +60,7 @@ class PinLockActivity : AppCompatActivity() {
 
         val unlockBtn = MaterialButton(this).apply {
             text = "Unlock"
-            setBackgroundColor(ContextCompat.getColor(this@PinLockActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@PinLockActivity, R.color.text_inverse))
             setOnClickListener {
                 val enteredPin = pinEt.text.toString().trim()

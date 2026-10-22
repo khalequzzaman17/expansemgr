@@ -40,6 +40,7 @@
         <item name="cardElevation">0dp</item>
     </style>
 
+
     <style name="CardViewCustom" parent="Widget.Material3.CardView.Filled">
         <item name="cardBackgroundColor">@color/surface_navy_elevated</item>
         <item name="strokeColor">@color/stroke_subtle</item>

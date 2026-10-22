@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.ContextCompat
+import com.sysninja.expensetracker.R
 import kotlin.math.min
 
 class DonutChartView @JvmOverloads constructor(
@@ -24,14 +26,14 @@ class DonutChartView @JvmOverloads constructor(
     }
 
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#F8FAFC")
+        color = ContextCompat.getColor(context, R.color.text_primary)
         textAlign = Paint.Align.CENTER
         textSize = 36f
         isFakeBoldText = true
     }
 
     private val subTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#94A3B8")
+        color = ContextCompat.getColor(context, R.color.text_secondary)
         textAlign = Paint.Align.CENTER
         textSize = 24f
     }
@@ -62,7 +64,7 @@ class DonutChartView @JvmOverloads constructor(
         oval.set(cx - radius + halfStroke, cy - radius + halfStroke, cx + radius - halfStroke, cy + radius - halfStroke)
 
         if (total <= 0.0 || slices.isEmpty()) {
-            paint.color = Color.parseColor("#1E293B")
+            paint.color = ContextCompat.getColor(context, R.color.stroke_subtle)
             canvas.drawArc(oval, 0f, 360f, false, paint)
             canvas.drawText("No Data", cx, cy + 10f, subTextPaint)
             return

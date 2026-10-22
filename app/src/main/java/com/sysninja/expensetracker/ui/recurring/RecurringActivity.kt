@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.recurring
+package com.sysninja.expensetracker.ui.recurring
 
 import android.content.Intent
 import android.os.Bundle
@@ -42,7 +42,7 @@ class RecurringActivity : AppCompatActivity() {
 
         val addBtn = MaterialButton(this).apply {
             text = getString(R.string.add_recurring)
-            setBackgroundColor(ContextCompat.getColor(this@RecurringActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@RecurringActivity, R.color.text_inverse))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,

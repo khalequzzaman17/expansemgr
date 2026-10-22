@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.security
+package com.sysninja.expensetracker.ui.security
 
 import android.os.Bundle
 import android.view.Gravity
@@ -82,7 +82,7 @@ class SetPinActivity : AppCompatActivity() {
 
         val saveBtn = MaterialButton(this).apply {
             text = getString(R.string.save)
-            setBackgroundColor(ContextCompat.getColor(this@SetPinActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@SetPinActivity, R.color.text_inverse))
             setOnClickListener {
                 val pin1 = pinEt.text.toString().trim()

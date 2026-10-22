@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.savings
+package com.sysninja.expensetracker.ui.savings
 
 import android.os.Bundle
 import android.widget.EditText
@@ -78,7 +78,7 @@ class SavingsDetailActivity : AppCompatActivity() {
 
         val depositBtn = MaterialButton(this).apply {
             text = getString(R.string.add_deposit)
-            setBackgroundColor(ContextCompat.getColor(this@SavingsDetailActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@SavingsDetailActivity, R.color.text_inverse))
             setOnClickListener {
                 val amt = MoneyUtils.parseToCents(depositEt.text.toString())

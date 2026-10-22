@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.categories
+package com.sysninja.expensetracker.ui.categories
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -73,7 +73,7 @@ class AddEditCategoryActivity : AppCompatActivity() {
 
         val saveBtn = MaterialButton(this).apply {
             text = getString(R.string.save)
-            setBackgroundColor(ContextCompat.getColor(this@AddEditCategoryActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@AddEditCategoryActivity, R.color.text_inverse))
             setOnClickListener {
                 val name = nameEt.text.toString().trim()

@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.about
+package com.sysninja.expensetracker.ui.about
 
 import android.content.Intent
 import android.net.Uri
@@ -109,7 +109,7 @@ class AboutActivity : AppCompatActivity() {
 
         val shareBtn = MaterialButton(this).apply {
             text = getString(R.string.share_app)
-            setBackgroundColor(ContextCompat.getColor(this@AboutActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@AboutActivity, R.color.text_inverse))
             setOnClickListener {
                 val shareIntent = Intent(Intent.ACTION_SEND).apply {

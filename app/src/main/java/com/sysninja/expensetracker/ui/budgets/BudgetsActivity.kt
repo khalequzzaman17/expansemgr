@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.budgets
+package com.sysninja.expensetracker.ui.budgets
 
 import android.content.Intent
 import android.os.Bundle
@@ -43,7 +43,7 @@ class BudgetsActivity : AppCompatActivity() {
 
         val addBtn = MaterialButton(this).apply {
             text = getString(R.string.add_budget)
-            setBackgroundColor(ContextCompat.getColor(this@BudgetsActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@BudgetsActivity, R.color.text_inverse))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,

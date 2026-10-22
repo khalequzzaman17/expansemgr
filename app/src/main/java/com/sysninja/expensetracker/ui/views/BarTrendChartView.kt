@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.ContextCompat
+import com.sysninja.expensetracker.R
 import kotlin.math.max
 
 class BarTrendChartView @JvmOverloads constructor(
@@ -21,22 +23,22 @@ class BarTrendChartView @JvmOverloads constructor(
     private val groups = mutableListOf<BarGroup>()
 
     private val incomePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#10B981")
+        color = ContextCompat.getColor(context, R.color.income_green)
         style = Paint.Style.FILL
     }
 
     private val expensePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#EF4444")
+        color = ContextCompat.getColor(context, R.color.expense_red)
         style = Paint.Style.FILL
     }
 
     private val gridPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#1E293B")
+        color = ContextCompat.getColor(context, R.color.stroke_subtle)
         strokeWidth = 1f
     }
 
     private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#94A3B8")
+        color = ContextCompat.getColor(context, R.color.text_secondary)
         textSize = 22f
         textAlign = Paint.Align.CENTER
     }

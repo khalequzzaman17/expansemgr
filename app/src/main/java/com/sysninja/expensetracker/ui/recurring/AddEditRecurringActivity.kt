@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.recurring
+package com.sysninja.expensetracker.ui.recurring
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -101,7 +101,7 @@ class AddEditRecurringActivity : AppCompatActivity() {
 
         val saveBtn = MaterialButton(this).apply {
             text = getString(R.string.save)
-            setBackgroundColor(ContextCompat.getColor(this@AddEditRecurringActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@AddEditRecurringActivity, R.color.text_inverse))
             setOnClickListener {
                 val title = titleEt.text.toString().trim()

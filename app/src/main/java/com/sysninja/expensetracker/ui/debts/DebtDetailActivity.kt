@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.debts
+package com.sysninja.expensetracker.ui.debts
 
 import android.os.Bundle
 import android.widget.EditText
@@ -78,7 +78,7 @@ class DebtDetailActivity : AppCompatActivity() {
 
         val repayBtn = MaterialButton(this).apply {
             text = getString(R.string.record_repayment)
-            setBackgroundColor(ContextCompat.getColor(this@DebtDetailActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@DebtDetailActivity, R.color.text_inverse))
             setOnClickListener {
                 val amt = MoneyUtils.parseToCents(repayEt.text.toString())

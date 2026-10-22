@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.budgets
+package com.sysninja.expensetracker.ui.budgets
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -77,7 +77,7 @@ class AddEditBudgetActivity : AppCompatActivity() {
 
         val saveBtn = MaterialButton(this).apply {
             text = getString(R.string.save)
-            setBackgroundColor(ContextCompat.getColor(this@AddEditBudgetActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@AddEditBudgetActivity, R.color.text_inverse))
             setOnClickListener {
                 val limitCents = MoneyUtils.parseToCents(limitEt.text.toString())

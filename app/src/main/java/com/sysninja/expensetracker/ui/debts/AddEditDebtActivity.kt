@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.debts
+package com.sysninja.expensetracker.ui.debts
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -88,7 +88,7 @@ class AddEditDebtActivity : AppCompatActivity() {
 
         val saveBtn = MaterialButton(this).apply {
             text = getString(R.string.save)
-            setBackgroundColor(ContextCompat.getColor(this@AddEditDebtActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@AddEditDebtActivity, R.color.text_inverse))
             setOnClickListener {
                 val person = personEt.text.toString().trim()

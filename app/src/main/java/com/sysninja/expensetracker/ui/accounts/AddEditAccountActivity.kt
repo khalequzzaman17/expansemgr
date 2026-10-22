@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.accounts
+package com.sysninja.expensetracker.ui.accounts
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -89,7 +89,7 @@ class AddEditAccountActivity : AppCompatActivity() {
 
         val saveBtn = MaterialButton(this).apply {
             text = getString(R.string.save)
-            setBackgroundColor(ContextCompat.getColor(this@AddEditAccountActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@AddEditAccountActivity, R.color.text_inverse))
             setOnClickListener {
                 val name = nameEt.text.toString().trim()

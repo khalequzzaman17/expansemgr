@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.savings
+package com.sysninja.expensetracker.ui.savings
 
 import android.os.Bundle
 import android.widget.EditText
@@ -73,7 +73,7 @@ class AddEditSavingsGoalActivity : AppCompatActivity() {
 
         val saveBtn = MaterialButton(this).apply {
             text = getString(R.string.save)
-            setBackgroundColor(ContextCompat.getColor(this@AddEditSavingsGoalActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@AddEditSavingsGoalActivity, R.color.text_inverse))
             setOnClickListener {
                 val name = nameEt.text.toString().trim()

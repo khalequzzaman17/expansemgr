@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.debts
+package com.sysninja.expensetracker.ui.debts
 
 import android.content.Intent
 import android.os.Bundle
@@ -42,7 +42,7 @@ class DebtsActivity : AppCompatActivity() {
 
         val addBtn = MaterialButton(this).apply {
             text = getString(R.string.add_debt)
-            setBackgroundColor(ContextCompat.getColor(this@DebtsActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@DebtsActivity, R.color.text_inverse))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,

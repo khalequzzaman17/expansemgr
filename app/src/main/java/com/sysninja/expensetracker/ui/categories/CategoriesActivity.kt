@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.categories
+package com.sysninja.expensetracker.ui.categories
 
 import android.content.Intent
 import android.os.Bundle
@@ -40,7 +40,7 @@ class CategoriesActivity : AppCompatActivity() {
 
         val addBtn = MaterialButton(this).apply {
             text = getString(R.string.add_category)
-            setBackgroundColor(ContextCompat.getColor(this@CategoriesActivity, R.color.teal_primary))
+            setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(this@CategoriesActivity, R.color.text_inverse))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,

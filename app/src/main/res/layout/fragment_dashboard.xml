@@ -370,61 +370,168 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Quick Actions Row -->
+        <!-- Quick Actions: Stitch circular action tiles -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="18dp"
-            android:orientation="horizontal">
+            android:background="@drawable/bg_card_rounded"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="14dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnQuickExpense"
-                style="@style/Widget.Material3.Button.TonalButton"
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="44dp"
-                android:layout_marginEnd="4dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/expense_red_bg"
-                android:text="+ Expense"
-                android:textColor="@color/expense_red"
-                android:textSize="12sp"
-                app:cornerRadius="12dp"
-                app:icon="@drawable/ic_expense"
-                app:iconSize="14dp"
-                app:iconTint="@color/expense_red" />
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnQuickIncome"
-                style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="0dp"
-                android:layout_height="44dp"
-                android:layout_marginHorizontal="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/income_green_bg"
-                android:text="+ Income"
-                android:textColor="@color/income_green"
-                android:textSize="12sp"
-                app:cornerRadius="12dp"
-                app:icon="@drawable/ic_income"
-                app:iconSize="14dp"
-                app:iconTint="@color/income_green" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuickExpense"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/expense_red_bg"
+                    android:minWidth="0dp"
+                    android:padding="0dp"
+                    android:text="−"
+                    android:textColor="@color/expense_red"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="24dp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnQuickTransfer"
-                style="@style/Widget.Material3.Button.TonalButton"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="খরচ যোগ"
+                    android:textColor="@color/text_primary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Expense"
+                    android:textColor="@color/text_muted"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="44dp"
-                android:layout_marginStart="4dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/transfer_blue_bg"
-                android:text="Transfer"
-                android:textColor="@color/transfer_blue"
-                android:textSize="12sp"
-                app:cornerRadius="12dp"
-                app:icon="@drawable/ic_transfer"
-                app:iconSize="14dp"
-                app:iconTint="@color/transfer_blue" />
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuickIncome"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/income_green_bg"
+                    android:minWidth="0dp"
+                    android:padding="0dp"
+                    android:text="+"
+                    android:textColor="@color/income_green"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="আয় যোগ"
+                    android:textColor="@color/text_primary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Income"
+                    android:textColor="@color/text_muted"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuickTransfer"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/transfer_blue_bg"
+                    android:minWidth="0dp"
+                    android:padding="0dp"
+                    android:text="↔"
+                    android:textColor="@color/transfer_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="ট্রান্সফার"
+                    android:textColor="@color/text_primary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Transfer"
+                    android:textColor="@color/text_muted"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/savings_purple_bg"
+                    android:minWidth="0dp"
+                    android:padding="0dp"
+                    android:text="◎"
+                    android:textColor="@color/savings_purple"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="বাজেট"
+                    android:textColor="@color/text_primary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Budget"
+                    android:textColor="@color/text_muted"
+                    android:textSize="9sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- Category Spending Breakdown Card -->

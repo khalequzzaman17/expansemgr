@@ -21,11 +21,23 @@
             android:paddingTop="20dp"
             android:paddingBottom="12dp">
 
+            <ImageView
+                android:id="@+id/ivBrandMark"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_button_teal"
+                android:padding="10dp"
+                android:src="@drawable/ic_wallet"
+                app:tint="@color/text_inverse" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:layout_toEndOf="@id/ivBrandMark"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -34,14 +46,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
                     android:textColor="@color/text_primary"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Financial Overview"
+                    android:text="খরচের হিসাব • Financial Overview"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -57,6 +69,49 @@
                 android:src="@drawable/ic_settings"
                 app:tint="@color/text_secondary" />
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Good evening, Khalequzzaman"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="আজকের আর্থিক সারাংশ দেখে নিন"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip_selected"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="● MFS synced"
+                android:textColor="@color/teal_light"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <!-- Net Worth Card -->
         <com.google.android.material.card.MaterialCardView
@@ -92,6 +147,14 @@
                     android:textSize="30sp"
                     android:textStyle="bold"
                     tools:text="৳ 128,450.00" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="এই মাসের মোট ব্যালেন্স"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvAccountsCount"

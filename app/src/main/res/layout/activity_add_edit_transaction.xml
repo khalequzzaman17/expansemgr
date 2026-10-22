@@ -17,7 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="@color/text_primary"
-            app:title="@string/title_add_transaction"
+            app:title="Add transaction • লেনদেন যোগ করুন"
             app:titleTextColor="@color/text_primary" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -32,6 +32,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Record a new expense, income or transfer"
+                android:textColor="@color/text_muted"
+                android:textSize="13sp" />
 
             <!-- Type Selector Segmented RadioGroup or Chips -->
             <com.google.android.material.chip.ChipGroup

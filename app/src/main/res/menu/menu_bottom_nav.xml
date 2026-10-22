@@ -11,11 +11,6 @@
         android:title="@string/nav_transactions" />
 
     <item
-        android:id="@+id/nav_add"
-        android:icon="@drawable/ic_add"
-        android:title="@string/nav_add" />
-
-    <item
         android:id="@+id/nav_reports"
         android:icon="@drawable/ic_analytics"
         android:title="@string/nav_reports" />

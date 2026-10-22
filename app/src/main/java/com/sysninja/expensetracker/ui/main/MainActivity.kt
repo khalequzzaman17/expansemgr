@@ -33,6 +33,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupBottomNavigation()
+        binding.fabAdd.setOnClickListener {
+            startActivity(Intent(this, AddEditTransactionActivity::class.java))
+        }
     }
 
     private fun checkPinLock() {
@@ -56,11 +59,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_transactions -> {
                     replaceFragment(TransactionsFragment(), "TRANSACTIONS")
                     true
-                }
-                R.id.nav_add -> {
-                    val intent = Intent(this, AddEditTransactionActivity::class.java)
-                    startActivity(intent)
-                    false // Don't highlight the add button as a tab
                 }
                 R.id.nav_reports -> {
                     // Navigate to transactions or show transactions with analytics

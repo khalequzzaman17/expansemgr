@@ -18,8 +18,11 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="@color/nav_bar_bg"
+        android:elevation="0dp"
         app:itemIconTint="@color/nav_item_color"
         app:itemTextColor="@color/nav_item_color"
+        app:itemIconSize="22dp"
+        app:itemHorizontalTranslationEnabled="false"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_bottom_nav" />

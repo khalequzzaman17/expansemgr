@@ -7,4 +7,5 @@ local.properties
 *.iml
 .presentation_build/
 .presentation_output/
+stitch_expense_tracker_android_ui/
 

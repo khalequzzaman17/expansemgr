@@ -2,11 +2,12 @@
     <style name="Theme.ExpenseTracker" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/teal_primary</item>
         <item name="colorOnPrimary">@color/text_inverse</item>
-        <item name="colorPrimaryContainer">@color/teal_dark</item>
+        <item name="colorPrimaryContainer">@color/teal_primary</item>
         <item name="colorOnPrimaryContainer">@color/teal_light</item>
 
-        <item name="colorSecondary">@color/transfer_blue</item>
+        <item name="colorSecondary">@color/income_green</item>
         <item name="colorOnSecondary">@color/text_inverse</item>
+        <item name="colorTertiary">@color/savings_purple</item>
 
         <item name="colorSurface">@color/surface_navy</item>
         <item name="colorOnSurface">@color/text_primary</item>
@@ -18,6 +19,25 @@
         <item name="android:navigationBarColor">@color/nav_bar_bg</item>
         <item name="android:windowBackground">@color/bg_navy_dark</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="fontFamily">sans</item>
+        <item name="materialButtonStyle">@style/Widget.ExpenseTracker.Button</item>
+        <item name="materialCardViewStyle">@style/Widget.ExpenseTracker.Card</item>
+    </style>
+
+    <style name="Widget.ExpenseTracker.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">16dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">sans</item>
+    </style>
+
+    <style name="Widget.ExpenseTracker.Card" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/surface_navy_elevated</item>
+        <item name="strokeColor">@color/stroke_subtle</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">0dp</item>
     </style>
 
     <style name="CardViewCustom" parent="Widget.Material3.CardView.Filled">
@@ -28,9 +48,15 @@
     </style>
 
     <style name="ChipCustom" parent="Widget.Material3.Chip.Filter">
-        <item name="chipBackgroundColor">@color/surface_navy</item>
+        <item name="chipBackgroundColor">@color/chip_background</item>
         <item name="chipStrokeColor">@color/stroke_subtle</item>
         <item name="chipStrokeWidth">1dp</item>
-        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textColor">@color/chip_text</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.ExpenseTracker.Chip</item>
+    </style>
+
+    <style name="ShapeAppearance.ExpenseTracker.Chip" parent="ShapeAppearance.Material3.Corner.Full">
+        <item name="cornerSize">999dp</item>
     </style>
 </resources>

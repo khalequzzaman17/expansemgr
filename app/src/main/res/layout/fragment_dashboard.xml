@@ -120,7 +120,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipToday"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/period_today"
@@ -128,7 +128,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipThisWeek"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/period_this_week"
@@ -136,7 +136,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipThisMonth"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
@@ -145,7 +145,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipLastMonth"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/period_last_month"
@@ -153,7 +153,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipThisYear"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/period_this_year"

@@ -61,7 +61,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipAll"
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/ChipCustom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
@@ -70,7 +70,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipExpense"
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/ChipCustom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/type_expense"
@@ -78,7 +78,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipIncome"
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/ChipCustom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/type_income"
@@ -86,7 +86,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipTransfer"
-                style="@style/Widget.Material3.Chip.Filter"
+                style="@style/ChipCustom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/type_transfer"

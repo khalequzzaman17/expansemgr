@@ -35,14 +35,14 @@ class ReportsActivity : AppCompatActivity() {
         scroll.addView(content)
         root.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
 
-        content.addView(stitchSectionLabel("আর্থিক রিপোর্ট / Analytics", "আপনার খরচ, আয় এবং সঞ্চয়ের বিশ্লেষণ"))
-        content.addView(periodCard())
-        content.addView(metricRow())
-        content.addView(chartCard("মাসিক আয় বনাম খরচ", "Monthly Cash Flow", barChart()))
-        content.addView(chartCard("খরচের খাতভিত্তিক বিশ্লেষণ", "Spending Breakdown", donutChart()))
-        content.addView(insightCard())
-        content.addView(stitchSectionLabel("সাম্প্রতিক খরচের ধরন", "Recent spending patterns"))
-        content.addView(simpleListCard())
+        content.addView(stitchSectionLabel("আর্থিক রিপোর্ট / Analytics", "আপনার খরচ, আয় এবং সঞ্চয়ের বিশ্লেষণ"), gapParams())
+        content.addView(periodCard(), gapParams(8))
+        content.addView(metricRow(), gapParams(12))
+        content.addView(chartCard("মাসিক আয় বনাম খরচ", "Monthly Cash Flow", barChart()), gapParams(12))
+        content.addView(chartCard("খরচের খাতভিত্তিক বিশ্লেষণ", "Spending Breakdown", donutChart()), gapParams(12))
+        content.addView(insightCard(), gapParams(12))
+        content.addView(stitchSectionLabel("সাম্প্রতিক খরচের ধরন", "Recent spending patterns"), gapParams(12))
+        content.addView(simpleListCard(), gapParams(8))
 
         setContentView(root)
     }
@@ -142,4 +142,9 @@ class ReportsActivity : AppCompatActivity() {
         radius = dp(18).toFloat()
         setContentPadding(dp(14), dp(14), dp(14), dp(14))
     }
+
+    private fun gapParams(top: Int = 0): LinearLayout.LayoutParams =
+        LinearLayout.LayoutParams(-1, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+            topMargin = dp(top)
+        }
 }

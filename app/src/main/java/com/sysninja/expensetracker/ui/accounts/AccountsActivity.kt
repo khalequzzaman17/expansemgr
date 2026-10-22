@@ -1,5 +1,7 @@
 package com.sysninja.expensetracker.ui.accounts
 
+import com.sysninja.expensetracker.ui.dp
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -42,7 +44,7 @@ class AccountsActivity : AppCompatActivity() {
 
         val actionsLayout = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
-            setPadding(32, 24, 32, 16)
+            setPadding(dp(16), dp(12), dp(16), dp(8))
         }
 
         val addBtn = MaterialButton(this).apply {
@@ -80,7 +82,7 @@ class AccountsActivity : AppCompatActivity() {
 
         val listContainer = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(32, 16, 32, 32)
+            setPadding(dp(16), dp(8), dp(16), dp(16))
         }
         scrollView.addView(listContainer)
         root.addView(scrollView)
@@ -95,7 +97,7 @@ class AccountsActivity : AppCompatActivity() {
                 balances.forEach { item ->
                     val card = LinearLayout(this@AccountsActivity).apply {
                         orientation = LinearLayout.HORIZONTAL
-                        setPadding(32, 32, 32, 32)
+                        setPadding(dp(16), dp(16), dp(16), dp(16))
                         setBackgroundResource(R.drawable.bg_card_rounded)
                         layoutParams = LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,

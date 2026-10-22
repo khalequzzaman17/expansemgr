@@ -1,5 +1,7 @@
 package com.sysninja.expensetracker.ui.transactions
 
+import com.sysninja.expensetracker.ui.dp
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -48,7 +50,7 @@ class TransactionDetailActivity : AppCompatActivity() {
 
         val content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(48, 48, 48, 48)
+            setPadding(dp(16), dp(16), dp(16), dp(16))
         }
 
         val titleTv = TextView(this).apply {

@@ -1,5 +1,7 @@
 package com.sysninja.expensetracker.ui.about
 
+import com.sysninja.expensetracker.ui.dp
+
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -39,7 +41,7 @@ class AboutActivity : AppCompatActivity() {
 
         val content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(48, 48, 48, 48)
+            setPadding(dp(16), dp(16), dp(16), dp(16))
             gravity = Gravity.CENTER_HORIZONTAL
         }
 

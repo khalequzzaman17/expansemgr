@@ -110,6 +110,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".ui.reports.ReportsActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.about.AboutActivity"
             android:exported="false" />
 

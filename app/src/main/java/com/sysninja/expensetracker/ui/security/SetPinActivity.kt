@@ -1,5 +1,7 @@
 package com.sysninja.expensetracker.ui.security
 
+import com.sysninja.expensetracker.ui.dp
+
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.EditText
@@ -42,7 +44,7 @@ class SetPinActivity : AppCompatActivity() {
 
         val content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(48, 48, 48, 48)
+            setPadding(dp(16), dp(16), dp(16), dp(16))
             gravity = Gravity.CENTER_HORIZONTAL
         }
 
@@ -55,7 +57,7 @@ class SetPinActivity : AppCompatActivity() {
             hint = "Enter 4-Digit PIN"
             maxLines = 1
             setBackgroundResource(R.drawable.bg_edit_text)
-            setPadding(32, 24, 32, 24)
+            setPadding(dp(16), dp(12), dp(16), dp(12))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -72,7 +74,7 @@ class SetPinActivity : AppCompatActivity() {
             hint = "Confirm 4-Digit PIN"
             maxLines = 1
             setBackgroundResource(R.drawable.bg_edit_text)
-            setPadding(32, 24, 32, 24)
+            setPadding(dp(16), dp(12), dp(16), dp(12))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT

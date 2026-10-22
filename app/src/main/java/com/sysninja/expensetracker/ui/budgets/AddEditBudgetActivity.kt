@@ -1,5 +1,7 @@
 package com.sysninja.expensetracker.ui.budgets
 
+import com.sysninja.expensetracker.ui.dp
+
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.EditText
@@ -48,12 +50,12 @@ class AddEditBudgetActivity : AppCompatActivity() {
 
         val form = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(40, 40, 40, 40)
+            setPadding(dp(20), dp(20), dp(20), dp(20))
         }
 
         val spinnerCategory = Spinner(this).apply {
             setBackgroundResource(R.drawable.bg_edit_text)
-            setPadding(32, 24, 32, 24)
+            setPadding(dp(16), dp(12), dp(16), dp(12))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -67,7 +69,7 @@ class AddEditBudgetActivity : AppCompatActivity() {
             setTextColor(ContextCompat.getColor(this@AddEditBudgetActivity, R.color.text_primary))
             setHintTextColor(ContextCompat.getColor(this@AddEditBudgetActivity, R.color.text_muted))
             setBackgroundResource(R.drawable.bg_edit_text)
-            setPadding(32, 24, 32, 24)
+            setPadding(dp(16), dp(12), dp(16), dp(12))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT

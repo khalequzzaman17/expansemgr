@@ -1,5 +1,7 @@
 package com.sysninja.expensetracker.ui.accounts
 
+import com.sysninja.expensetracker.ui.dp
+
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.EditText
@@ -46,7 +48,7 @@ class AddEditAccountActivity : AppCompatActivity() {
 
         val form = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(40, 40, 40, 40)
+            setPadding(dp(20), dp(20), dp(20), dp(20))
         }
 
         val nameEt = EditText(this).apply {
@@ -54,7 +56,7 @@ class AddEditAccountActivity : AppCompatActivity() {
             setTextColor(ContextCompat.getColor(this@AddEditAccountActivity, R.color.text_primary))
             setHintTextColor(ContextCompat.getColor(this@AddEditAccountActivity, R.color.text_muted))
             setBackgroundResource(R.drawable.bg_edit_text)
-            setPadding(32, 24, 32, 24)
+            setPadding(dp(16), dp(12), dp(16), dp(12))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -68,7 +70,7 @@ class AddEditAccountActivity : AppCompatActivity() {
             setTextColor(ContextCompat.getColor(this@AddEditAccountActivity, R.color.text_primary))
             setHintTextColor(ContextCompat.getColor(this@AddEditAccountActivity, R.color.text_muted))
             setBackgroundResource(R.drawable.bg_edit_text)
-            setPadding(32, 24, 32, 24)
+            setPadding(dp(16), dp(12), dp(16), dp(12))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -79,7 +81,7 @@ class AddEditAccountActivity : AppCompatActivity() {
         val spinnerType = Spinner(this).apply {
             adapter = ArrayAdapter(this@AddEditAccountActivity, android.R.layout.simple_spinner_dropdown_item, accountTypes)
             setBackgroundResource(R.drawable.bg_edit_text)
-            setPadding(32, 24, 32, 24)
+            setPadding(dp(16), dp(12), dp(16), dp(12))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT

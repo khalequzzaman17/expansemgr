@@ -1,5 +1,7 @@
 package com.sysninja.expensetracker.ui.export
 
+import com.sysninja.expensetracker.ui.dp
+
 import android.os.Bundle
 import android.os.Environment
 import android.widget.LinearLayout
@@ -44,7 +46,7 @@ class ExportActivity : AppCompatActivity() {
 
         val content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(48, 48, 48, 48)
+            setPadding(dp(16), dp(16), dp(16), dp(16))
         }
 
         val csvBtn = MaterialButton(this).apply {

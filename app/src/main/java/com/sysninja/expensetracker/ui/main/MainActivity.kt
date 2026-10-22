@@ -12,6 +12,7 @@ import com.sysninja.expensetracker.domain.SecurityManager
 import com.sysninja.expensetracker.ui.addtransaction.AddEditTransactionActivity
 import com.sysninja.expensetracker.ui.dashboard.DashboardFragment
 import com.sysninja.expensetracker.ui.security.PinLockActivity
+import com.sysninja.expensetracker.ui.reports.ReportsActivity
 import com.sysninja.expensetracker.ui.settings.SettingsActivity
 import com.sysninja.expensetracker.ui.transactions.TransactionsFragment
 import kotlinx.coroutines.flow.first
@@ -61,9 +62,8 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_reports -> {
-                    // Navigate to transactions or show transactions with analytics
-                    replaceFragment(TransactionsFragment(), "REPORTS")
-                    true
+                    startActivity(Intent(this, ReportsActivity::class.java))
+                    false
                 }
                 R.id.nav_more -> {
                     val intent = Intent(this, SettingsActivity::class.java)

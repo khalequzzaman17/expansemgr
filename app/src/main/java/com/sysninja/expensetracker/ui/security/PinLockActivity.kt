@@ -1,5 +1,7 @@
 package com.sysninja.expensetracker.ui.security
 
+import com.sysninja.expensetracker.ui.dp
+
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.EditText
@@ -25,7 +27,7 @@ class PinLockActivity : AppCompatActivity() {
             orientation = LinearLayout.VERTICAL
             setBackgroundColor(ContextCompat.getColor(this@PinLockActivity, R.color.bg_navy_dark))
             gravity = Gravity.CENTER
-            setPadding(48, 48, 48, 48)
+            setPadding(dp(16), dp(16), dp(16), dp(16))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
@@ -51,7 +53,7 @@ class PinLockActivity : AppCompatActivity() {
             hint = "••••"
             maxLines = 1
             setBackgroundResource(R.drawable.bg_edit_text)
-            setPadding(32, 24, 32, 24)
+            setPadding(dp(16), dp(12), dp(16), dp(12))
             layoutParams = LinearLayout.LayoutParams(400, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
                 bottomMargin = 32
             }

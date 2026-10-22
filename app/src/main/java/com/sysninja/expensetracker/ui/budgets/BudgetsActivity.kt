@@ -1,5 +1,7 @@
 package com.sysninja.expensetracker.ui.budgets
 
+import com.sysninja.expensetracker.ui.dp
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -48,7 +50,7 @@ class BudgetsActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { setMargins(32, 24, 32, 16) }
+            ).apply { setMargins(dp(16), dp(12), dp(16), dp(8)) }
             setOnClickListener {
                 startActivity(Intent(this@BudgetsActivity, AddEditBudgetActivity::class.java))
             }
@@ -65,7 +67,7 @@ class BudgetsActivity : AppCompatActivity() {
 
         val listContainer = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(32, 16, 32, 32)
+            setPadding(dp(16), dp(8), dp(16), dp(16))
         }
         scrollView.addView(listContainer)
         root.addView(scrollView)
@@ -90,7 +92,7 @@ class BudgetsActivity : AppCompatActivity() {
                     budgets.forEach { b ->
                         val card = LinearLayout(this@BudgetsActivity).apply {
                             orientation = LinearLayout.VERTICAL
-                            setPadding(32, 28, 32, 28)
+                            setPadding(dp(16), dp(14), dp(16), dp(14))
                             setBackgroundResource(R.drawable.bg_card_rounded)
                             layoutParams = LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,

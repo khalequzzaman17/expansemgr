@@ -1,5 +1,7 @@
 package com.sysninja.expensetracker.ui.savings
 
+import com.sysninja.expensetracker.ui.dp
+
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -45,7 +47,7 @@ class SavingsDetailActivity : AppCompatActivity() {
 
         val content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(40, 40, 40, 40)
+            setPadding(dp(20), dp(20), dp(20), dp(20))
         }
 
         val titleTv = TextView(this).apply {
@@ -68,7 +70,7 @@ class SavingsDetailActivity : AppCompatActivity() {
             setTextColor(ContextCompat.getColor(this@SavingsDetailActivity, R.color.text_primary))
             setHintTextColor(ContextCompat.getColor(this@SavingsDetailActivity, R.color.text_muted))
             setBackgroundResource(R.drawable.bg_edit_text)
-            setPadding(32, 24, 32, 24)
+            setPadding(dp(16), dp(12), dp(16), dp(12))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT

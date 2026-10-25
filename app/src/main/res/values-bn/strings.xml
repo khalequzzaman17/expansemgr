@@ -500,4 +500,28 @@
     <string name="save_name_action">এগিয়ে যান</string>
     <string name="edit_name_title">নাম পরিবর্তন করুন</string>
     <string name="default_user_name">ব্যবহারকারী</string>
+
+    <!-- Redesigned About Developer Strings -->
+    <string name="about_dev_subtitle">সিসনিঞ্জা • ডিজিটাল উদ্ভাবন</string>
+    <string name="developer_role">লিড সফটওয়্যার আর্কিটেক্ট ও ডেভেলপার</string>
+    <string name="developer_organization">সিসনিঞ্জা • ঢাকা, বাংলাদেশ</string>
+    <string name="developer_bio">উচ্চ-পারফরম্যান্স, প্রাইভেসি-ফার্স্ট এবং আধুনিক অ্যান্ড্রয়েড অ্যাপস তৈরিতে নিবেদিতপ্রাণ সফটওয়্যার ইঞ্জিনিয়ার।</string>
+    <string name="connect_with_dev">যোগাযোগ ও সোশ্যাল</string>
+    <string name="app_tech_stack_title">অ্যাপ আর্কিটেকচার ও প্রযুক্তি</string>
+    <string name="tech_kotlin_title">১০০% কোটলিন ২.০</string>
+    <string name="tech_kotlin_desc">করুটিন্স ও রিয়্যাক্টিভ ফ্লো</string>
+    <string name="tech_room_title">রুম এসকিউএল ডাটাবেজ</string>
+    <string name="tech_room_desc">সম্পূর্ণ অফলাইন ও প্রাইভেট</string>
+    <string name="tech_m3_title">স্টিচ / মেটেরিয়াল ৩</string>
+    <string name="tech_m3_desc">বেঙ্গল লেজার ডার্ক থিম</string>
+    <string name="tech_security_title">ব্যাংক-গ্রেড নিরাপত্তা</string>
+    <string name="tech_security_desc">লোকাল এনক্রিপশন ও সিকিউর হ্যাশ</string>
+    <string name="privacy_pledge_title">শতভাগ অফলাইন ও প্রাইভেসি নিশ্চয়তা</string>
+    <string name="privacy_pledge_desc">আপনার কোনো আর্থিক হিসাব বা লেনদেনের তথ্য ইন্টারনেটে পাঠানো হয় না। কোনো ট্র্যাকার বা বিজ্ঞাপন নেই। আপনার হিসাব খাতা শতভাগ নিরাপদ ও ব্যক্তিগত।</string>
+    <string name="btn_visit_website">ওয়েবসাইট ভিজিট করুন</string>
+    <string name="btn_send_email">ইমেইল পাঠান</string>
+    <string name="btn_call_phone">কল / হোয়াটসঅ্যাপ</string>
+    <string name="share_app_btn">অ্যাপটি শেয়ার করুন</string>
+    <string name="made_with_love">বাংলাদেশে তৈরি 🇧🇩</string>
+    <string name="copyright_text">© ২০২৬ সিসনিঞ্জা। তৈরিতে Khalequzzaman। সর্বস্বত্ব সংরক্ষিত।</string>
 </resources>

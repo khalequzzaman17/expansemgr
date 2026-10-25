@@ -500,4 +500,28 @@
     <string name="save_name_action">Continue</string>
     <string name="edit_name_title">Edit Your Name</string>
     <string name="default_user_name">User</string>
+
+    <!-- Redesigned About Developer Strings -->
+    <string name="about_dev_subtitle">SysNinja • Crafting Intelligent Digital Products</string>
+    <string name="developer_role">Lead Architect &amp; Software Engineer</string>
+    <string name="developer_organization">SysNinja HQ • Dhaka, Bangladesh</string>
+    <string name="developer_bio">Dedicated to building high-performance, privacy-centric, and beautifully crafted mobile and native solutions.</string>
+    <string name="connect_with_dev">Connect &amp; Collaborate</string>
+    <string name="app_tech_stack_title">Architecture &amp; Engineering</string>
+    <string name="tech_kotlin_title">100% Kotlin 2.0</string>
+    <string name="tech_kotlin_desc">Coroutines, Flow &amp; StateFlow</string>
+    <string name="tech_room_title">Room SQLite Engine</string>
+    <string name="tech_room_desc">100% Offline &amp; Private</string>
+    <string name="tech_m3_title">Stitch / Material 3</string>
+    <string name="tech_m3_desc">Bengal Ledger Dark Theme</string>
+    <string name="tech_security_title">Bank-Grade Security</string>
+    <string name="tech_security_desc">Hardware Keystore &amp; SHA-256</string>
+    <string name="privacy_pledge_title">Privacy &amp; Offline Pledge</string>
+    <string name="privacy_pledge_desc">Your financial ledger never leaves your device. No analytics, no ads, no trackers, and zero server logging. Full financial privacy guaranteed.</string>
+    <string name="btn_visit_website">Visit Portfolio</string>
+    <string name="btn_send_email">Send Email</string>
+    <string name="btn_call_phone">Phone / WhatsApp</string>
+    <string name="share_app_btn">Share Application</string>
+    <string name="made_with_love">Crafted with passion in Bangladesh 🇧🇩</string>
+    <string name="copyright_text">© 2026 SysNinja. Built by Khalequzzaman. All rights reserved.</string>
 </resources>

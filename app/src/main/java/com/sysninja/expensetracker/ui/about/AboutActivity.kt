@@ -1,129 +1,106 @@
 package com.sysninja.expensetracker.ui.about
 
-import com.sysninja.expensetracker.ui.dp
-
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.sysninja.expensetracker.BuildConfig
 import com.sysninja.expensetracker.R
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
+import com.sysninja.expensetracker.databinding.ActivityAboutBinding
 
 class AboutActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityAboutBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityAboutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(ContextCompat.getColor(this@AboutActivity, R.color.bg_navy_dark))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { finish() }
+
+        setupAppDetails()
+        setupClickListeners()
+    }
+
+    private fun setupAppDetails() {
+        binding.tvAppVersion.text = getString(
+            R.string.app_version,
+            BuildConfig.VERSION_NAME,
+            BuildConfig.VERSION_CODE
+        )
+    }
+
+    private fun setupClickListeners() {
+        // Quick share on topbar
+        binding.btnQuickShare.setOnClickListener {
+            shareApp()
         }
 
-        val toolbar = MaterialToolbar(this).apply {
-            title = getString(R.string.about_title)
-            setTitleTextColor(ContextCompat.getColor(this@AboutActivity, R.color.text_primary))
-            setBackgroundColor(ContextCompat.getColor(this@AboutActivity, R.color.surface_navy))
-            setNavigationIcon(R.drawable.ic_arrow_back)
-            setNavigationIconTint(ContextCompat.getColor(this@AboutActivity, R.color.text_primary))
-            setNavigationOnClickListener { finish() }
-        }
-        root.addView(toolbar)
-
-        val content = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(16), dp(16), dp(16), dp(16))
-            gravity = Gravity.CENTER_HORIZONTAL
+        // Bottom big share button
+        binding.btnBottomShare.setOnClickListener {
+            shareApp()
         }
 
-        val titleTv = TextView(this).apply {
-            text = getString(R.string.app_name)
-            setTextColor(ContextCompat.getColor(this@AboutActivity, R.color.text_primary))
-            textSize = 22f
-            paint.isFakeBoldText = true
-            gravity = Gravity.CENTER
+        // Developer action cards
+        binding.btnWebsiteCard.setOnClickListener {
+            openUrl(getString(R.string.website_url))
         }
-        content.addView(titleTv)
 
-        val versionTv = TextView(this).apply {
-            text = getString(R.string.app_version, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
-            setTextColor(ContextCompat.getColor(this@AboutActivity, R.color.teal_light))
-            textSize = 13f
-            gravity = Gravity.CENTER
-            setPadding(0, 8, 0, 32)
+        binding.btnEmailCard.setOnClickListener {
+            sendEmail(getString(R.string.email_raw))
         }
-        content.addView(versionTv)
 
-        val devTv = TextView(this).apply {
-            text = getString(R.string.developer_name)
-            setTextColor(ContextCompat.getColor(this@AboutActivity, R.color.text_primary))
-            textSize = 16f
-            paint.isFakeBoldText = true
-            gravity = Gravity.CENTER
-            setPadding(0, 16, 0, 8)
+        binding.btnPhoneCard.setOnClickListener {
+            callPhone(getString(R.string.phone_raw))
         }
-        content.addView(devTv)
 
-        val phoneTv = TextView(this).apply {
-            text = getString(R.string.developer_phone)
-            setTextColor(ContextCompat.getColor(this@AboutActivity, R.color.text_secondary))
-            textSize = 14f
-            setPadding(0, 8, 0, 8)
-            setOnClickListener {
-                val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${getString(R.string.phone_raw)}"))
-                startActivity(intent)
+        binding.btnShareAppCard.setOnClickListener {
+            shareApp()
+        }
+    }
+
+    private fun openUrl(url: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        } catch (_: Exception) {
+            // Browser not installed or URL malformed
+        }
+    }
+
+    private fun sendEmail(email: String) {
+        try {
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:$email")
+                putExtra(Intent.EXTRA_SUBJECT, "Expense Tracker Feedback & Inquiry")
             }
+            startActivity(intent)
+        } catch (_: Exception) {
+            // Email app not available
         }
-        content.addView(phoneTv)
+    }
 
-        val emailTv = TextView(this).apply {
-            text = getString(R.string.developer_email)
-            setTextColor(ContextCompat.getColor(this@AboutActivity, R.color.text_secondary))
-            textSize = 14f
-            setPadding(0, 8, 0, 8)
-            setOnClickListener {
-                val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:${getString(R.string.email_raw)}"))
-                startActivity(intent)
+    private fun callPhone(phoneNumber: String) {
+        try {
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
+            startActivity(intent)
+        } catch (_: Exception) {
+            // Dialer not available
+        }
+    }
+
+    private fun shareApp() {
+        try {
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
+                putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text))
             }
+            startActivity(Intent.createChooser(shareIntent, getString(R.string.share_app)))
+        } catch (_: Exception) {
+            // Share chooser error
         }
-        content.addView(emailTv)
-
-        val websiteTv = TextView(this).apply {
-            text = getString(R.string.developer_website)
-            setTextColor(ContextCompat.getColor(this@AboutActivity, R.color.teal_primary))
-            textSize = 14f
-            setPadding(0, 8, 0, 24)
-            setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.website_url)))
-                startActivity(intent)
-            }
-        }
-        content.addView(websiteTv)
-
-        val shareBtn = MaterialButton(this).apply {
-            text = getString(R.string.share_app)
-            setBackgroundResource(R.drawable.bg_button_teal)
-            setTextColor(ContextCompat.getColor(this@AboutActivity, R.color.text_inverse))
-            setOnClickListener {
-                val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                    type = "text/plain"
-                    putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text))
-                }
-                startActivity(Intent.createChooser(shareIntent, getString(R.string.share_app)))
-            }
-        }
-        content.addView(shareBtn)
-
-        root.addView(content)
-        setContentView(root)
     }
 }

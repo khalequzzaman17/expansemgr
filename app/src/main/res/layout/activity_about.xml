@@ -683,7 +683,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_marginTop="20dp"
-                android:backgroundResource="@drawable/bg_button_teal"
+                android:background="@drawable/bg_button_teal"
                 android:text="@string/share_app_btn"
                 android:textColor="@color/text_inverse"
                 android:textSize="14sp"

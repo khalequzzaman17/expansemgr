@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.addtransaction
+package com.sysninja.expensetracker.ui.addtransaction
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -45,6 +45,7 @@ class AddEditTransactionActivity : AppCompatActivity() {
         setupTypeSelector(initialType)
         setupPaymentMethodSpinner()
         setupDatePicker()
+        setupQuickAmountChips()
         setupSaveButton()
 
         loadAccountsAndCategories {
@@ -56,6 +57,21 @@ class AddEditTransactionActivity : AppCompatActivity() {
                 updateDateTimeButton()
             }
         }
+    }
+
+    private fun setupQuickAmountChips() {
+        fun addAmount(delta: Double) {
+            val current = binding.etAmount.text.toString().toDoubleOrNull() ?: 0.0
+            val updated = current + delta
+            binding.etAmount.setText(if (updated % 1.0 == 0.0) updated.toLong().toString() else String.format(java.util.Locale.US, "%.2f", updated))
+            binding.etAmount.setSelection(binding.etAmount.text?.length ?: 0)
+        }
+
+        binding.btnQuickAdd100.setOnClickListener { addAmount(100.0) }
+        binding.btnQuickAdd500.setOnClickListener { addAmount(500.0) }
+        binding.btnQuickAdd1000.setOnClickListener { addAmount(1000.0) }
+        binding.btnQuickAdd5000.setOnClickListener { addAmount(5000.0) }
+        binding.btnClearAmount.setOnClickListener { binding.etAmount.setText("") }
     }
 
     private fun setupTypeSelector(initialType: String) {

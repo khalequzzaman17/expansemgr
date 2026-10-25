@@ -1,5 +1,6 @@
 package com.sysninja.expensetracker.ui.reports
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -7,144 +8,210 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.android.material.card.MaterialCardView
+import androidx.lifecycle.lifecycleScope
+import com.sysninja.expensetracker.ExpenseTrackerApp
 import com.sysninja.expensetracker.R
-import com.sysninja.expensetracker.ui.dp
-import com.sysninja.expensetracker.ui.stitchSectionLabel
-import com.sysninja.expensetracker.ui.stitchToolbar
+import com.sysninja.expensetracker.data.model.TransactionWithDetails
+import com.sysninja.expensetracker.databinding.ActivityReportsBinding
+import com.sysninja.expensetracker.domain.MoneyUtils
+import com.sysninja.expensetracker.ui.export.ExportActivity
 import com.sysninja.expensetracker.ui.views.BarTrendChartView
 import com.sysninja.expensetracker.ui.views.DonutChartView
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class ReportsActivity : AppCompatActivity() {
-    private val teal by lazy { ContextCompat.getColor(this, R.color.teal_primary) }
+
+    private lateinit var binding: ActivityReportsBinding
+    private val calendar = Calendar.getInstance()
+    private var currencySymbol: String = "৳"
+    private var allTransactions = listOf<TransactionWithDetails>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityReportsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(ContextCompat.getColor(context, R.color.bg_navy_dark))
-        }
-        root.addView(stitchToolbar("Expense Tracker", "হিসাব খাতা • Reports", ::finish))
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { finish() }
 
-        val scroll = android.widget.ScrollView(this)
-        val content = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(16), dp(10), dp(16), dp(28))
-        }
-        scroll.addView(content)
-        root.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
-
-        content.addView(stitchSectionLabel("আর্থিক রিপোর্ট / Analytics", "আপনার খরচ, আয় এবং সঞ্চয়ের বিশ্লেষণ"), gapParams())
-        content.addView(periodCard(), gapParams(8))
-        content.addView(metricRow(), gapParams(12))
-        content.addView(chartCard("মাসিক আয় বনাম খরচ", "Monthly Cash Flow", barChart()), gapParams(12))
-        content.addView(chartCard("খরচের খাতভিত্তিক বিশ্লেষণ", "Spending Breakdown", donutChart()), gapParams(12))
-        content.addView(insightCard(), gapParams(12))
-        content.addView(stitchSectionLabel("সাম্প্রতিক খরচের ধরন", "Recent spending patterns"), gapParams(12))
-        content.addView(simpleListCard(), gapParams(8))
-
-        setContentView(root)
+        setupMonthNavigator()
+        setupListeners()
+        observeData()
     }
 
-    private fun periodCard(): MaterialCardView = card().apply {
-        val row = LinearLayout(context).apply {
-            gravity = Gravity.CENTER_VERTICAL
-            orientation = LinearLayout.HORIZONTAL
+    private fun setupMonthNavigator() {
+        updateMonthDisplay()
+
+        binding.btnPrevMonth.setOnClickListener {
+            calendar.add(Calendar.MONTH, -1)
+            updateMonthDisplay()
+            updateReportData()
         }
-        row.addView(TextView(context).apply {
-            text = "এপ্রিল ২০২৫  •  April 2025"
-            setTextColor(ContextCompat.getColor(context, R.color.text_primary))
-            textSize = 14f
-        }, LinearLayout.LayoutParams(0, -2, 1f))
-        row.addView(TextView(context).apply {
-            text = "মাসিক"
-            setTextColor(teal)
-            textSize = 12f
-        })
-        addView(row)
+
+        binding.btnNextMonth.setOnClickListener {
+            calendar.add(Calendar.MONTH, 1)
+            updateMonthDisplay()
+            updateReportData()
+        }
     }
 
-    private fun metricRow(): LinearLayout = LinearLayout(this).apply {
-        orientation = LinearLayout.HORIZONTAL
-        setPadding(0, dp(12), 0, 0)
-        listOf("মোট আয়\n৳ ৮৫,০০০", "মোট ব্যয়\n৳ ৪২,১৫০", "সঞ্চয় হার\n৫০.৪%").forEachIndexed { index, label ->
-            val card = card().apply {
-                setCardBackgroundColor(ContextCompat.getColor(context, R.color.surface_navy_elevated))
-                val tv = TextView(context).apply {
-                    text = label
-                    setTextColor(if (index == 1) ContextCompat.getColor(context, R.color.expense_red) else teal)
-                    textSize = 13f
-                    setTypeface(typeface, android.graphics.Typeface.BOLD)
-                }
-                addView(tv)
+    private fun updateMonthDisplay() {
+        val sdf = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+        binding.tvReportMonth.text = sdf.format(calendar.time)
+    }
+
+    private fun setupListeners() {
+        binding.btnExportReports.setOnClickListener {
+            startActivity(Intent(this, ExportActivity::class.java))
+        }
+    }
+
+    private fun observeData() {
+        val app = application as ExpenseTrackerApp
+        lifecycleScope.launch {
+            currencySymbol = app.preferencesManager.currencySymbolFlow.first()
+            app.repository.getAllTransactionsWithDetails().collect { txList ->
+                allTransactions = txList
+                updateReportData()
             }
-            addView(card, LinearLayout.LayoutParams(0, dp(72), 1f).apply { if (index > 0) marginStart = dp(8) })
         }
     }
 
-    private fun barChart(): BarTrendChartView = BarTrendChartView(this).apply {
-        setData(listOf(
-            BarTrendChartView.BarGroup("Jan", 62.0, 35.0),
-            BarTrendChartView.BarGroup("Feb", 70.0, 42.0),
-            BarTrendChartView.BarGroup("Mar", 78.0, 48.0),
-            BarTrendChartView.BarGroup("Apr", 85.0, 42.0)
-        ))
-    }
+    private fun updateReportData() {
+        val cal = Calendar.getInstance().apply { time = calendar.time }
+        cal.set(Calendar.DAY_OF_MONTH, 1)
+        cal.set(Calendar.HOUR_OF_DAY, 0)
+        cal.set(Calendar.MINUTE, 0)
+        cal.set(Calendar.SECOND, 0)
+        cal.set(Calendar.MILLISECOND, 0)
+        val startOfMonth = cal.timeInMillis
 
-    private fun donutChart(): DonutChartView = DonutChartView(this).apply {
-        setData(listOf(
-            DonutChartView.Slice("Groceries", 35.0, teal),
-            DonutChartView.Slice("Rent", 28.0, ContextCompat.getColor(context, R.color.savings_purple)),
-            DonutChartView.Slice("Dining", 18.0, ContextCompat.getColor(context, R.color.expense_red)),
-            DonutChartView.Slice("Transport", 11.0, ContextCompat.getColor(context, R.color.warning_amber)),
-            DonutChartView.Slice("Others", 8.0, ContextCompat.getColor(context, R.color.text_muted))
-        ), "৳ ৪২.১k", "মোট খরচ")
-    }
+        cal.add(Calendar.MONTH, 1)
+        val endOfMonth = cal.timeInMillis
 
-    private fun chartCard(title: String, subtitle: String, chart: android.view.View): MaterialCardView = card().apply {
-        val body = LinearLayout(context).apply { orientation = LinearLayout.VERTICAL }
-        body.addView(TextView(context).apply {
-            text = "$title\n$subtitle"
-            setTextColor(ContextCompat.getColor(context, R.color.text_primary))
-            textSize = 14f
-            setTypeface(typeface, android.graphics.Typeface.BOLD)
-        })
-        body.addView(chart, LinearLayout.LayoutParams(-1, dp(190)).apply { topMargin = dp(12) })
-        addView(body)
-    }
+        val monthTx = allTransactions.filter { it.transaction.timestamp in startOfMonth until endOfMonth }
 
-    private fun insightCard(): MaterialCardView = card().apply {
-        addView(TextView(context).apply {
-            text = "💡  Smart Tip\nএই মাসে আপনার ফুড ডেলিভারি খরচ ১৫% কমেছে। একইভাবে চললে আরও ৳ ৩,৫০০ সঞ্চয় হতে পারে।"
-            setTextColor(ContextCompat.getColor(context, R.color.text_primary))
-            textSize = 13f
-        })
-    }
+        var totalIncome = 0L
+        var totalExpense = 0L
+        val categoryExpenseMap = mutableMapOf<String, Long>()
 
-    private fun simpleListCard(): MaterialCardView = card().apply {
-        val body = LinearLayout(context).apply { orientation = LinearLayout.VERTICAL }
-        listOf("Shwapno Supermarket     -৳ ৩,৪৫০", "Tech Solutions Ltd       +৳ ৮৫,০০০", "Pathao Ride                 -৳ ২৮০").forEach { line ->
-            body.addView(TextView(context).apply {
-                text = line
-                setTextColor(ContextCompat.getColor(context, R.color.text_primary))
-                textSize = 13f
-                setPadding(0, dp(8), 0, dp(8))
-            })
+        monthTx.forEach { item ->
+            val tx = item.transaction
+            if (tx.type.equals("INCOME", ignoreCase = true)) {
+                totalIncome += tx.amountCents
+            } else if (tx.type.equals("EXPENSE", ignoreCase = true)) {
+                totalExpense += tx.amountCents
+                val catName = item.category?.name ?: "অন্যান্য (Other)"
+                categoryExpenseMap[catName] = (categoryExpenseMap[catName] ?: 0L) + tx.amountCents
+            }
         }
-        addView(body)
-    }
 
-    private fun card(): MaterialCardView = MaterialCardView(this).apply {
-        setCardBackgroundColor(ContextCompat.getColor(context, R.color.surface_navy_elevated))
-        strokeColor = ContextCompat.getColor(context, R.color.stroke_subtle)
-        strokeWidth = dp(1)
-        radius = dp(18).toFloat()
-        setContentPadding(dp(14), dp(14), dp(14), dp(14))
-    }
+        binding.tvTotalIncome.text = MoneyUtils.formatCents(totalIncome, currencySymbol)
+        binding.tvTotalExpense.text = MoneyUtils.formatCents(totalExpense, currencySymbol)
 
-    private fun gapParams(top: Int = 0): LinearLayout.LayoutParams =
-        LinearLayout.LayoutParams(-1, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-            topMargin = dp(top)
+        val savingsRate = if (totalIncome > 0) {
+            val netSavings = (totalIncome - totalExpense).coerceAtLeast(0)
+            ((netSavings.toDouble() / totalIncome.toDouble()) * 100).toInt()
+        } else {
+            0
         }
+        binding.tvSavingsRate.text = "$savingsRate%"
+
+        // Bar Chart (last 4 months)
+        val barData = mutableListOf<BarTrendChartView.BarGroup>()
+        val barCal = Calendar.getInstance().apply { time = calendar.time }
+        barCal.add(Calendar.MONTH, -3)
+
+        val monthLabelFormat = SimpleDateFormat("MMM", Locale.getDefault())
+        for (i in 0..3) {
+            barCal.set(Calendar.DAY_OF_MONTH, 1)
+            barCal.set(Calendar.HOUR_OF_DAY, 0)
+            barCal.set(Calendar.MINUTE, 0)
+            barCal.set(Calendar.SECOND, 0)
+            val mStart = barCal.timeInMillis
+            barCal.add(Calendar.MONTH, 1)
+            val mEnd = barCal.timeInMillis
+
+            val periodTx = allTransactions.filter { it.transaction.timestamp in mStart until mEnd }
+            val inc = periodTx.filter { it.transaction.type.equals("INCOME", ignoreCase = true) }.sumOf { it.transaction.amountCents } / 100.0
+            val exp = periodTx.filter { it.transaction.type.equals("EXPENSE", ignoreCase = true) }.sumOf { it.transaction.amountCents } / 100.0
+
+            barCal.add(Calendar.MONTH, -1)
+            val label = monthLabelFormat.format(barCal.time)
+            barData.add(BarTrendChartView.BarGroup(label, inc, exp))
+            barCal.add(Calendar.MONTH, 1)
+        }
+        binding.chartBarTrend.setData(barData)
+
+        // Donut Chart
+        val palette = listOf(
+            Color.parseColor("#46EFCF"),
+            Color.parseColor("#4EDEA3"),
+            Color.parseColor("#DFCFFF"),
+            Color.parseColor("#FBBF24"),
+            Color.parseColor("#F43F5E"),
+            Color.parseColor("#38BDF8"),
+            Color.parseColor("#A78BFA")
+        )
+
+        val slices = mutableListOf<DonutChartView.Slice>()
+        binding.llCategoryLegend.removeAllViews()
+
+        var colorIdx = 0
+        val sortedCategories = categoryExpenseMap.entries.sortedByDescending { it.value }
+
+        sortedCategories.forEach { (catName, amtCents) ->
+            val color = palette[colorIdx % palette.size]
+            colorIdx++
+
+            val amtMajor = amtCents / 100.0
+            slices.add(DonutChartView.Slice(catName, amtMajor, color))
+
+            // Add legend item
+            val legendRow = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.CENTER_VERTICAL
+                setPadding(0, dp(4), 0, dp(4))
+            }
+
+            val dot = android.view.View(this).apply {
+                val d = android.graphics.drawable.GradientDrawable()
+                d.shape = android.graphics.drawable.GradientDrawable.OVAL
+                d.setColor(color)
+                background = d
+            }
+            legendRow.addView(dot, LinearLayout.LayoutParams(dp(10), dp(10)))
+
+            val nameTv = TextView(this).apply {
+                text = catName
+                setTextColor(ContextCompat.getColor(this@ReportsActivity, R.color.text_primary))
+                textSize = 12f
+                setPadding(dp(8), 0, 0, 0)
+            }
+            legendRow.addView(nameTv, LinearLayout.LayoutParams(0, -2, 1f))
+
+            val amtTv = TextView(this).apply {
+                text = MoneyUtils.formatCents(amtCents, currencySymbol)
+                setTextColor(ContextCompat.getColor(this@ReportsActivity, R.color.text_muted))
+                textSize = 12f
+            }
+            legendRow.addView(amtTv)
+
+            binding.llCategoryLegend.addView(legendRow)
+        }
+
+        binding.chartDonut.setData(
+            slices,
+            MoneyUtils.formatCents(totalExpense, currencySymbol),
+            "মোট ব্যয়"
+        )
+    }
+
+    private fun dp(value: Int): Int {
+        return (value * resources.displayMetrics.density).toInt()
+    }
 }

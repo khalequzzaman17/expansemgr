@@ -1,117 +1,54 @@
 package com.sysninja.expensetracker.ui.transactions
 
-import com.sysninja.expensetracker.ui.dp
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.sysninja.expensetracker.ExpenseTrackerApp
 import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.databinding.ActivityTransactionDetailBinding
 import com.sysninja.expensetracker.domain.DateUtils
 import com.sysninja.expensetracker.domain.MoneyUtils
 import com.sysninja.expensetracker.ui.addtransaction.AddEditTransactionActivity
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class TransactionDetailActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityTransactionDetailBinding
     private var transactionId: Long = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityTransactionDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         transactionId = intent.getLongExtra("EXTRA_TRANSACTION_ID", 0L)
+        binding.toolbar.setNavigationOnClickListener { finish() }
 
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.bg_navy_dark))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
+        binding.btnEdit.setOnClickListener {
+            startActivity(Intent(this, AddEditTransactionActivity::class.java).apply {
+                putExtra("EXTRA_TRANSACTION_ID", transactionId)
+            })
+            finish()
         }
 
-        val toolbar = MaterialToolbar(this).apply {
-            title = getString(R.string.transaction_details)
-            setTitleTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.text_primary))
-            setBackgroundColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.surface_navy))
-            setNavigationIcon(R.drawable.ic_arrow_back)
-            setNavigationIconTint(ContextCompat.getColor(this@TransactionDetailActivity, R.color.text_primary))
-            setNavigationOnClickListener { finish() }
-        }
-        root.addView(toolbar)
-
-        val content = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(16), dp(16), dp(16), dp(16))
-        }
-
-        val titleTv = TextView(this).apply {
-            textSize = 22f
-            setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.text_primary))
-            paint.isFakeBoldText = true
-        }
-        content.addView(titleTv)
-
-        val amountTv = TextView(this).apply {
-            textSize = 28f
-            paint.isFakeBoldText = true
-            setPadding(0, 16, 0, 16)
-        }
-        content.addView(amountTv)
-
-        val dateTv = TextView(this).apply {
-            textSize = 14f
-            setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.text_secondary))
-            setPadding(0, 0, 0, 24)
-        }
-        content.addView(dateTv)
-
-        val noteTv = TextView(this).apply {
-            textSize = 14f
-            setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.text_secondary))
-            setPadding(0, 0, 0, 32)
-        }
-        content.addView(noteTv)
-
-        val editBtn = MaterialButton(this).apply {
-            text = getString(R.string.edit)
-            setBackgroundResource(R.drawable.bg_button_teal)
-            setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.text_inverse))
-            setOnClickListener {
-                startActivity(Intent(this@TransactionDetailActivity, AddEditTransactionActivity::class.java).apply {
-                    putExtra("EXTRA_TRANSACTION_ID", transactionId)
-                })
+        binding.btnDelete.setOnClickListener {
+            val app = application as ExpenseTrackerApp
+            lifecycleScope.launch {
+                app.repository.deleteTransactionById(transactionId)
+                Toast.makeText(this@TransactionDetailActivity, "লেনদেন মুছে ফেলা হয়েছে", Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
-        content.addView(editBtn)
 
-        val deleteBtn = MaterialButton(this).apply {
-            text = getString(R.string.delete)
-            setBackgroundColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.expense_red_bg))
-            setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.expense_red))
-            setOnClickListener {
-                val app = application as ExpenseTrackerApp
-                lifecycleScope.launch {
-                    app.repository.deleteTransactionById(transactionId)
-                    Toast.makeText(this@TransactionDetailActivity, "Transaction deleted", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-            }
-        }
-        content.addView(deleteBtn)
+        loadTransactionDetails()
+    }
 
-        root.addView(content)
-        setContentView(root)
-
+    private fun loadTransactionDetails() {
         val app = application as ExpenseTrackerApp
         lifecycleScope.launch {
             val currency = app.preferencesManager.currencySymbolFlow.first()
@@ -120,24 +57,54 @@ class TransactionDetailActivity : AppCompatActivity() {
                 finish()
                 return@launch
             }
+
             val tx = txWithDetails.transaction
-            titleTv.text = tx.title
-            dateTv.text = DateUtils.formatDateTime(tx.timestamp)
-            noteTv.text = tx.note ?: "No notes"
+            binding.tvTitle.text = tx.title
+            binding.tvDate.text = DateUtils.formatDateTime(tx.timestamp)
+
+            val note = tx.note
+            if (!note.isNullOrBlank()) {
+                binding.layoutNote.visibility = View.VISIBLE
+                binding.tvNote.text = note
+            } else {
+                binding.layoutNote.visibility = View.GONE
+            }
+
+            val catName = txWithDetails.category?.name ?: "সাধারণ / General"
+            binding.tvCategory.text = catName
+
+            val fromAcc = txWithDetails.account?.name ?: "ডিফল্ট হিসাব"
+            val toAcc = txWithDetails.toAccount?.name
+            binding.tvAccount.text = if (toAcc != null) "$fromAcc → $toAcc" else fromAcc
 
             val amt = MoneyUtils.formatCents(tx.amountCents, currency)
             when (tx.type) {
                 "INCOME" -> {
-                    amountTv.text = "+ $amt"
-                    amountTv.setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.income_green))
+                    binding.tvAmount.text = "+ $amt"
+                    binding.tvAmount.setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.secondary_mint))
+                    binding.tvType.text = "আয় • Income"
+                    binding.tvStatusChip.text = "আয় জমা হয়েছে • Credited"
+                    binding.ivCategoryAvatarBg.setBackgroundResource(R.drawable.bg_badge_cash)
+                    binding.ivCategoryIcon.setImageResource(R.drawable.ic_income)
+                    binding.ivCategoryIcon.setColorFilter(ContextCompat.getColor(this@TransactionDetailActivity, R.color.secondary_mint))
                 }
                 "EXPENSE" -> {
-                    amountTv.text = "- $amt"
-                    amountTv.setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.expense_red))
+                    binding.tvAmount.text = "- $amt"
+                    binding.tvAmount.setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.expense_red))
+                    binding.tvType.text = "ব্যয় • Expense"
+                    binding.tvStatusChip.text = "সফল লেনদেন • Completed"
+                    binding.ivCategoryAvatarBg.setBackgroundResource(R.drawable.bg_badge_expense)
+                    binding.ivCategoryIcon.setImageResource(R.drawable.ic_expense)
+                    binding.ivCategoryIcon.setColorFilter(ContextCompat.getColor(this@TransactionDetailActivity, R.color.expense_red))
                 }
                 else -> {
-                    amountTv.text = amt
-                    amountTv.setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.transfer_blue))
+                    binding.tvAmount.text = "⇄ $amt"
+                    binding.tvAmount.setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.teal_primary))
+                    binding.tvType.text = "স্থানান্তর • Transfer"
+                    binding.tvStatusChip.text = "স্থানান্তরিত • Transferred"
+                    binding.ivCategoryAvatarBg.setBackgroundResource(R.drawable.bg_badge_bank)
+                    binding.ivCategoryIcon.setImageResource(R.drawable.ic_transfer)
+                    binding.ivCategoryIcon.setColorFilter(ContextCompat.getColor(this@TransactionDetailActivity, R.color.teal_primary))
                 }
             }
         }

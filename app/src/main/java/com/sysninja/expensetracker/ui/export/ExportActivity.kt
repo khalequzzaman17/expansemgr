@@ -1,20 +1,16 @@
 package com.sysninja.expensetracker.ui.export
 
-import com.sysninja.expensetracker.ui.dp
-
 import android.os.Bundle
 import android.os.Environment
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.sysninja.expensetracker.ExpenseTrackerApp
 import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.databinding.ActivityExportBinding
 import com.sysninja.expensetracker.domain.CsvExporter
 import com.sysninja.expensetracker.domain.PdfExporter
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.io.File
@@ -22,84 +18,89 @@ import java.io.FileOutputStream
 
 class ExportActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityExportBinding
+    private var isPdfSelected = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityExportBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(ContextCompat.getColor(this@ExportActivity, R.color.bg_navy_dark))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
-        }
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { finish() }
 
-        val toolbar = MaterialToolbar(this).apply {
-            title = getString(R.string.export_title)
-            setTitleTextColor(ContextCompat.getColor(this@ExportActivity, R.color.text_primary))
-            setBackgroundColor(ContextCompat.getColor(this@ExportActivity, R.color.surface_navy))
-            setNavigationIcon(R.drawable.ic_arrow_back)
-            setNavigationIconTint(ContextCompat.getColor(this@ExportActivity, R.color.text_primary))
-            setNavigationOnClickListener { finish() }
-        }
-        root.addView(toolbar)
-
-        val content = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(16), dp(16), dp(16), dp(16))
-        }
-
-        val csvBtn = MaterialButton(this).apply {
-            text = getString(R.string.export_csv)
-            setBackgroundResource(R.drawable.bg_button_teal)
-            setTextColor(ContextCompat.getColor(this@ExportActivity, R.color.text_inverse))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { bottomMargin = 24 }
-            setOnClickListener { exportData(isPdf = false) }
-        }
-        content.addView(csvBtn)
-
-        val pdfBtn = MaterialButton(this).apply {
-            text = getString(R.string.export_pdf)
-            setBackgroundColor(ContextCompat.getColor(this@ExportActivity, R.color.surface_navy_elevated))
-            setTextColor(ContextCompat.getColor(this@ExportActivity, R.color.text_primary))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            setOnClickListener { exportData(isPdf = true) }
-        }
-        content.addView(pdfBtn)
-
-        root.addView(content)
-        setContentView(root)
+        setupFormatSelection()
+        setupListeners()
     }
 
-    private fun exportData(isPdf: Boolean) {
+    private fun setupFormatSelection() {
+        binding.cardFormatPdf.setOnClickListener {
+            isPdfSelected = true
+            updateFormatSelectionUI()
+        }
+
+        binding.cardFormatCsv.setOnClickListener {
+            isPdfSelected = false
+            updateFormatSelectionUI()
+        }
+    }
+
+    private fun updateFormatSelectionUI() {
+        if (isPdfSelected) {
+            binding.cardFormatPdf.strokeColor = ContextCompat.getColor(this, R.color.teal_primary)
+            binding.cardFormatPdf.strokeWidth = 4
+            binding.cardFormatCsv.strokeColor = ContextCompat.getColor(this, R.color.stroke_subtle)
+            binding.cardFormatCsv.strokeWidth = 2
+            binding.btnExecuteExport.text = "PDF অডিট স্টেটমেন্ট ডাউনলোড করুন"
+        } else {
+            binding.cardFormatCsv.strokeColor = ContextCompat.getColor(this, R.color.teal_primary)
+            binding.cardFormatCsv.strokeWidth = 4
+            binding.cardFormatPdf.strokeColor = ContextCompat.getColor(this, R.color.stroke_subtle)
+            binding.cardFormatPdf.strokeWidth = 2
+            binding.btnExecuteExport.text = "CSV স্প্রেডশিট ডাউনলোড করুন"
+        }
+    }
+
+    private fun setupListeners() {
+        binding.btnExecuteExport.setOnClickListener {
+            executeExport()
+        }
+    }
+
+    private fun executeExport() {
         val app = application as ExpenseTrackerApp
         lifecycleScope.launch {
             try {
                 val transactions = app.repository.getAllTransactionsWithDetails().first()
                 val currency = app.preferencesManager.currencySymbolFlow.first()
-                val dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) ?: filesDir
-                val file = if (isPdf) {
-                    File(dir, "ExpenseTracker_${System.currentTimeMillis()}.pdf")
-                } else {
-                    File(dir, "ExpenseTracker_${System.currentTimeMillis()}.csv")
-                }
 
-                FileOutputStream(file).use { os ->
-                    if (isPdf) {
-                        PdfExporter.generatePdfReport(transactions, "All Transactions", os, currency)
-                    } else {
-                        CsvExporter.exportTransactionsToCsv(transactions, os, currency)
-                    }
+                val dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) ?: filesDir
+                val timestamp = System.currentTimeMillis()
+
+                if (isPdfSelected) {
+                    val file = File(dir, "bengal_ledger_export_$timestamp.pdf")
+                    val fos = FileOutputStream(file)
+                    PdfExporter.generatePdfReport(
+                        transactions = transactions,
+                        periodTitle = "সব লেনদেন (All Records)",
+                        outputStream = fos,
+                        currencySymbol = currency
+                    )
+                    fos.close()
+                    Toast.makeText(this@ExportActivity, "PDF সফলভাবে ডাউনলোড হয়েছে: ${file.name}", Toast.LENGTH_LONG).show()
+                } else {
+                    val file = File(dir, "bengal_ledger_export_$timestamp.csv")
+                    val fos = FileOutputStream(file)
+                    CsvExporter.exportTransactionsToCsv(
+                        transactions = transactions,
+                        outputStream = fos,
+                        currencySymbol = currency
+                    )
+                    fos.close()
+                    Toast.makeText(this@ExportActivity, "CSV সফলভাবে ডাউনলোড হয়েছে: ${file.name}", Toast.LENGTH_LONG).show()
                 }
-                Toast.makeText(this@ExportActivity, "Saved to ${file.name}", Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
-                Toast.makeText(this@ExportActivity, "Export failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ExportActivity, "এক্সপোর্টে সমস্যা হয়েছে: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

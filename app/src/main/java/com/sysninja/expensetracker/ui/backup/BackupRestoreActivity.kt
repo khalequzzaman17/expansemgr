@@ -1,19 +1,14 @@
 package com.sysninja.expensetracker.ui.backup
 
-import com.sysninja.expensetracker.ui.dp
-
 import android.os.Bundle
 import android.os.Environment
-import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.sysninja.expensetracker.ExpenseTrackerApp
-import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.databinding.ActivityBackupRestoreBinding
 import com.sysninja.expensetracker.domain.BackupManager
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileInputStream
@@ -21,59 +16,23 @@ import java.io.FileOutputStream
 
 class BackupRestoreActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityBackupRestoreBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityBackupRestoreBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(ContextCompat.getColor(this@BackupRestoreActivity, R.color.bg_navy_dark))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { finish() }
+
+        binding.btnCreateBackup.setOnClickListener {
+            createBackup()
         }
 
-        val toolbar = MaterialToolbar(this).apply {
-            title = getString(R.string.backup_restore_title)
-            setTitleTextColor(ContextCompat.getColor(this@BackupRestoreActivity, R.color.text_primary))
-            setBackgroundColor(ContextCompat.getColor(this@BackupRestoreActivity, R.color.surface_navy))
-            setNavigationIcon(R.drawable.ic_arrow_back)
-            setNavigationIconTint(ContextCompat.getColor(this@BackupRestoreActivity, R.color.text_primary))
-            setNavigationOnClickListener { finish() }
+        binding.btnRestoreBackup.setOnClickListener {
+            showRestoreChooser()
         }
-        root.addView(toolbar)
-
-        val content = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(16), dp(16), dp(16), dp(16))
-        }
-
-        val backupBtn = MaterialButton(this).apply {
-            text = getString(R.string.create_backup)
-            setBackgroundResource(R.drawable.bg_button_teal)
-            setTextColor(ContextCompat.getColor(this@BackupRestoreActivity, R.color.text_inverse))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { bottomMargin = 24 }
-            setOnClickListener { createBackup() }
-        }
-        content.addView(backupBtn)
-
-        val restoreBtn = MaterialButton(this).apply {
-            text = getString(R.string.restore_backup)
-            setBackgroundColor(ContextCompat.getColor(this@BackupRestoreActivity, R.color.surface_navy_elevated))
-            setTextColor(ContextCompat.getColor(this@BackupRestoreActivity, R.color.text_primary))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            setOnClickListener { restoreBackup() }
-        }
-        content.addView(restoreBtn)
-
-        root.addView(content)
-        setContentView(root)
     }
 
     private fun createBackup() {
@@ -81,34 +40,56 @@ class BackupRestoreActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) ?: filesDir
-                val backupFile = File(dir, "backup_expense_tracker.json")
-                FileOutputStream(backupFile).use { os ->
-                    BackupManager.createBackup(app.database, os)
-                }
-                Toast.makeText(this@BackupRestoreActivity, getString(R.string.backup_success), Toast.LENGTH_SHORT).show()
+                val timestamp = System.currentTimeMillis()
+                val file = File(dir, "bengal_ledger_backup_$timestamp.json")
+                val fos = FileOutputStream(file)
+                BackupManager.createBackup(app.database, fos)
+                fos.close()
+                Toast.makeText(this@BackupRestoreActivity, "ব্যাকআপ সফল হয়েছে: ${file.name}", Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
-                Toast.makeText(this@BackupRestoreActivity, "Backup failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@BackupRestoreActivity, "ব্যাকআপ তৈরিতে সমস্যা: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun restoreBackup() {
-        val app = application as ExpenseTrackerApp
-        lifecycleScope.launch {
-            try {
-                val dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) ?: filesDir
-                val backupFile = File(dir, "backup_expense_tracker.json")
-                if (!backupFile.exists()) {
-                    Toast.makeText(this@BackupRestoreActivity, "No local backup found", Toast.LENGTH_SHORT).show()
-                    return@launch
-                }
-                FileInputStream(backupFile).use { `is` ->
-                    BackupManager.restoreBackup(app.database, `is`)
-                }
-                Toast.makeText(this@BackupRestoreActivity, getString(R.string.restore_success), Toast.LENGTH_SHORT).show()
-            } catch (e: Exception) {
-                Toast.makeText(this@BackupRestoreActivity, "Restore failed: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+    private fun showRestoreChooser() {
+        val dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) ?: filesDir
+        val backupFiles = dir.listFiles { _, name -> name.endsWith(".json") && name.startsWith("bengal_ledger_backup") }
+            ?.sortedByDescending { it.lastModified() }
+
+        if (backupFiles.isNullOrEmpty()) {
+            Toast.makeText(this, "কোন ব্যাকআপ ফাইল পাওয়া যায়নি", Toast.LENGTH_SHORT).show()
+            return
         }
+
+        val fileNames = backupFiles.map { it.name }.toTypedArray()
+        AlertDialog.Builder(this)
+            .setTitle("রিস্টোর করার ফাইল নির্বাচন করুন")
+            .setItems(fileNames) { _, which ->
+                confirmRestore(backupFiles[which])
+            }
+            .setNegativeButton("বাতিল", null)
+            .show()
+    }
+
+    private fun confirmRestore(file: File) {
+        AlertDialog.Builder(this)
+            .setTitle("রিস্টোর নিশ্চিতকরণ")
+            .setMessage("নির্বাচিত ফাইল (${file.name}) থেকে ডাটা রিস্টোর করতে চান?")
+            .setPositiveButton("রিস্টোর করুন") { _, _ ->
+                val app = application as ExpenseTrackerApp
+                lifecycleScope.launch {
+                    try {
+                        val fis = FileInputStream(file)
+                        BackupManager.restoreBackup(app.database, fis)
+                        fis.close()
+                        Toast.makeText(this@BackupRestoreActivity, "ডাটা সফলভাবে রিস্টোর হয়েছে!", Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(this@BackupRestoreActivity, "রিস্টোরে ত্রুটি: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            .setNegativeButton("বাতিল", null)
+            .show()
     }
 }

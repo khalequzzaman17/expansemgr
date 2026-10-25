@@ -60,4 +60,18 @@
     <style name="ShapeAppearance.ExpenseTracker.Chip" parent="ShapeAppearance.Material3.Corner.Full">
         <item name="cornerSize">999dp</item>
     </style>
+
+    <style name="KeypadButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_pill_sync</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
 </resources>

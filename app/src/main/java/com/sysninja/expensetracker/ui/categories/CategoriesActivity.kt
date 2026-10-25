@@ -2,127 +2,132 @@ package com.sysninja.expensetracker.ui.categories
 
 import android.content.Intent
 import android.os.Bundle
-import android.graphics.Typeface
-import android.view.Gravity
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.ScrollView
-import android.widget.TextView
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sysninja.expensetracker.ExpenseTrackerApp
-import com.sysninja.expensetracker.R
-import com.sysninja.expensetracker.ui.dp
-import com.sysninja.expensetracker.ui.stitchToolbar
+import com.sysninja.expensetracker.data.local.entity.CategoryEntity
+import com.sysninja.expensetracker.databinding.ActivityCategoriesBinding
 import kotlinx.coroutines.launch
 
 class CategoriesActivity : AppCompatActivity() {
-    private val primary by lazy { ContextCompat.getColor(this, R.color.teal_primary) }
-    private val textPrimary by lazy { ContextCompat.getColor(this, R.color.text_primary) }
-    private val muted by lazy { ContextCompat.getColor(this, R.color.text_muted) }
+
+    private lateinit var binding: ActivityCategoriesBinding
+    private lateinit var adapter: CategoryAdapter
+    private var allCategories = listOf<CategoryEntity>()
+    private var selectedType = "EXPENSE"
+    private var searchQuery = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(ContextCompat.getColor(context, R.color.bg_navy_dark))
+        binding = ActivityCategoriesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { finish() }
+
+        setupRecyclerView()
+        setupListeners()
+        observeData()
+    }
+
+    private fun setupRecyclerView() {
+        adapter = CategoryAdapter(
+            onCategoryClick = { cat ->
+                openEditCategory(cat)
+            },
+            onEditClick = { cat ->
+                openEditCategory(cat)
+            },
+            onDeleteClick = { cat ->
+                confirmDelete(cat)
+            }
+        )
+        binding.rvCategories.layoutManager = LinearLayoutManager(this)
+        binding.rvCategories.adapter = adapter
+    }
+
+    private fun setupListeners() {
+        binding.btnAddNewCategory.setOnClickListener {
+            startActivity(Intent(this, AddEditCategoryActivity::class.java))
         }
-        root.addView(stitchToolbar("Categories", "হিসাব খাতা • Ledger", ::finish))
 
-        val scroll = ScrollView(this)
-        val content = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(16), dp(10), dp(16), dp(24))
+        binding.chipGroupCategoryType.setOnCheckedStateChangeListener { _, checkedIds ->
+            selectedType = if (checkedIds.contains(binding.chipIncomeCategories.id)) {
+                "INCOME"
+            } else {
+                "EXPENSE"
+            }
+            filterCategories()
         }
-        scroll.addView(content)
-        root.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
 
-        val titleRow = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL }
-        titleRow.addView(TextView(this).apply {
-            text = "ক্যাটাগরি সমূহ\nCategories & Tags Management"
-            setTextColor(textPrimary)
-            textSize = 20f
-            setTypeface(typeface, Typeface.BOLD)
-        }, LinearLayout.LayoutParams(0, -2, 1f))
-        titleRow.addView(MaterialButton(this).apply {
-            text = "+  নতুন খাত"
-            setBackgroundResource(R.drawable.bg_button_teal)
-            setTextColor(ContextCompat.getColor(context, R.color.text_inverse))
-            setOnClickListener { startActivity(Intent(this@CategoriesActivity, AddEditCategoryActivity::class.java)) }
-        }, LinearLayout.LayoutParams(dp(132), dp(48)))
-        content.addView(titleRow)
-
-        val tabs = LinearLayout(this).apply {
-            gravity = Gravity.CENTER_VERTICAL
-            setBackgroundResource(R.drawable.bg_card_rounded)
-            setPadding(dp(6), dp(6), dp(6), dp(6))
-        }
-        tabs.addView(TextView(this).apply { text = "↓  ব্যয় খাত (১৬)"; setTextColor(primary); textSize = 14f; setPadding(dp(12), dp(10), dp(12), dp(10)) }, LinearLayout.LayoutParams(0, -2, 1f))
-        tabs.addView(TextView(this).apply { text = "↑  আয় খাত (৬)"; setTextColor(ContextCompat.getColor(context, R.color.text_secondary)); textSize = 14f; setPadding(dp(12), dp(10), dp(12), dp(10)) }, LinearLayout.LayoutParams(0, -2, 1f))
-        content.addView(tabs, LinearLayout.LayoutParams(-1, dp(58)).apply { topMargin = dp(16) })
-
-        content.addView(EditText(this).apply {
-            hint = "⌕  খাত বা ট্যাগ খুঁজুন... (Search category)"
-            setHintTextColor(muted)
-            setTextColor(textPrimary)
-            textSize = 14f
-            setSingleLine()
-            setBackgroundResource(R.drawable.bg_edit_text)
-            setPadding(dp(16), 0, dp(16), 0)
-        }, LinearLayout.LayoutParams(-1, dp(54)).apply { topMargin = dp(16) })
-
-        content.addView(TextView(this).apply {
-            text = "ⓘ  মোট ২৮টি সক্রিয় খাত • টাইপ করে ফিল্টার করুন"
-            setTextColor(ContextCompat.getColor(context, R.color.text_secondary))
-            textSize = 12f
-            setPadding(dp(4), dp(12), dp(4), dp(10))
+        binding.etSearchCategory.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                searchQuery = s?.toString()?.trim() ?: ""
+                filterCategories()
+            }
+            override fun afterTextChanged(s: Editable?) {}
         })
+    }
 
-        val listContainer = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
-        content.addView(listContainer)
-        setContentView(root)
-
+    private fun observeData() {
         val app = application as ExpenseTrackerApp
         lifecycleScope.launch {
             app.repository.getAllActiveCategories().collect { categories ->
-                listContainer.removeAllViews()
-                categories.forEach { category ->
-                    listContainer.addView(categoryCard(category.name, category.type))
-                }
+                allCategories = categories
+                binding.tvCategorySummary.text = "মোট ${categories.size}টি খাত নিবন্ধিত"
+                filterCategories()
             }
         }
     }
 
-    private fun categoryCard(name: String, type: String): MaterialCardView = MaterialCardView(this).apply {
-        setCardBackgroundColor(ContextCompat.getColor(context, R.color.surface_navy_elevated))
-        strokeColor = ContextCompat.getColor(context, R.color.stroke_subtle)
-        strokeWidth = dp(1)
-        radius = dp(18).toFloat()
-        val row = LinearLayout(context).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(14), dp(14), dp(14), dp(14)) }
-        row.addView(TextView(context).apply {
-            text = if (type.equals("INCOME", true)) "↑" else "⌁"
-            gravity = Gravity.CENTER
-            setTextColor(primary)
-            textSize = 22f
-            setBackgroundResource(R.drawable.bg_chip_selected)
-        }, LinearLayout.LayoutParams(dp(48), dp(48)))
-        row.addView(TextView(context).apply {
-            text = "$name\n${if (type.equals("INCOME", true)) "Income" else "Expense"} category"
-            setTextColor(textPrimary)
-            textSize = 14f
-            setTypeface(typeface, Typeface.BOLD)
-            setPadding(dp(12), 0, 0, 0)
-        }, LinearLayout.LayoutParams(0, -2, 1f))
-        row.addView(TextView(context).apply {
-            text = "•  ০ লেনদেন\n⋮"
-            gravity = Gravity.END
-            setTextColor(muted)
-            textSize = 12f
-        })
-        addView(row)
-        layoutParams = LinearLayout.LayoutParams(-1, dp(82)).apply { bottomMargin = dp(10) }
+    private fun filterCategories() {
+        val filtered = allCategories.filter { cat ->
+            val matchesType = cat.type.equals(selectedType, ignoreCase = true)
+            val matchesSearch = if (searchQuery.isNotEmpty()) {
+                cat.name.contains(searchQuery, ignoreCase = true)
+            } else {
+                true
+            }
+            matchesType && matchesSearch
+        }
+
+        adapter.submitList(filtered)
+
+        if (filtered.isEmpty()) {
+            binding.rvCategories.visibility = View.GONE
+            binding.llEmptyCategories.visibility = View.VISIBLE
+        } else {
+            binding.rvCategories.visibility = View.VISIBLE
+            binding.llEmptyCategories.visibility = View.GONE
+        }
+    }
+
+    private fun openEditCategory(category: CategoryEntity) {
+        val intent = Intent(this, AddEditCategoryActivity::class.java).apply {
+            putExtra("category_id", category.id)
+        }
+        startActivity(intent)
+    }
+
+    private fun confirmDelete(category: CategoryEntity) {
+        AlertDialog.Builder(this)
+            .setTitle("খাত মুছবেন?")
+            .setMessage("\"${category.name}\" ক্যাটাগরিটি মুছে ফেলতে চান?")
+            .setPositiveButton("মুছুন") { _, _ ->
+                val app = application as ExpenseTrackerApp
+                lifecycleScope.launch {
+                    app.repository.deleteCategory(category)
+                    Toast.makeText(this@CategoriesActivity, "মুছে ফেলা হয়েছে", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("বাতিল", null)
+            .show()
     }
 }

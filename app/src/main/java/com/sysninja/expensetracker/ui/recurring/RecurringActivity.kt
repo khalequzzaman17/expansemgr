@@ -1,123 +1,166 @@
 package com.sysninja.expensetracker.ui.recurring
 
-import com.sysninja.expensetracker.ui.dp
-
 import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.ScrollView
-import android.widget.TextView
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sysninja.expensetracker.ExpenseTrackerApp
 import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.data.local.entity.RecurringTransactionEntity
+import com.sysninja.expensetracker.databinding.ActivityRecurringBinding
 import com.sysninja.expensetracker.domain.MoneyUtils
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class RecurringActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityRecurringBinding
+    private lateinit var adapter: RecurringAdapter
+    private var allItems = listOf<RecurringTransactionEntity>()
+    private var currentFilter = "ALL"
+    private var currencySymbol: String = "৳"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityRecurringBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(ContextCompat.getColor(this@RecurringActivity, R.color.bg_navy_dark))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
-        }
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { finish() }
 
-        val toolbar = MaterialToolbar(this).apply {
-            title = getString(R.string.recurring_title)
-            setTitleTextColor(ContextCompat.getColor(this@RecurringActivity, R.color.text_primary))
-            setBackgroundColor(ContextCompat.getColor(this@RecurringActivity, R.color.surface_navy))
-            setNavigationIcon(R.drawable.ic_arrow_back)
-            setNavigationIconTint(ContextCompat.getColor(this@RecurringActivity, R.color.text_primary))
-            setNavigationOnClickListener { finish() }
-        }
-        root.addView(toolbar)
+        setupRecyclerView()
+        setupListeners()
+        observeData()
+    }
 
-        val addBtn = MaterialButton(this).apply {
-            text = getString(R.string.add_recurring)
-            setBackgroundResource(R.drawable.bg_button_teal)
-            setTextColor(ContextCompat.getColor(this@RecurringActivity, R.color.text_inverse))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { setMargins(dp(16), dp(12), dp(16), dp(8)) }
-            setOnClickListener {
-                startActivity(Intent(this@RecurringActivity, AddEditRecurringActivity::class.java))
+    private fun setupRecyclerView() {
+        adapter = RecurringAdapter(
+            currencySymbol = currencySymbol,
+            onRecurringClick = { item ->
+                val intent = Intent(this, AddEditRecurringActivity::class.java).apply {
+                    putExtra("recurring_id", item.id)
+                }
+                startActivity(intent)
+            },
+            onTogglePause = { item ->
+                val app = application as ExpenseTrackerApp
+                lifecycleScope.launch {
+                    val updated = item.copy(isPaused = !item.isPaused)
+                    app.repository.updateRecurring(updated)
+                    val statusMsg = if (updated.isPaused) "লেনদেন স্থগিত করা হয়েছে" else "লেনদেন সক্রিয় করা হয়েছে"
+                    Toast.makeText(this@RecurringActivity, statusMsg, Toast.LENGTH_SHORT).show()
+                }
+            },
+            onDeleteRecurring = { item ->
+                confirmDelete(item)
             }
+        )
+        binding.rvRecurring.layoutManager = LinearLayoutManager(this)
+        binding.rvRecurring.adapter = adapter
+    }
+
+    private fun setupListeners() {
+        binding.btnAddNewRecurring.setOnClickListener {
+            startActivity(Intent(this, AddEditRecurringActivity::class.java))
         }
-        root.addView(addBtn)
 
-        val scrollView = ScrollView(this).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                0,
-                1f
-            )
+        binding.chipGroupRecurring.setOnCheckedStateChangeListener { _, checkedIds ->
+            currentFilter = when {
+                checkedIds.contains(R.id.chipRecurringMonthly) -> "MONTHLY"
+                checkedIds.contains(R.id.chipRecurringWeekly) -> "WEEKLY"
+                checkedIds.contains(R.id.chipRecurringYearly) -> "YEARLY"
+                else -> "ALL"
+            }
+            applyFilter()
         }
+    }
 
-        val listContainer = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(16), dp(8), dp(16), dp(16))
-        }
-        scrollView.addView(listContainer)
-        root.addView(scrollView)
-
-        setContentView(root)
-
+    private fun observeData() {
         val app = application as ExpenseTrackerApp
         lifecycleScope.launch {
-            val currency = app.preferencesManager.currencySymbolFlow.first()
-            app.repository.getAllRecurring().collect { list ->
-                listContainer.removeAllViews()
-                if (list.isEmpty()) {
-                    val emptyTv = TextView(this@RecurringActivity).apply {
-                        text = "No recurring payments scheduled"
-                        setTextColor(ContextCompat.getColor(this@RecurringActivity, R.color.text_muted))
-                        textSize = 14f
-                        setPadding(0, 32, 0, 0)
-                    }
-                    listContainer.addView(emptyTv)
-                } else {
-                    list.forEach { item ->
-                        val card = LinearLayout(this@RecurringActivity).apply {
-                            orientation = LinearLayout.VERTICAL
-                            setPadding(dp(16), dp(14), dp(16), dp(14))
-                            setBackgroundResource(R.drawable.bg_card_rounded)
-                            layoutParams = LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                            ).apply { bottomMargin = 16 }
-                        }
+            currencySymbol = app.preferencesManager.currencySymbolFlow.first()
+            app.repository.getAllRecurring().collect { items ->
+                allItems = items
+                updateOverview(items)
+                applyFilter()
+            }
+        }
+    }
 
-                        val nameTv = TextView(this@RecurringActivity).apply {
-                            text = "${item.title} (${item.frequency})"
-                            setTextColor(ContextCompat.getColor(this@RecurringActivity, R.color.text_primary))
-                            textSize = 15f
-                            paint.isFakeBoldText = true
-                        }
-                        card.addView(nameTv)
+    private fun updateOverview(items: List<RecurringTransactionEntity>) {
+        var monthlyTotalCents = 0L
+        var activeCount = 0
+        var upcoming7DaysCount = 0
+        var upcoming7DaysAmount = 0L
 
-                        val detailsTv = TextView(this@RecurringActivity).apply {
-                            text = MoneyUtils.formatCents(item.amountCents, currency)
-                            setTextColor(ContextCompat.getColor(this@RecurringActivity, R.color.teal_light))
-                            textSize = 14f
-                            setPadding(0, 8, 0, 0)
-                        }
-                        card.addView(detailsTv)
+        val now = System.currentTimeMillis()
+        val sevenDaysMs = TimeUnit.DAYS.toMillis(7)
 
-                        listContainer.addView(card)
-                    }
+        items.forEach { item ->
+            if (!item.isPaused) {
+                activeCount++
+                val monthlyEquivalent = when (item.frequency.uppercase()) {
+                    "DAILY" -> item.amountCents * 30
+                    "WEEKLY" -> item.amountCents * 4
+                    "YEARLY" -> item.amountCents / 12
+                    else -> item.amountCents
+                }
+                monthlyTotalCents += monthlyEquivalent
+
+                val diff = item.nextDueDate - now
+                if (diff in 0..sevenDaysMs) {
+                    upcoming7DaysCount++
+                    upcoming7DaysAmount += item.amountCents
                 }
             }
         }
+
+        binding.tvActiveRecurringCount.text = "${activeCount}টি সচল"
+        binding.tvMonthlyRecurringTotal.text = "${MoneyUtils.formatCents(monthlyTotalCents, currencySymbol)} / মাস"
+
+        if (upcoming7DaysCount > 0) {
+            binding.llUpcomingAlert.visibility = View.VISIBLE
+            binding.tvUpcomingAlertText.text = "${upcoming7DaysCount}টি বিলের পরিশোধের তারিখ কাছাকাছি"
+            binding.tvUpcomingAlertAmount.text = MoneyUtils.formatCents(upcoming7DaysAmount, currencySymbol)
+        } else {
+            binding.llUpcomingAlert.visibility = View.GONE
+        }
+    }
+
+    private fun applyFilter() {
+        val filtered = when (currentFilter) {
+            "ALL" -> allItems
+            else -> allItems.filter { it.frequency.equals(currentFilter, ignoreCase = true) }
+        }
+
+        adapter.submitList(filtered, currencySymbol)
+
+        if (filtered.isEmpty()) {
+            binding.rvRecurring.visibility = View.GONE
+            binding.llEmptyRecurring.visibility = View.VISIBLE
+        } else {
+            binding.rvRecurring.visibility = View.VISIBLE
+            binding.llEmptyRecurring.visibility = View.GONE
+        }
+    }
+
+    private fun confirmDelete(item: RecurringTransactionEntity) {
+        AlertDialog.Builder(this)
+            .setTitle("বিল মুছবেন?")
+            .setMessage("\"${item.title}\" পুনরাবৃত্ত লেনদেনটি মুছে ফেলতে চান?")
+            .setPositiveButton("মুছুন") { _, _ ->
+                val app = application as ExpenseTrackerApp
+                lifecycleScope.launch {
+                    app.repository.deleteRecurring(item)
+                    Toast.makeText(this@RecurringActivity, "মুছে ফেলা হয়েছে", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("বাতিল", null)
+            .show()
     }
 }

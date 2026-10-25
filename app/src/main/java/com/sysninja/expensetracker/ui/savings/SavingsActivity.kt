@@ -1,128 +1,147 @@
 package com.sysninja.expensetracker.ui.savings
 
-import com.sysninja.expensetracker.ui.dp
-
 import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.ScrollView
-import android.widget.TextView
+import android.view.View
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sysninja.expensetracker.ExpenseTrackerApp
 import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.data.local.entity.SavingsGoalEntity
+import com.sysninja.expensetracker.databinding.ActivitySavingsBinding
 import com.sysninja.expensetracker.domain.MoneyUtils
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class SavingsActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivitySavingsBinding
+    private lateinit var adapter: SavingsGoalAdapter
+    private var currencySymbol: String = "৳"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivitySavingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(ContextCompat.getColor(this@SavingsActivity, R.color.bg_navy_dark))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
-        }
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { finish() }
 
-        val toolbar = MaterialToolbar(this).apply {
-            title = getString(R.string.savings_title)
-            setTitleTextColor(ContextCompat.getColor(this@SavingsActivity, R.color.text_primary))
-            setBackgroundColor(ContextCompat.getColor(this@SavingsActivity, R.color.surface_navy))
-            setNavigationIcon(R.drawable.ic_arrow_back)
-            setNavigationIconTint(ContextCompat.getColor(this@SavingsActivity, R.color.text_primary))
-            setNavigationOnClickListener { finish() }
-        }
-        root.addView(toolbar)
+        setupRecyclerView()
+        setupListeners()
+        observeData()
+    }
 
-        val addBtn = MaterialButton(this).apply {
-            text = getString(R.string.add_savings_goal)
-            setBackgroundResource(R.drawable.bg_button_teal)
-            setTextColor(ContextCompat.getColor(this@SavingsActivity, R.color.text_inverse))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { setMargins(dp(16), dp(12), dp(16), dp(8)) }
-            setOnClickListener {
-                startActivity(Intent(this@SavingsActivity, AddEditSavingsGoalActivity::class.java))
+    private fun setupRecyclerView() {
+        adapter = SavingsGoalAdapter(
+            currencySymbol = currencySymbol,
+            onGoalClick = { goal ->
+                val intent = Intent(this, SavingsDetailActivity::class.java).apply {
+                    putExtra("goal_id", goal.id)
+                }
+                startActivity(intent)
+            },
+            onQuickDeposit = { goal ->
+                showQuickDepositDialog(goal)
             }
+        )
+        binding.rvSavingsGoals.layoutManager = LinearLayoutManager(this)
+        binding.rvSavingsGoals.adapter = adapter
+    }
+
+    private fun setupListeners() {
+        binding.btnAddNewGoal.setOnClickListener {
+            startActivity(Intent(this, AddEditSavingsGoalActivity::class.java))
         }
-        root.addView(addBtn)
+    }
 
-        val scrollView = ScrollView(this).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                0,
-                1f
-            )
-        }
-
-        val listContainer = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(16), dp(8), dp(16), dp(16))
-        }
-        scrollView.addView(listContainer)
-        root.addView(scrollView)
-
-        setContentView(root)
-
+    private fun observeData() {
         val app = application as ExpenseTrackerApp
         lifecycleScope.launch {
-            val currency = app.preferencesManager.currencySymbolFlow.first()
+            currencySymbol = app.preferencesManager.currencySymbolFlow.first()
             app.repository.getAllSavingsGoals().collect { goals ->
-                listContainer.removeAllViews()
+                updateOverview(goals)
+                adapter.submitList(goals, currencySymbol)
+
                 if (goals.isEmpty()) {
-                    val emptyTv = TextView(this@SavingsActivity).apply {
-                        text = "No savings goals yet"
-                        setTextColor(ContextCompat.getColor(this@SavingsActivity, R.color.text_muted))
-                        textSize = 14f
-                        setPadding(0, 32, 0, 0)
-                    }
-                    listContainer.addView(emptyTv)
+                    binding.rvSavingsGoals.visibility = View.GONE
+                    binding.llEmptySavings.visibility = View.VISIBLE
+                    binding.tvGoalsCountBadge.text = "০টি"
                 } else {
-                    goals.forEach { goal ->
-                        val card = LinearLayout(this@SavingsActivity).apply {
-                            orientation = LinearLayout.VERTICAL
-                            setPadding(dp(16), dp(14), dp(16), dp(14))
-                            setBackgroundResource(R.drawable.bg_card_rounded)
-                            layoutParams = LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                            ).apply { bottomMargin = 16 }
-                            setOnClickListener {
-                                startActivity(Intent(this@SavingsActivity, SavingsDetailActivity::class.java).apply {
-                                    putExtra("EXTRA_GOAL_ID", goal.id)
-                                })
-                            }
-                        }
-
-                        val nameTv = TextView(this@SavingsActivity).apply {
-                            text = goal.name
-                            setTextColor(ContextCompat.getColor(this@SavingsActivity, R.color.text_primary))
-                            textSize = 16f
-                            paint.isFakeBoldText = true
-                        }
-                        card.addView(nameTv)
-
-                        val detailsTv = TextView(this@SavingsActivity).apply {
-                            text = "${MoneyUtils.formatCents(goal.currentAmountCents, currency)} / ${MoneyUtils.formatCents(goal.targetAmountCents, currency)}"
-                            setTextColor(ContextCompat.getColor(this@SavingsActivity, R.color.teal_light))
-                            textSize = 14f
-                            setPadding(0, 8, 0, 0)
-                        }
-                        card.addView(detailsTv)
-
-                        listContainer.addView(card)
-                    }
+                    binding.rvSavingsGoals.visibility = View.VISIBLE
+                    binding.llEmptySavings.visibility = View.GONE
+                    binding.tvGoalsCountBadge.text = "${goals.size}টি"
                 }
             }
         }
+    }
+
+    private fun updateOverview(goals: List<SavingsGoalEntity>) {
+        var totalSavedCents = 0L
+        var totalTargetCents = 0L
+        var completedCount = 0
+
+        goals.forEach { g ->
+            totalSavedCents += g.currentAmountCents
+            totalTargetCents += g.targetAmountCents
+            if (g.isCompleted || (g.targetAmountCents > 0 && g.currentAmountCents >= g.targetAmountCents)) {
+                completedCount++
+            }
+        }
+
+        val activeCount = goals.size - completedCount
+        binding.tvTotalSavedAmount.text = MoneyUtils.formatCents(totalSavedCents, currencySymbol)
+        binding.tvTotalTarget.text = MoneyUtils.formatCents(totalTargetCents, currencySymbol)
+        binding.tvGoalsStatusInfo.text = "${activeCount}টি চলমান • ${completedCount}টি অর্জিত"
+
+        val pct = if (totalTargetCents > 0) {
+            ((totalSavedCents.toDouble() / totalTargetCents.toDouble()) * 100).toInt()
+        } else {
+            0
+        }
+        val clampedPct = pct.coerceIn(0, 100)
+        binding.progressBarMasterSavings.progress = clampedPct
+        binding.tvSavedPercentage.text = "$clampedPct% অর্জিত"
+    }
+
+    private fun showQuickDepositDialog(goal: SavingsGoalEntity) {
+        val input = EditText(this).apply {
+            hint = "টাকার পরিমাণ লিখুন (Amount)"
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
+            setTextColor(getColor(R.color.text_primary))
+            setHintTextColor(getColor(R.color.text_muted))
+            setPadding(40, 30, 40, 30)
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("টাকা জমা করুন • Deposit to ${goal.name}")
+            .setMessage("বর্তমান জমার পরিমাণ: ${MoneyUtils.formatCents(goal.currentAmountCents, currencySymbol)}")
+            .setView(input)
+            .setPositiveButton("জমা দিন") { _, _ ->
+                val amtStr = input.text.toString().trim()
+                val parsed = MoneyUtils.parseToCents(amtStr)
+                if (parsed != null && parsed > 0) {
+                    val app = application as ExpenseTrackerApp
+                    lifecycleScope.launch {
+                        val newTotal = goal.currentAmountCents + parsed
+                        val isComplete = newTotal >= goal.targetAmountCents
+                        app.repository.updateSavingsGoal(
+                            goal.copy(
+                                currentAmountCents = newTotal,
+                                isCompleted = isComplete
+                            )
+                        )
+                        Toast.makeText(this@SavingsActivity, "সফলভাবে জমা হয়েছে!", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "সঠিক পরিমাণ লিখুন", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("বাতিল", null)
+            .show()
     }
 }

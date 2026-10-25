@@ -1,128 +1,199 @@
 package com.sysninja.expensetracker.ui.debts
 
-import com.sysninja.expensetracker.ui.dp
-
 import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.ScrollView
-import android.widget.TextView
+import android.view.View
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sysninja.expensetracker.ExpenseTrackerApp
 import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.data.local.entity.DebtEntity
+import com.sysninja.expensetracker.databinding.ActivityDebtsBinding
 import com.sysninja.expensetracker.domain.MoneyUtils
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class DebtsActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityDebtsBinding
+    private lateinit var adapter: DebtAdapter
+    private var allDebts = listOf<DebtEntity>()
+    private var currentFilter = FilterType.ALL
+    private var currencySymbol: String = "৳"
+
+    enum class FilterType {
+        ALL, RECEIVABLE, PAYABLE, SETTLED
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityDebtsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(ContextCompat.getColor(this@DebtsActivity, R.color.bg_navy_dark))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
-        }
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { finish() }
 
-        val toolbar = MaterialToolbar(this).apply {
-            title = getString(R.string.debts_title)
-            setTitleTextColor(ContextCompat.getColor(this@DebtsActivity, R.color.text_primary))
-            setBackgroundColor(ContextCompat.getColor(this@DebtsActivity, R.color.surface_navy))
-            setNavigationIcon(R.drawable.ic_arrow_back)
-            setNavigationIconTint(ContextCompat.getColor(this@DebtsActivity, R.color.text_primary))
-            setNavigationOnClickListener { finish() }
-        }
-        root.addView(toolbar)
+        setupRecyclerView()
+        setupListeners()
+        observeData()
+    }
 
-        val addBtn = MaterialButton(this).apply {
-            text = getString(R.string.add_debt)
-            setBackgroundResource(R.drawable.bg_button_teal)
-            setTextColor(ContextCompat.getColor(this@DebtsActivity, R.color.text_inverse))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { setMargins(dp(16), dp(12), dp(16), dp(8)) }
-            setOnClickListener {
-                startActivity(Intent(this@DebtsActivity, AddEditDebtActivity::class.java))
+    private fun setupRecyclerView() {
+        adapter = DebtAdapter(
+            currencySymbol = currencySymbol,
+            onDebtClick = { debt ->
+                // show details or settlement
+                showSettlementDialog(debt)
+            },
+            onRecordSettlement = { debt ->
+                showSettlementDialog(debt)
+            },
+            onDeleteDebt = { debt ->
+                confirmDeleteDebt(debt)
             }
+        )
+        binding.rvDebts.layoutManager = LinearLayoutManager(this)
+        binding.rvDebts.adapter = adapter
+    }
+
+    private fun setupListeners() {
+        binding.btnAddNewDebt.setOnClickListener {
+            startActivity(Intent(this, AddEditDebtActivity::class.java))
         }
-        root.addView(addBtn)
 
-        val scrollView = ScrollView(this).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                0,
-                1f
-            )
+        binding.chipGroupFilter.setOnCheckedStateChangeListener { _, checkedIds ->
+            currentFilter = when {
+                checkedIds.contains(R.id.chipReceivable) -> FilterType.RECEIVABLE
+                checkedIds.contains(R.id.chipPayable) -> FilterType.PAYABLE
+                checkedIds.contains(R.id.chipSettled) -> FilterType.SETTLED
+                else -> FilterType.ALL
+            }
+            applyFilter()
         }
+    }
 
-        val listContainer = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(16), dp(8), dp(16), dp(16))
-        }
-        scrollView.addView(listContainer)
-        root.addView(scrollView)
-
-        setContentView(root)
-
+    private fun observeData() {
         val app = application as ExpenseTrackerApp
         lifecycleScope.launch {
-            val currency = app.preferencesManager.currencySymbolFlow.first()
+            currencySymbol = app.preferencesManager.currencySymbolFlow.first()
             app.repository.getAllDebts().collect { debts ->
-                listContainer.removeAllViews()
-                if (debts.isEmpty()) {
-                    val emptyTv = TextView(this@DebtsActivity).apply {
-                        text = "No active debts or loans"
-                        setTextColor(ContextCompat.getColor(this@DebtsActivity, R.color.text_muted))
-                        textSize = 14f
-                        setPadding(0, 32, 0, 0)
-                    }
-                    listContainer.addView(emptyTv)
+                allDebts = debts
+                updateOverview(debts)
+                applyFilter()
+            }
+        }
+    }
+
+    private fun updateOverview(debts: List<DebtEntity>) {
+        var totalReceivable = 0L
+        var totalPayable = 0L
+        var countReceivable = 0
+        var countPayable = 0
+
+        debts.forEach { d ->
+            val isPaid = d.status.equals("PAID", ignoreCase = true) || d.outstandingBalanceCents <= 0L
+            if (!isPaid) {
+                if (d.type.equals("RECEIVABLE", ignoreCase = true)) {
+                    totalReceivable += d.outstandingBalanceCents
+                    countReceivable++
                 } else {
-                    debts.forEach { debt ->
-                        val card = LinearLayout(this@DebtsActivity).apply {
-                            orientation = LinearLayout.VERTICAL
-                            setPadding(dp(16), dp(14), dp(16), dp(14))
-                            setBackgroundResource(R.drawable.bg_card_rounded)
-                            layoutParams = LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                            ).apply { bottomMargin = 16 }
-                            setOnClickListener {
-                                startActivity(Intent(this@DebtsActivity, DebtDetailActivity::class.java).apply {
-                                    putExtra("EXTRA_DEBT_ID", debt.id)
-                                })
-                            }
-                        }
-
-                        val nameTv = TextView(this@DebtsActivity).apply {
-                            text = "${debt.personName} (${debt.type})"
-                            setTextColor(ContextCompat.getColor(this@DebtsActivity, R.color.text_primary))
-                            textSize = 15f
-                            paint.isFakeBoldText = true
-                        }
-                        card.addView(nameTv)
-
-                        val detailsTv = TextView(this@DebtsActivity).apply {
-                            text = "Remaining: ${MoneyUtils.formatCents(debt.outstandingBalanceCents, currency)}"
-                            setTextColor(ContextCompat.getColor(this@DebtsActivity, if (debt.type == "PAYABLE") R.color.expense_red else R.color.income_green))
-                            textSize = 14f
-                            setPadding(0, 8, 0, 0)
-                        }
-                        card.addView(detailsTv)
-
-                        listContainer.addView(card)
-                    }
+                    totalPayable += d.outstandingBalanceCents
+                    countPayable++
                 }
             }
         }
+
+        val net = totalReceivable - totalPayable
+        val netPrefix = if (net >= 0) "+" else "-"
+        val netFormatted = MoneyUtils.formatCents(Math.abs(net), currencySymbol)
+        binding.tvNetDebtAmount.text = "$netPrefix$netFormatted"
+
+        binding.tvReceivableTotal.text = "+${MoneyUtils.formatCents(totalReceivable, currencySymbol)}"
+        binding.tvReceivableCount.text = "$countReceivable জন ব্যক্তি"
+
+        binding.tvPayableTotal.text = "-${MoneyUtils.formatCents(totalPayable, currencySymbol)}"
+        binding.tvPayableCount.text = "$countPayable জন ব্যক্তি"
+    }
+
+    private fun applyFilter() {
+        val filtered = when (currentFilter) {
+            FilterType.ALL -> allDebts
+            FilterType.RECEIVABLE -> allDebts.filter {
+                it.type.equals("RECEIVABLE", ignoreCase = true) &&
+                        !it.status.equals("PAID", ignoreCase = true) &&
+                        it.outstandingBalanceCents > 0L
+            }
+            FilterType.PAYABLE -> allDebts.filter {
+                it.type.equals("PAYABLE", ignoreCase = true) &&
+                        !it.status.equals("PAID", ignoreCase = true) &&
+                        it.outstandingBalanceCents > 0L
+            }
+            FilterType.SETTLED -> allDebts.filter {
+                it.status.equals("PAID", ignoreCase = true) || it.outstandingBalanceCents <= 0L
+            }
+        }
+
+        adapter.submitList(filtered, currencySymbol)
+
+        if (filtered.isEmpty()) {
+            binding.rvDebts.visibility = View.GONE
+            binding.llEmptyDebts.visibility = View.VISIBLE
+        } else {
+            binding.rvDebts.visibility = View.VISIBLE
+            binding.llEmptyDebts.visibility = View.GONE
+        }
+    }
+
+    private fun showSettlementDialog(debt: DebtEntity) {
+        val isReceivable = debt.type.equals("RECEIVABLE", ignoreCase = true)
+        val titleText = if (isReceivable) "পাওনা টাকা গ্রহণ • Settle Debt" else "দেনা পরিশোধ • Pay Debt"
+
+        val input = EditText(this).apply {
+            hint = "পরিশোধের পরিমাণ লিখুন (Amount)"
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
+            setText(MoneyUtils.toBigDecimal(debt.outstandingBalanceCents).toPlainString())
+            setTextColor(getColor(R.color.text_primary))
+            setHintTextColor(getColor(R.color.text_muted))
+            setPadding(40, 30, 40, 30)
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle(titleText)
+            .setMessage("${debt.personName}\nবাকি পরিমাণ: ${MoneyUtils.formatCents(debt.outstandingBalanceCents, currencySymbol)}")
+            .setView(input)
+            .setPositiveButton("পরিশোধ নিশ্চিত করুন") { _, _ ->
+                val amtStr = input.text.toString().trim()
+                val parsed = MoneyUtils.parseToCents(amtStr)
+                if (parsed != null && parsed > 0) {
+                    val app = application as ExpenseTrackerApp
+                    lifecycleScope.launch {
+                        app.repository.recordDebtRepayment(debt.id, null, parsed, "Debt settlement")
+                        Toast.makeText(this@DebtsActivity, "পরিশোধ রেকর্ড করা হয়েছে!", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "সঠিক পরিমাণ লিখুন", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("বাতিল", null)
+            .show()
+    }
+
+    private fun confirmDeleteDebt(debt: DebtEntity) {
+        AlertDialog.Builder(this)
+            .setTitle("ধার রেকর্ড মুছবেন?")
+            .setMessage("${debt.personName}-এর রেকর্ডটি মুছে ফেলতে চান?")
+            .setPositiveButton("মুছুন") { _, _ ->
+                val app = application as ExpenseTrackerApp
+                lifecycleScope.launch {
+                    app.repository.deleteDebt(debt)
+                    Toast.makeText(this@DebtsActivity, "রেকর্ড মুছে ফেলা হয়েছে", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("বাতিল", null)
+            .show()
     }
 }

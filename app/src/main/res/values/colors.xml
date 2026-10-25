@@ -1,36 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Backgrounds & Surfaces -->
+    <!-- Backgrounds & Surfaces (Bengal Ledger Dark Navy Stack) -->
     <color name="bg_navy_dark">#0D1320</color>
+    <color name="surface_lowest">#080E1B</color>
+    <color name="surface_low">#161B29</color>
+    <color name="surface_container">#1A1F2D</color>
+    <color name="surface_high">#242A38</color>
+    <color name="surface_highest">#2F3543</color>
+    <color name="surface_bright">#333948</color>
+    
+    <!-- Legacy surface aliases mapped to Stitch stack -->
     <color name="surface_navy">#111A2E</color>
-    <color name="surface_navy_elevated">#152036</color>
-    <color name="surface_card_highlight">#1A2742</color>
+    <color name="surface_navy_elevated">#1A1F2D</color>
+    <color name="surface_card_highlight">#242A38</color>
     <color name="stroke_subtle">#233554</color>
     <color name="stroke_medium">#2F3543</color>
+    <color name="outline">#85948F</color>
+    <color name="outline_variant">#3B4A45</color>
     
-    <!-- Primary Accents -->
+    <!-- Primary Accents (Teal) -->
     <color name="teal_primary">#00D2B4</color>
     <color name="teal_light">#46EFCF</color>
     <color name="teal_dark">#006B5B</color>
     <color name="teal_glow">#3300D2B4</color>
+    <color name="on_primary">#00382E</color>
+    <color name="on_primary_container">#005547</color>
+    
+    <!-- Secondary Accents (Mint Green) -->
+    <color name="secondary_mint">#4EDEA3</color>
+    <color name="secondary_container">#00A572</color>
+    <color name="on_secondary">#003824</color>
+    <color name="income_green">#10B981</color>
+    <color name="income_green_bg">#2610B981</color>
+    
+    <!-- Tertiary Accents (Purple / Lavender) -->
+    <color name="tertiary_purple">#DFCFFF</color>
+    <color name="tertiary_container">#C6AEFF</color>
+    <color name="tertiary_dark">#591EC2</color>
+    <color name="savings_purple">#8B5CF6</color>
+    <color name="savings_purple_bg">#268B5CF6</color>
     
     <!-- Semantic Financial Colors -->
-    <color name="income_green">#10B981</color>
-    <color name="income_green_bg">#1A10B981</color>
     <color name="expense_red">#F43F5E</color>
-    <color name="expense_red_bg">#1AF43F5E</color>
+    <color name="expense_red_bg">#26F43F5E</color>
+    <color name="error_soft">#FFB4AB</color>
+    <color name="error_container">#93000A</color>
     <color name="transfer_blue">#3B82F6</color>
-    <color name="transfer_blue_bg">#1A3B82F6</color>
+    <color name="transfer_blue_bg">#263B82F6</color>
     <color name="warning_amber">#F59E0B</color>
-    <color name="warning_amber_bg">#1AF59E0B</color>
-    <color name="savings_purple">#8B5CF6</color>
-    <color name="savings_purple_bg">#1A8B5CF6</color>
+    <color name="warning_amber_bg">#26F59E0B</color>
     <color name="debt_orange">#FB923C</color>
-    <color name="debt_orange_bg">#1AFB923C</color>
+    <color name="debt_orange_bg">#26FB923C</color>
+    
+    <!-- Localized Brand Colors (Strict to Institution Tags) -->
+    <color name="bkash_crimson">#E2136E</color>
+    <color name="bkash_text">#F43F8E</color>
+    <color name="bkash_bg">#26E2136E</color>
+    
+    <color name="nagad_orange">#F7941D</color>
+    <color name="nagad_text">#FB923C</color>
+    <color name="nagad_bg">#26F7941D</color>
+    
+    <color name="bank_azure">#3B82F6</color>
+    <color name="bank_text">#60A5FA</color>
+    <color name="bank_bg">#263B82F6</color>
+    
+    <color name="cash_mint">#10B981</color>
+    <color name="cash_text">#34D399</color>
+    <color name="cash_bg">#2610B981</color>
     
     <!-- Typography -->
     <color name="text_primary">#F8FAFC</color>
+    <color name="on_surface">#DDE2F5</color>
     <color name="text_secondary">#BACAC4</color>
+    <color name="on_surface_variant">#BACAC4</color>
     <color name="text_muted">#85948F</color>
     <color name="text_inverse">#0D1320</color>
     
@@ -42,4 +85,16 @@
     <color name="scrim_dark">#99000000</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    
+    <!-- Chip selected colors -->
+    <color name="chip_selected_bg">#00D2B4</color>
+    <color name="chip_selected_text">#00382E</color>
+
+    <!-- Semantic & Stitch Aliases -->
+    <color name="mint_secondary">#4EDEA3</color>
+    <color name="tertiary_lavender">#DFCFFF</color>
+    <color name="surface_container_highest">#2F3543</color>
+    <color name="amber_primary">#F59E0B</color>
+    <color name="rose_error">#F43F5E</color>
+    <color name="bkash_pink">#E2136E</color>
 </resources>

@@ -11,33 +11,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="24dp">
+        android:paddingBottom="40dp">
 
-        <!-- Top Header -->
+        <!-- Top Header matching Stitch Mobile Tab Shell -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="12dp">
+            android:background="@color/surface_lowest"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="14dp">
 
-            <ImageView
-                android:id="@+id/ivBrandMark"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+            <FrameLayout
+                android:id="@+id/logoContainer"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/bg_button_teal"
-                android:padding="10dp"
-                android:src="@drawable/ic_wallet"
-                app:tint="@color/text_inverse" />
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/ivBrandMark"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_wallet"
+                    app:tint="@color/text_inverse" />
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/ivBrandMark"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/logoContainer"
                 android:orientation="vertical">
 
                 <TextView
@@ -46,34 +53,82 @@
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
                     android:textColor="@color/text_primary"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="খরচের হিসাব • Financial Overview"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp" />
+                    android:layout_marginTop="1dp"
+                    android:text="হিসাব খাতা • Home"
+                    android:textColor="@color/teal_primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/ivSettings"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+            <!-- Actions: Language Toggle & Settings/Profile -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/bg_chip_unselected"
-                android:padding="8dp"
-                android:src="@drawable/ic_settings"
-                app:tint="@color/text_secondary" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnLangToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_pill_sync"
+                    android:gravity="center"
+                    android:paddingHorizontal="10dp"
+                    android:text="EN | বাং"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <FrameLayout
+                    android:id="@+id/ivNotificationContainer"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="8dp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_notification"
+                        app:tint="@color/text_secondary" />
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="top|end"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginEnd="7dp"
+                        android:background="@drawable/bg_circle_income"
+                        android:backgroundTint="@color/teal_primary" />
+                </FrameLayout>
+
+                <ImageView
+                    android:id="@+id/ivSettings"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_pill_sync"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_settings"
+                    app:tint="@color/text_secondary" />
+            </LinearLayout>
         </RelativeLayout>
 
+        <!-- Top Greeting & Financial Micro-Status Bar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="14dp"
             android:layout_marginBottom="8dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -84,94 +139,187 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Good evening, Khalequzzaman"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Khalequzzaman"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/ic_verified"
+                        app:tint="@color/teal_primary" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="আজকের আর্থিক সারাংশ দেখে নিন"
-                    android:textColor="@color/text_muted"
+                    android:text="Welcome back | শুভ দিন ✨"
+                    android:textColor="@color/text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <TextView
+            <!-- Live Sync Pill -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_chip_selected"
+                android:background="@drawable/bg_pill_sync"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingHorizontal="10dp"
-                android:paddingVertical="6dp"
-                android:text="● MFS synced"
-                android:textColor="@color/teal_light"
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                android:paddingVertical="5dp">
+
+                <View
+                    android:layout_width="7dp"
+                    android:layout_height="7dp"
+                    android:background="@drawable/bg_circle_income"
+                    android:backgroundTint="@color/secondary_mint" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="MFS Synced"
+                    android:textColor="@color/secondary_mint"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Net Worth Card -->
-        <com.google.android.material.card.MaterialCardView
+        <!-- Primary Total Balance Hero Card (Luminous Bengal Ledger Elevation) -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="4dp"
-            app:cardBackgroundColor="@color/surface_navy_elevated"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="@color/teal_dark"
-            app:strokeWidth="1dp">
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_hero_card"
+            android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total_balance"
-                    android:textColor="@color/teal_light"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+                <!-- Card Eyebrow -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_wallet"
+                            app:tint="@color/teal_light" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="মোট ব্যালেন্স • Total Balance"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnToggleBalance"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_pill_sync"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_visibility"
+                        app:tint="@color/text_secondary" />
+                </RelativeLayout>
+
+                <!-- Balance Figure -->
                 <TextView
                     android:id="@+id/tvNetWorth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/text_primary"
-                    android:textSize="30sp"
+                    android:textSize="32sp"
                     android:textStyle="bold"
-                    tools:text="৳ 128,450.00" />
+                    tools:text="৳ 1,42,850.00" />
 
-                <TextView
+                <!-- Badges Row -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="এই মাসের মোট ব্যালেন্স"
-                    android:textColor="@color/text_muted"
-                    android:textSize="12sp" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvAccountsCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Across 4 active accounts"
-                    android:textColor="@color/text_muted"
-                    android:textSize="12sp" />
+                    <!-- MoM Growth Badge -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_badge_cash"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="3dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▲ +12.4% vs last month"
+                            android:textColor="@color/secondary_mint"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Accounts count chip -->
+                    <TextView
+                        android:id="@+id/tvAccountsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_pill_sync"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="3dp"
+                        android:text="৪টি অ্যাকাউন্ট যুক্ত"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Sparkline Wave Strip -->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="12dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_sparkline_wave" />
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </FrameLayout>
 
-        <!-- Period Selector Filter Chips -->
+        <!-- Horizontal Period Filter Chips (Scrollable) -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="14dp"
             android:paddingHorizontal="16dp"
             android:scrollbars="none">
 
@@ -186,16 +334,16 @@
                     style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/period_today"
-                    android:textColor="@color/text_primary" />
+                    android:text="আজ / Today"
+                    android:textColor="@color/chip_text" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipThisWeek"
                     style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/period_this_week"
-                    android:textColor="@color/text_primary" />
+                    android:text="এই সপ্তাহ / Week"
+                    android:textColor="@color/chip_text" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipThisMonth"
@@ -203,33 +351,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="@string/period_this_month"
-                    android:textColor="@color/text_primary" />
+                    android:text="এই মাস / This Month"
+                    android:textColor="@color/chip_text" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipLastMonth"
                     style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/period_last_month"
-                    android:textColor="@color/text_primary" />
+                    android:text="গত মাস / Last Month"
+                    android:textColor="@color/chip_text" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipThisYear"
                     style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/period_this_year"
-                    android:textColor="@color/text_primary" />
+                    android:text="এই বছর / Year"
+                    android:textColor="@color/chip_text" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 
-        <!-- Income & Expense Row -->
+        <!-- Cash Flow Split Grid (2-Card Row) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <!-- Income Card -->
@@ -238,7 +386,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="6dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="@color/surface_navy_elevated"
+                app:cardBackgroundColor="@color/surface_high"
                 app:cardCornerRadius="16dp"
                 app:strokeColor="@color/stroke_subtle"
                 app:strokeWidth="1dp">
@@ -249,36 +397,55 @@
                     android:orientation="vertical"
                     android:padding="14dp">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/ic_income"
-                            app:tint="@color/income_green" />
+                        <FrameLayout
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_alignParentStart="true"
+                            android:background="@drawable/bg_badge_cash">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_income"
+                                app:tint="@color/secondary_mint" />
+                        </FrameLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:text="@string/total_income"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/bg_badge_cash"
+                            android:paddingHorizontal="6dp"
+                            android:paddingVertical="2dp"
+                            android:text="+8.2%"
+                            android:textColor="@color/secondary_mint"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="আয় • Income"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tvTotalIncome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:textColor="@color/income_green"
-                        android:textSize="17sp"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/secondary_mint"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        tools:text="+ ৳ 50,000.00" />
+                        tools:text="৳ 85,000" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -288,7 +455,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="@color/surface_navy_elevated"
+                app:cardBackgroundColor="@color/surface_high"
                 app:cardCornerRadius="16dp"
                 app:strokeColor="@color/stroke_subtle"
                 app:strokeWidth="1dp">
@@ -299,47 +466,128 @@
                     android:orientation="vertical"
                     android:padding="14dp">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/ic_expense"
-                            app:tint="@color/expense_red" />
+                        <FrameLayout
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_alignParentStart="true"
+                            android:background="@drawable/bg_badge_expense">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_expense"
+                                app:tint="@color/expense_red" />
+                        </FrameLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:text="@string/total_expense"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/bg_badge_expense"
+                            android:paddingHorizontal="6dp"
+                            android:paddingVertical="2dp"
+                            android:text="-3.5%"
+                            android:textColor="@color/expense_red"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="ব্যয় • Expense"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tvTotalExpense"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="4dp"
                         android:textColor="@color/expense_red"
-                        android:textSize="17sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        tools:text="- ৳ 18,340.00" />
+                        tools:text="৳ 42,150" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- Net Cash Flow Card -->
-        <com.google.android.material.card.MaterialCardView
+        <!-- Net Cash Flow Strip Banner -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
-            app:cardBackgroundColor="@color/surface_navy_elevated"
+            android:background="@drawable/bg_net_cashflow_banner"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:background="@drawable/bg_circle_income"
+                        android:backgroundTint="@color/teal_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="নিট ক্যাশ ফ্লো: "
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvNetCashFlow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/teal_primary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="+ ৳ 42,850.00" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvSavingsRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/bg_badge_cash"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="3dp"
+                    android:text="50.4% সঞ্চয়"
+                    android:textColor="@color/teal_light"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </FrameLayout>
+
+        <!-- Quick Action Circular Buttons (Stitch 4-Tile Row) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="@color/surface_container"
             app:cardCornerRadius="16dp"
             app:strokeColor="@color/stroke_subtle"
             app:strokeWidth="1dp">
@@ -347,242 +595,188 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="14dp">
+                android:paddingVertical="14dp">
 
-                <TextView
+                <!-- Add Expense Action -->
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/net_cashflow"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvNetCashFlow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/teal_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:text="+ ৳ 31,660.00" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <FrameLayout
+                        android:id="@+id/btnQuickExpense"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_circle_expense"
+                        android:clickable="true"
+                        android:focusable="true">
 
-        <!-- Quick Actions: Stitch circular action tiles -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/bg_card_rounded"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="14dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="−"
+                            android:textColor="@color/expense_red"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+                    </FrameLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="খরচ যোগ"
+                        android:textColor="@color/text_primary"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnQuickExpense"
-                    style="@style/Widget.Material3.Button.TonalButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:backgroundTint="@color/expense_red_bg"
-                    android:minWidth="0dp"
-                    android:padding="0dp"
-                    android:text="−"
-                    android:textColor="@color/expense_red"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="24dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Expense"
+                        android:textColor="@color/text_muted"
+                        android:textSize="9sp" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="খরচ যোগ"
-                    android:textColor="@color/text_primary"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Expense"
-                    android:textColor="@color/text_muted"
-                    android:textSize="9sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnQuickIncome"
-                    style="@style/Widget.Material3.Button.TonalButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:backgroundTint="@color/income_green_bg"
-                    android:minWidth="0dp"
-                    android:padding="0dp"
-                    android:text="+"
-                    android:textColor="@color/income_green"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="24dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="আয় যোগ"
-                    android:textColor="@color/text_primary"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Income"
-                    android:textColor="@color/text_muted"
-                    android:textSize="9sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnQuickTransfer"
-                    style="@style/Widget.Material3.Button.TonalButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:backgroundTint="@color/transfer_blue_bg"
-                    android:minWidth="0dp"
-                    android:padding="0dp"
-                    android:text="↔"
-                    android:textColor="@color/transfer_blue"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="24dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="ট্রান্সফার"
-                    android:textColor="@color/text_primary"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Transfer"
-                    android:textColor="@color/text_muted"
-                    android:textSize="9sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.Material3.Button.TonalButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:backgroundTint="@color/savings_purple_bg"
-                    android:minWidth="0dp"
-                    android:padding="0dp"
-                    android:text="◎"
-                    android:textColor="@color/savings_purple"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="24dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="বাজেট"
-                    android:textColor="@color/text_primary"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Budget"
-                    android:textColor="@color/text_muted"
-                    android:textSize="9sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Category Spending Breakdown Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardCategoryBreakdown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="18dp"
-            app:cardBackgroundColor="@color/surface_navy_elevated"
-            app:cardCornerRadius="18dp"
-            app:strokeColor="@color/stroke_subtle"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/spending_breakdown"
-                    android:textColor="@color/text_primary"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <com.sysninja.expensetracker.ui.views.DonutChartView
-                    android:id="@+id/donutChart"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_marginTop="12dp" />
-
+                <!-- Add Income Action -->
                 <LinearLayout
-                    android:id="@+id/layoutTopCategories"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="vertical" />
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:id="@+id/btnQuickIncome"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_circle_income"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="+"
+                            android:textColor="@color/secondary_mint"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="আয় যোগ"
+                        android:textColor="@color/text_primary"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Income"
+                        android:textColor="@color/text_muted"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+                <!-- Transfer Action -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:id="@+id/btnQuickTransfer"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_circle_transfer"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_transfer"
+                            app:tint="@color/teal_primary" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="ট্রান্সফার"
+                        android:textColor="@color/text_primary"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Transfer"
+                        android:textColor="@color/text_muted"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+                <!-- Budget Target Action -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:id="@+id/btnQuickBudget"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_circle_budget"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_budget"
+                            app:tint="@color/tertiary_purple" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="বাজেট"
+                        android:textColor="@color/text_primary"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Budget"
+                        android:textColor="@color/text_muted"
+                        android:textSize="9sp" />
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Budget Progress Card -->
+        <!-- Monthly Budget Status Card -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardBudgetProgress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="18dp"
-            app:cardBackgroundColor="@color/surface_navy_elevated"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="@color/surface_container"
             app:cardCornerRadius="18dp"
             app:strokeColor="@color/stroke_subtle"
             app:strokeWidth="1dp">
@@ -597,33 +791,64 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/budget_overview"
-                        android:textColor="@color/text_primary"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_budget"
+                            app:tint="@color/teal_primary" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="বাজেট অবস্থা"
+                                android:textColor="@color/text_primary"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Monthly Budget"
+                                android:textColor="@color/text_muted"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvBudgetStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
                         android:textColor="@color/teal_primary"
-                        android:textSize="12sp"
-                        tools:text="65% Used" />
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        tools:text="70.2% Used" />
                 </RelativeLayout>
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/progressBudget"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="12dp"
                     app:indicatorColor="@color/teal_primary"
-                    app:trackColor="@color/surface_navy"
+                    app:trackColor="@color/surface_highest"
                     app:trackCornerRadius="5dp"
-                    tools:progress="65" />
+                    tools:progress="70" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -638,16 +863,88 @@
                         android:layout_weight="1"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"
-                        tools:text="Spent: ৳ 18,340" />
+                        tools:text="ব্যয়: ৳ 42,150" />
 
                     <TextView
                         android:id="@+id/tvBudgetRemaining"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/text_muted"
+                        android:textColor="@color/secondary_mint"
                         android:textSize="12sp"
-                        tools:text="Remaining: ৳ 11,660" />
+                        android:textStyle="bold"
+                        tools:text="৳ 17,850 বাকি" />
                 </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Spending Breakdown Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCategoryBreakdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="@color/surface_container"
+            app:cardCornerRadius="18dp"
+            app:strokeColor="@color/stroke_subtle"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="খরচের খাতসমূহ"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Spending Breakdown"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/btnAnalysis"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:text="বিশ্লেষণ >"
+                        android:textColor="@color/teal_primary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <com.sysninja.expensetracker.ui.views.DonutChartView
+                    android:id="@+id/donutChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="12dp" />
+
+                <LinearLayout
+                    android:id="@+id/layoutTopCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -656,16 +953,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="24dp">
+            android:layout_marginTop="22dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:text="@string/recent_transactions"
+                android:text="সাম্প্রতিক লেনদেন • Recent"
                 android:textColor="@color/text_primary"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -675,9 +972,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:padding="4dp"
-                android:text="@string/see_all"
+                android:text="সব দেখুন >"
                 android:textColor="@color/teal_primary"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 

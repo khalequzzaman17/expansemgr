@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.dashboard
+package com.sysninja.expensetracker.ui.dashboard
 
 import android.content.Intent
 import android.graphics.Color
@@ -32,6 +32,8 @@ class DashboardFragment : Fragment() {
 
     private val viewModel: DashboardViewModel by viewModels()
     private lateinit var transactionAdapter: TransactionListAdapter
+    private var isBalanceVisible = true
+    private var currentNetWorthText = "৳ 0.00"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,6 +67,25 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setupListeners() {
+        binding.btnToggleBalance.setOnClickListener {
+            isBalanceVisible = !isBalanceVisible
+            if (isBalanceVisible) {
+                binding.btnToggleBalance.setImageResource(R.drawable.ic_visibility)
+                binding.tvNetWorth.text = currentNetWorthText
+            } else {
+                binding.btnToggleBalance.setImageResource(R.drawable.ic_visibility_off)
+                binding.tvNetWorth.text = "৳ •••••••"
+            }
+        }
+
+        binding.btnQuickBudget.setOnClickListener {
+            startActivity(Intent(requireContext(), com.sysninja.expensetracker.ui.budgets.BudgetsActivity::class.java))
+        }
+
+        binding.btnAnalysis.setOnClickListener {
+            startActivity(Intent(requireContext(), com.sysninja.expensetracker.ui.reports.ReportsActivity::class.java))
+        }
+
         binding.ivSettings.setOnClickListener {
             startActivity(Intent(requireContext(), SettingsActivity::class.java))
         }
@@ -85,6 +106,14 @@ class DashboardFragment : Fragment() {
             startActivity(Intent(requireContext(), AddEditTransactionActivity::class.java).apply {
                 putExtra("EXTRA_TYPE", "TRANSFER")
             })
+        }
+
+        binding.btnLangToggle.text = if (com.sysninja.expensetracker.domain.LocaleManager.getCurrentLanguage() == "bn") "বাং | EN" else "EN | বাং"
+        binding.btnLangToggle.setOnClickListener {
+            com.sysninja.expensetracker.domain.LocaleManager.toggleLanguage(requireContext()) { newLang ->
+                val msg = if (newLang == "bn") "ভাষা বাংলা নির্বাচন করা হয়েছে" else "Language switched to English"
+                android.widget.Toast.makeText(requireContext(), msg, android.widget.Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.tvSeeAllTransactions.setOnClickListener {
@@ -119,7 +148,12 @@ class DashboardFragment : Fragment() {
         transactionAdapter.updateCurrency(currency)
 
         // Summary cards
-        binding.tvNetWorth.text = MoneyUtils.formatCents(state.totalNetWorth, currency)
+        currentNetWorthText = MoneyUtils.formatCents(state.totalNetWorth, currency)
+        if (isBalanceVisible) {
+            binding.tvNetWorth.text = currentNetWorthText
+        } else {
+            binding.tvNetWorth.text = "৳ •••••••"
+        }
         binding.tvTotalIncome.text = "+ ${MoneyUtils.formatCents(state.totalIncome, currency)}"
         binding.tvTotalExpense.text = "- ${MoneyUtils.formatCents(state.totalExpense, currency)}"
 

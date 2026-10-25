@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker
+package com.sysninja.expensetracker
 
 import android.app.Application
 import androidx.work.ExistingPeriodicWorkPolicy
@@ -29,6 +29,7 @@ class ExpenseTrackerApp : Application() {
         preferencesManager = UserPreferencesManager(this)
 
         ReminderNotificationHelper.createNotificationChannel(this)
+        com.sysninja.expensetracker.domain.LocaleManager.initAppLocale(this)
         scheduleRecurringWorker()
     }
 

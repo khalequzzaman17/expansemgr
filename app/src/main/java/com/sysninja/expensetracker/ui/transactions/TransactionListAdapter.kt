@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.ui.transactions
+package com.sysninja.expensetracker.ui.transactions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -45,6 +45,41 @@ class TransactionListAdapter(
 
             val amountStr = MoneyUtils.formatCents(tx.amountCents, currencySymbol)
 
+            val accName = item.account?.name ?: ""
+            if (accName.isNotBlank()) {
+                val lower = accName.lowercase()
+                binding.tvAccountTag.visibility = android.view.View.VISIBLE
+                when {
+                    lower.contains("bkash") || lower.contains("বিকাশ") -> {
+                        binding.tvAccountTag.text = "bKash"
+                        binding.tvAccountTag.setBackgroundResource(R.drawable.bg_badge_bkash)
+                        binding.tvAccountTag.setTextColor(ContextCompat.getColor(context, R.color.bkash_text))
+                    }
+                    lower.contains("nagad") || lower.contains("নগদ") -> {
+                        binding.tvAccountTag.text = "Nagad"
+                        binding.tvAccountTag.setBackgroundResource(R.drawable.bg_badge_nagad)
+                        binding.tvAccountTag.setTextColor(ContextCompat.getColor(context, R.color.nagad_text))
+                    }
+                    lower.contains("bank") || lower.contains("ব্যাংক") || lower.contains("city") || lower.contains("brac") -> {
+                        binding.tvAccountTag.text = "Bank"
+                        binding.tvAccountTag.setBackgroundResource(R.drawable.bg_badge_bank)
+                        binding.tvAccountTag.setTextColor(ContextCompat.getColor(context, R.color.bank_text))
+                    }
+                    lower.contains("cash") -> {
+                        binding.tvAccountTag.text = "Cash"
+                        binding.tvAccountTag.setBackgroundResource(R.drawable.bg_badge_cash)
+                        binding.tvAccountTag.setTextColor(ContextCompat.getColor(context, R.color.cash_text))
+                    }
+                    else -> {
+                        binding.tvAccountTag.text = accName
+                        binding.tvAccountTag.setBackgroundResource(R.drawable.bg_badge_bank)
+                        binding.tvAccountTag.setTextColor(ContextCompat.getColor(context, R.color.bank_text))
+                    }
+                }
+            } else {
+                binding.tvAccountTag.visibility = android.view.View.GONE
+            }
+
             when (tx.type) {
                 "INCOME" -> {
                     binding.iconContainer.setBackgroundResource(R.drawable.bg_badge_income)
@@ -53,7 +88,6 @@ class TransactionListAdapter(
                     binding.tvAmount.text = "+ $amountStr"
                     binding.tvAmount.setTextColor(ContextCompat.getColor(context, R.color.income_green))
                     val catName = item.category?.name ?: context.getString(R.string.type_income)
-                    val accName = item.account?.name ?: ""
                     binding.tvSubtitle.text = if (accName.isNotBlank()) "$catName • $accName" else catName
                 }
                 "EXPENSE" -> {
@@ -63,7 +97,6 @@ class TransactionListAdapter(
                     binding.tvAmount.text = "- $amountStr"
                     binding.tvAmount.setTextColor(ContextCompat.getColor(context, R.color.expense_red))
                     val catName = item.category?.name ?: context.getString(R.string.type_expense)
-                    val accName = item.account?.name ?: ""
                     binding.tvSubtitle.text = if (accName.isNotBlank()) "$catName • $accName" else catName
                 }
                 "TRANSFER" -> {

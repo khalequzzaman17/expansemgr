@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_navy_dark"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="36dp"
+    android:paddingBottom="24dp">
+
+    <!-- Lock Icon with Glowing Aura -->
+    <FrameLayout
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_circle_transfer">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_lock"
+            app:tint="@color/teal_primary" />
+    </FrameLayout>
+
+    <!-- App Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="হিসাব খাতা নিরাপত্তা • Security"
+        android:textColor="@color/text_primary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvPinHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="আপনার ৪-সংখ্যার সিকিউরিটি পিন দিন"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp" />
+
+    <!-- 4 PIN Indicator Dots -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/pinDot1"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/bg_pill_sync" />
+
+        <View
+            android:id="@+id/pinDot2"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/bg_pill_sync" />
+
+        <View
+            android:id="@+id/pinDot3"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/bg_pill_sync" />
+
+        <View
+            android:id="@+id/pinDot4"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/bg_pill_sync" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- 3x4 Numeric Keypad Grid matching Stitch -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="3"
+        android:rowCount="4">
+
+        <!-- Row 1: 1, 2, 3 -->
+        <TextView
+            android:id="@+id/key1"
+            style="@style/KeypadButton"
+            android:text="1" />
+
+        <TextView
+            android:id="@+id/key2"
+            style="@style/KeypadButton"
+            android:text="2" />
+
+        <TextView
+            android:id="@+id/key3"
+            style="@style/KeypadButton"
+            android:text="3" />
+
+        <!-- Row 2: 4, 5, 6 -->
+        <TextView
+            android:id="@+id/key4"
+            style="@style/KeypadButton"
+            android:text="4" />
+
+        <TextView
+            android:id="@+id/key5"
+            style="@style/KeypadButton"
+            android:text="5" />
+
+        <TextView
+            android:id="@+id/key6"
+            style="@style/KeypadButton"
+            android:text="6" />
+
+        <!-- Row 3: 7, 8, 9 -->
+        <TextView
+            android:id="@+id/key7"
+            style="@style/KeypadButton"
+            android:text="7" />
+
+        <TextView
+            android:id="@+id/key8"
+            style="@style/KeypadButton"
+            android:text="8" />
+
+        <TextView
+            android:id="@+id/key9"
+            style="@style/KeypadButton"
+            android:text="9" />
+
+        <!-- Row 4: Biometric, 0, Backspace -->
+        <FrameLayout
+            android:id="@+id/keyBiometric"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:background="@drawable/bg_pill_sync"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_fingerprint"
+                app:tint="@color/teal_primary" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/key0"
+            style="@style/KeypadButton"
+            android:text="0" />
+
+        <FrameLayout
+            android:id="@+id/keyBackspace"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:background="@drawable/bg_pill_sync"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="⌫"
+                android:textColor="@color/text_secondary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+    </GridLayout>
+
+    <!-- Bottom Help / Forgot -->
+    <TextView
+        android:id="@+id/btnForgotPin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="8dp"
+        android:text="পিন মনে নেই? • Forgot PIN?"
+        android:textColor="@color/teal_light"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

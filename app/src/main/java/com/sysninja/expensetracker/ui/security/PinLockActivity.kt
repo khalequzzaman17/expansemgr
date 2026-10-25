@@ -1,96 +1,133 @@
 package com.sysninja.expensetracker.ui.security
 
-import com.sysninja.expensetracker.ui.dp
-
 import android.os.Bundle
-import android.view.Gravity
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.sysninja.expensetracker.ExpenseTrackerApp
 import com.sysninja.expensetracker.R
+import com.sysninja.expensetracker.databinding.ActivityPinLockBinding
 import com.sysninja.expensetracker.domain.SecurityManager
-import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.util.concurrent.Executor
 
 class PinLockActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityPinLockBinding
+    private val pinBuilder = StringBuilder()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityPinLockBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(ContextCompat.getColor(this@PinLockActivity, R.color.bg_navy_dark))
-            gravity = Gravity.CENTER
-            setPadding(dp(16), dp(16), dp(16), dp(16))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
+        setupKeypad()
+        setupBiometric()
+
+        binding.btnForgotPin.setOnClickListener {
+            Toast.makeText(this, "অনুগ্রহ করে আপনার মাস্টার সিকিউরিটি ব্যাকআপ ব্যবহার করুন", Toast.LENGTH_LONG).show()
         }
+    }
 
-        val titleTv = TextView(this).apply {
-            text = getString(R.string.enter_pin)
-            setTextColor(ContextCompat.getColor(this@PinLockActivity, R.color.text_primary))
-            textSize = 20f
-            paint.isFakeBoldText = true
-            gravity = Gravity.CENTER
-            setPadding(0, 0, 0, 24)
-        }
-        root.addView(titleTv)
+    private fun setupKeypad() {
+        val numberKeys = listOf(
+            binding.key0 to "0",
+            binding.key1 to "1",
+            binding.key2 to "2",
+            binding.key3 to "3",
+            binding.key4 to "4",
+            binding.key5 to "5",
+            binding.key6 to "6",
+            binding.key7 to "7",
+            binding.key8 to "8",
+            binding.key9 to "9"
+        )
 
-        val pinEt = EditText(this).apply {
-            inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
-            gravity = Gravity.CENTER
-            textSize = 24f
-            setTextColor(ContextCompat.getColor(this@PinLockActivity, R.color.text_primary))
-            setHintTextColor(ContextCompat.getColor(this@PinLockActivity, R.color.text_muted))
-            hint = "••••"
-            maxLines = 1
-            setBackgroundResource(R.drawable.bg_edit_text)
-            setPadding(dp(16), dp(12), dp(16), dp(12))
-            layoutParams = LinearLayout.LayoutParams(400, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                bottomMargin = 32
-            }
-        }
-        root.addView(pinEt)
-
-        val unlockBtn = MaterialButton(this).apply {
-            text = "Unlock"
-            setBackgroundResource(R.drawable.bg_button_teal)
-            setTextColor(ContextCompat.getColor(this@PinLockActivity, R.color.text_inverse))
-            setOnClickListener {
-                val enteredPin = pinEt.text.toString().trim()
-                if (enteredPin.length < 4) {
-                    Toast.makeText(this@PinLockActivity, "Please enter 4 digits", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                val app = application as ExpenseTrackerApp
-                lifecycleScope.launch {
-                    val hash = app.preferencesManager.pinHashFlow.first()
-                    val salt = app.preferencesManager.pinSaltFlow.first()
-                    if (SecurityManager.verifyPin(enteredPin, hash, salt)) {
-                        finish()
-                    } else {
-                        Toast.makeText(this@PinLockActivity, getString(R.string.pin_wrong, SecurityManager.getRemainingAttempts()), Toast.LENGTH_SHORT).show()
+        numberKeys.forEach { (view, digit) ->
+            view.setOnClickListener {
+                if (pinBuilder.length < 4) {
+                    pinBuilder.append(digit)
+                    updatePinDots()
+                    if (pinBuilder.length == 4) {
+                        verifyEnteredPin(pinBuilder.toString())
                     }
                 }
             }
         }
-        root.addView(unlockBtn)
 
-        setContentView(root)
+        binding.keyBackspace.setOnClickListener {
+            if (pinBuilder.isNotEmpty()) {
+                pinBuilder.deleteCharAt(pinBuilder.length - 1)
+                updatePinDots()
+            }
+        }
+    }
+
+    private fun updatePinDots() {
+        val len = pinBuilder.length
+        binding.pinDot1.setBackgroundResource(if (len >= 1) R.drawable.bg_button_teal else R.drawable.bg_pill_sync)
+        binding.pinDot2.setBackgroundResource(if (len >= 2) R.drawable.bg_button_teal else R.drawable.bg_pill_sync)
+        binding.pinDot3.setBackgroundResource(if (len >= 3) R.drawable.bg_button_teal else R.drawable.bg_pill_sync)
+        binding.pinDot4.setBackgroundResource(if (len >= 4) R.drawable.bg_button_teal else R.drawable.bg_pill_sync)
+    }
+
+    private fun verifyEnteredPin(pin: String) {
+        val app = application as ExpenseTrackerApp
+        lifecycleScope.launch {
+            val hash = app.preferencesManager.pinHashFlow.first()
+            val salt = app.preferencesManager.pinSaltFlow.first()
+            if (SecurityManager.verifyPin(pin, hash, salt)) {
+                SecurityManager.isSessionUnlocked = true
+                finish()
+            } else {
+                Toast.makeText(this@PinLockActivity, getString(R.string.pin_wrong, SecurityManager.getRemainingAttempts()), Toast.LENGTH_SHORT).show()
+                pinBuilder.clear()
+                updatePinDots()
+            }
+        }
+    }
+
+    private fun setupBiometric() {
+        binding.keyBiometric.setOnClickListener {
+            promptBiometric()
+        }
+
+        // Automatically prompt biometric if available
+        promptBiometric()
+    }
+
+    private fun promptBiometric() {
+        try {
+            val executor: Executor = ContextCompat.getMainExecutor(this)
+            val biometricPrompt = BiometricPrompt(this, executor, object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    SecurityManager.isSessionUnlocked = true
+                    finish()
+                }
+
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    super.onAuthenticationError(errorCode, errString)
+                }
+            })
+
+            val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle("বায়োমেট্রিক আনলক • Biometric Unlock")
+                .setSubtitle("হিসাব খাতা খুলতে আঙুলের ছাপ দিন")
+                .setNegativeButtonText("পিন ব্যবহার করুন")
+                .build()
+
+            biometricPrompt.authenticate(promptInfo)
+        } catch (_: Exception) {
+            // Biometric not available on device or not configured
+        }
     }
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        // Prevent back press from bypassing PIN
         finishAffinity()
     }
 }

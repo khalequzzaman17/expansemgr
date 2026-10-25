@@ -7,39 +7,42 @@
     android:background="@color/bg_navy_dark"
     android:orientation="vertical">
 
+    <!-- Top Bar with Bengal Ledger Heading -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/surface_lowest"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
         android:paddingTop="18dp"
-        android:paddingBottom="4dp">
+        android:paddingBottom="12dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Transactions"
+            android:text="লেনদেনের খাতা • Transactions"
             android:textColor="@color/text_primary"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="লেনদেনের সম্পূর্ণ তালিকা"
-            android:textColor="@color/text_muted"
-            android:textSize="12sp" />
+            android:text="আয়, ব্যয় ও স্থানান্তরের বিস্তারিত তালিকা"
+            android:textColor="@color/teal_primary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Top Bar with Search -->
+    <!-- Top Bar with Search & Sort -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
-        android:paddingTop="16dp"
+        android:paddingTop="14dp"
         android:paddingBottom="8dp">
 
         <EditText
@@ -47,26 +50,26 @@
             android:layout_width="0dp"
             android:layout_height="46dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_edit_text"
+            android:background="@drawable/bg_pill_sync"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="10dp"
-            android:drawableTint="@color/text_secondary"
-            android:hint="@string/search_transactions"
+            android:drawableTint="@color/teal_light"
+            android:hint="লেনদেন অনুসন্ধান করুন..."
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
             android:paddingHorizontal="14dp"
             android:textColor="@color/text_primary"
             android:textColorHint="@color/text_muted"
-            android:textSize="14sp" />
+            android:textSize="13sp" />
 
         <ImageView
             android:id="@+id/ivSort"
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:layout_marginStart="8dp"
-            android:background="@drawable/bg_chip_unselected"
-            android:padding="10dp"
+            android:background="@drawable/bg_pill_sync"
+            android:padding="11dp"
             android:src="@drawable/ic_sort"
             app:tint="@color/text_secondary" />
     </LinearLayout>
@@ -90,32 +93,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/filter_all"
-                android:textColor="@color/text_primary" />
+                android:text="সব • All"
+                android:textColor="@color/chip_text" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipExpense"
                 style="@style/ChipCustom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/type_expense"
-                android:textColor="@color/text_primary" />
+                android:text="ব্যয় • Expense"
+                android:textColor="@color/chip_text" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipIncome"
                 style="@style/ChipCustom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/type_income"
-                android:textColor="@color/text_primary" />
+                android:text="আয় • Income"
+                android:textColor="@color/chip_text" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipTransfer"
                 style="@style/ChipCustom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/type_transfer"
-                android:textColor="@color/text_primary" />
+                android:text="স্থানান্তর • Transfer"
+                android:textColor="@color/chip_text" />
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 
@@ -137,7 +140,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
-        android:paddingBottom="16dp" />
+        android:paddingBottom="24dp" />
 
     <!-- Empty State -->
     <TextView

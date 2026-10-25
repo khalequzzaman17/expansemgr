@@ -100,26 +100,48 @@ class AccountsActivity : AppCompatActivity() {
                     }
                 }
 
-                val positiveTotal = (bankCents + mfsCents + cashCents).coerceAtLeast(1L)
-                val bankPct = ((bankCents.toDouble() / positiveTotal.toDouble()) * 100).toInt()
-                val mfsPct = ((mfsCents.toDouble() / positiveTotal.toDouble()) * 100).toInt()
-                val cashPct = (100 - bankPct - mfsPct).coerceAtLeast(0)
+                val positiveTotal = bankCents + mfsCents + cashCents
+                if (positiveTotal > 0L) {
+                    val bankPct = ((bankCents.toDouble() / positiveTotal.toDouble()) * 100).toInt()
+                    val mfsPct = ((mfsCents.toDouble() / positiveTotal.toDouble()) * 100).toInt()
+                    val cashPct = (100 - bankPct - mfsPct).coerceAtLeast(0)
 
-                binding.tvPctBank.text = "$bankPct%"
-                binding.tvPctMfs.text = "$mfsPct%"
-                binding.tvPctCash.text = "$cashPct%"
+                    binding.tvPctBank.text = "$bankPct%"
+                    binding.tvPctMfs.text = "$mfsPct%"
+                    binding.tvPctCash.text = "$cashPct%"
 
-                val segBankParams = binding.segBank.layoutParams as LinearLayout.LayoutParams
-                segBankParams.weight = bankPct.coerceAtLeast(1).toFloat()
-                binding.segBank.layoutParams = segBankParams
+                    val segBankParams = binding.segBank.layoutParams as LinearLayout.LayoutParams
+                    segBankParams.weight = bankPct.coerceAtLeast(1).toFloat()
+                    binding.segBank.layoutParams = segBankParams
 
-                val segMfsParams = binding.segMfs.layoutParams as LinearLayout.LayoutParams
-                segMfsParams.weight = mfsPct.coerceAtLeast(1).toFloat()
-                binding.segMfs.layoutParams = segMfsParams
+                    val segMfsParams = binding.segMfs.layoutParams as LinearLayout.LayoutParams
+                    segMfsParams.weight = mfsPct.coerceAtLeast(1).toFloat()
+                    binding.segMfs.layoutParams = segMfsParams
 
-                val segCashParams = binding.segCash.layoutParams as LinearLayout.LayoutParams
-                segCashParams.weight = cashPct.coerceAtLeast(1).toFloat()
-                binding.segCash.layoutParams = segCashParams
+                    val segCashParams = binding.segCash.layoutParams as LinearLayout.LayoutParams
+                    segCashParams.weight = cashPct.coerceAtLeast(1).toFloat()
+                    binding.segCash.layoutParams = segCashParams
+
+                    binding.tvAssetAllocationStatus.text = getString(R.string.all_categorized)
+                } else {
+                    binding.tvPctBank.text = "0%"
+                    binding.tvPctMfs.text = "0%"
+                    binding.tvPctCash.text = "0%"
+
+                    val segBankParams = binding.segBank.layoutParams as LinearLayout.LayoutParams
+                    segBankParams.weight = 1f
+                    binding.segBank.layoutParams = segBankParams
+
+                    val segMfsParams = binding.segMfs.layoutParams as LinearLayout.LayoutParams
+                    segMfsParams.weight = 1f
+                    binding.segMfs.layoutParams = segMfsParams
+
+                    val segCashParams = binding.segCash.layoutParams as LinearLayout.LayoutParams
+                    segCashParams.weight = 1f
+                    binding.segCash.layoutParams = segCashParams
+
+                    binding.tvAssetAllocationStatus.text = getString(R.string.no_funds_allocated)
+                }
 
                 // Render account items
                 balances.forEach { item ->

@@ -250,10 +250,11 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvAssetAllocationStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="@string/all_categorized"
+                        tools:text="@string/all_categorized"
                         android:textColor="@color/text_muted"
                         android:textSize="11sp" />
                 </RelativeLayout>

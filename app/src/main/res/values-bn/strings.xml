@@ -284,10 +284,18 @@
     <string name="expenses_controlled">%1$s বিগত মাসের তুলনায়</string>
     <string name="savings_rate_label">সঞ্চয় হার</string>
     <string name="savings_rate_badge">চমৎকার সঞ্চয়</string>
+    <string name="savings_rate_badge_excellent">চমৎকার সঞ্চয়</string>
+    <string name="savings_rate_badge_good">সন্তোষজনক</string>
+    <string name="savings_rate_badge_moderate">পরিমিত</string>
+    <string name="savings_rate_badge_low">মনোযোগ প্রয়োজন</string>
     <string name="cashflow_comparison">আয় বনাম ব্যয় পর্যালোচনা</string>
     <string name="category_breakdown_title">খরচের খাতভিত্তিক বিশ্লেষণ</string>
     <string name="smart_tip_title">স্মার্ট আর্থিক পরামর্শ</string>
-    <string name="smart_tip_content">বাজার ও মুদি কেনাকাটায় গত মাসের তুলনায় ৬% সাশ্রয় হয়েছে। সঞ্চয়ের লক্ষ্যমাত্রা বজায় রাখতে নিয়মিত হিসাব রাখা চালিয়ে যান।</string>
+    <string name="smart_tip_content">আর্থিক স্বাধীনতার জন্য নিয়মিত হিসাব রাখুন।</string>
+    <string name="smart_tip_empty">ব্যক্তিগত আর্থিক বিশ্লেষণ ও ব্যয়ের ধারা দেখতে আপনার দৈনন্দিন আয় ও ব্যয়ের হিসাব যুক্ত করা শুরু করুন।</string>
+    <string name="smart_tip_top_cat">এই সময়ে আপনার সর্বোচ্চ খরচের খাত হলো %1$s, যা মোট ব্যয়ের %2$d%% (%3$s)।</string>
+    <string name="smart_tip_high_expense">এই মাসে আপনার ব্যয় আয়ের চেয়ে %1$s বেশি হয়েছে। ইতিবাচক ক্যাশ ফ্লো বজায় রাখতে অপ্রয়োজনীয় খরচগুলো পর্যবেক্ষণ করুন।</string>
+    <string name="smart_tip_good_savings">চমৎকার আর্থিক শৃঙ্খলা! এই মাসে আপনি %1$s (আয়ের %2$d%%) সঞ্চয় করেছেন। সঞ্চয়ের লক্ষ্যে এটি জমা করার কথা বিবেচনা করুন।</string>
 
     <string name="preferences_language_section">পছন্দ ও ভাষা</string>
     <string name="app_language_title">ভাষা পরিবর্তন (App Language)</string>
@@ -313,7 +321,7 @@
     <string name="format_csv_sub">ডাটা অ্যানালাইসিস</string>
     <string name="date_range_section">সময়সীমা</string>
     <string name="range_30_days">গত ৩০ দিন</string>
-    <string name="range_fiscal_year">চলতি অর্থবছর (FY 2024-25)</string>
+    <string name="range_fiscal_year">চলতি অর্থবছর</string>
     <string name="range_all_records">সব লেনদেন</string>
     <string name="download_export_file">এক্সপোর্ট ফাইল ডাউনলোড করুন</string>
     <string name="download_pdf_file">PDF অডিট স্টেটমেন্ট ডাউনলোড করুন</string>
@@ -346,6 +354,7 @@
     <string name="transfer_funds_action">⇄ ট্রান্সফার করুন</string>
     <string name="asset_allocation">ফান্ড বিতরণ</string>
     <string name="all_categorized">১০০% ক্যাটাগরাইজড</string>
+    <string name="no_funds_allocated">০% বরাদ্দকৃত</string>
     <string name="bank_label">ব্যাংক</string>
     <string name="mfs_label">এমএফএস</string>
     <string name="cash_label">নগদ</string>

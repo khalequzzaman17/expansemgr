@@ -72,7 +72,7 @@
                         android:background="@drawable/bg_chip_bengal"
                         android:paddingHorizontal="6dp"
                         android:paddingVertical="2dp"
-                        android:text="অগ্রাধিকার"
+                        android:text="@string/priority_badge"
                         android:textColor="@color/tertiary_lavender"
                         android:textSize="10sp" />
                 </LinearLayout>
@@ -94,7 +94,7 @@
                 android:background="@drawable/bg_pill_sync"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="3dp"
-                android:text="চলমান"
+                android:text="@string/active_chip"
                 android:textColor="@color/mint_secondary"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -199,7 +199,7 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:paddingHorizontal="12dp"
-                android:text="+ টাকা জমান"
+                android:text="@string/quick_deposit"
                 android:textColor="@color/teal_primary"
                 android:textSize="12sp"
                 app:backgroundTint="@color/surface_container_highest"
@@ -213,7 +213,7 @@
                 android:layout_marginStart="8dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="বিস্তারিত ›"
+                android:text="@string/goal_details"
                 android:textColor="@color/text_muted"
                 android:textSize="12sp" />
         </LinearLayout>

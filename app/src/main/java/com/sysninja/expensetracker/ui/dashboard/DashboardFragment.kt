@@ -161,7 +161,7 @@ class DashboardFragment : Fragment() {
         binding.tvNetCashFlow.text = "$cashFlowPrefix${MoneyUtils.formatCents(state.netCashFlow, currency)}"
 
         val accountCount = state.accountBalances.size
-        binding.tvAccountsCount.text = getString(R.string.accounts_summary) + " ($accountCount)"
+        binding.tvAccountsCount.text = getString(R.string.accounts_count, accountCount)
 
         // Category breakdown donut chart
         if (state.categorySpending.isNotEmpty()) {
@@ -177,7 +177,7 @@ class DashboardFragment : Fragment() {
             binding.donutChart.setData(
                 slices,
                 MoneyUtils.formatCents(state.totalExpense, currency),
-                "Expenses"
+                getString(R.string.type_expense)
             )
 
             // Top categories list
@@ -206,7 +206,7 @@ class DashboardFragment : Fragment() {
             val remaining = (totalLimit - totalSpent).coerceAtLeast(0L)
 
             binding.progressBudget.progress = usedPct.coerceIn(0, 100)
-            binding.tvBudgetStatus.text = "$usedPct% Used"
+            binding.tvBudgetStatus.text = "$usedPct%"
             binding.tvBudgetSpent.text = "${getString(R.string.spent)}: ${MoneyUtils.formatCents(totalSpent, currency)}"
             binding.tvBudgetRemaining.text = "${getString(R.string.remaining)}: ${MoneyUtils.formatCents(remaining, currency)}"
         } else {

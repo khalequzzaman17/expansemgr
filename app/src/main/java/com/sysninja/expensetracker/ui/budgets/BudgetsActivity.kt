@@ -45,15 +45,15 @@ class BudgetsActivity : AppCompatActivity() {
 
                 if (budgets.isEmpty()) {
                     binding.tvEmptyBudgets.visibility = View.VISIBLE
-                    binding.tvBudgetsCount.text = "০টি"
+                    binding.tvBudgetsCount.text = getString(R.string.goals_count_format, 0)
                     binding.tvTotalSpentHero.text = MoneyUtils.formatCents(0, currency)
                     binding.tvSafeLeftHero.text = MoneyUtils.formatCents(0, currency)
                     binding.progressMaster.progress = 0
-                    binding.tvMasterPercentBadge.text = "০% খরচ"
-                    binding.tvDailySafeLimit.text = "৳ 0 / দিন"
+                    binding.tvMasterPercentBadge.text = "0%"
+                    binding.tvDailySafeLimit.text = "${MoneyUtils.formatCents(0, currency)} / ${getString(R.string.freq_daily)}"
                 } else {
                     binding.tvEmptyBudgets.visibility = View.GONE
-                    binding.tvBudgetsCount.text = "${budgets.size}টি"
+                    binding.tvBudgetsCount.text = getString(R.string.goals_count_format, budgets.size)
 
                     val totalLimit = budgets.sumOf { it.limitCents }
                     val totalSpent = budgets.sumOf { it.spentCents }
@@ -63,12 +63,12 @@ class BudgetsActivity : AppCompatActivity() {
                     binding.tvTotalSpentHero.text = MoneyUtils.formatCents(totalSpent, currency)
                     binding.tvSafeLeftHero.text = MoneyUtils.formatCents(totalRemaining, currency)
                     binding.progressMaster.progress = overallPct.coerceIn(0, 100)
-                    binding.tvMasterPercentBadge.text = "$overallPct% খরচ"
-                    binding.tvMasterCapSubtitle.text = "Master Monthly Cap • ${MoneyUtils.formatCents(totalLimit, currency)}"
+                    binding.tvMasterPercentBadge.text = "$overallPct%"
+                    binding.tvMasterCapSubtitle.text = "${getString(R.string.master_monthly_cap)} • ${MoneyUtils.formatCents(totalLimit, currency)}"
 
                     val daysRemainingInMonth = 8 // approximate days
                     val dailySafeCents = if (daysRemainingInMonth > 0) totalRemaining / daysRemainingInMonth else 0L
-                    binding.tvDailySafeLimit.text = "${MoneyUtils.formatCents(dailySafeCents, currency)} / দিন"
+                    binding.tvDailySafeLimit.text = "${MoneyUtils.formatCents(dailySafeCents, currency)} / ${getString(R.string.freq_daily)}"
 
                     budgets.forEach { b ->
                         val itemBinding = ItemBudgetCardBinding.inflate(
@@ -79,27 +79,27 @@ class BudgetsActivity : AppCompatActivity() {
 
                         itemBinding.tvCategoryName.text = b.categoryName
                         itemBinding.tvSpentAmount.text = MoneyUtils.formatCents(b.spentCents, currency)
-                        itemBinding.tvBudgetLimit.text = "বাজেট: ${MoneyUtils.formatCents(b.limitCents, currency)}"
+                        itemBinding.tvBudgetLimit.text = "${getString(R.string.budgets_title)}: ${MoneyUtils.formatCents(b.limitCents, currency)}"
                         itemBinding.progressCategory.progress = b.usedPercentage.coerceIn(0, 100)
 
                         val remCents = (b.limitCents - b.spentCents).coerceAtLeast(0L)
-                        itemBinding.tvRemainingAmount.text = "${MoneyUtils.formatCents(remCents, currency)} বাকি"
+                        itemBinding.tvRemainingAmount.text = getString(R.string.remaining_amount_format, MoneyUtils.formatCents(remCents, currency))
 
                         when {
                             b.usedPercentage >= 100 -> {
-                                itemBinding.tvStatusChip.text = "✕ সীমা অতিক্রম • Over Limit (${b.usedPercentage}%)"
+                                itemBinding.tvStatusChip.text = "${getString(R.string.over_budget)} (${b.usedPercentage}%)"
                                 itemBinding.tvStatusChip.setBackgroundResource(R.drawable.bg_badge_expense)
                                 itemBinding.tvStatusChip.setTextColor(ContextCompat.getColor(this@BudgetsActivity, R.color.expense_red))
                                 itemBinding.progressCategory.setIndicatorColor(ContextCompat.getColor(this@BudgetsActivity, R.color.expense_red))
                             }
                             b.usedPercentage >= 85 -> {
-                                itemBinding.tvStatusChip.text = "⚠ সতর্কতা: দ্বারপ্রান্তে • Warning (${b.usedPercentage}%)"
+                                itemBinding.tvStatusChip.text = getString(R.string.budget_warning, b.usedPercentage)
                                 itemBinding.tvStatusChip.setBackgroundResource(R.drawable.bg_badge_nagad)
                                 itemBinding.tvStatusChip.setTextColor(ContextCompat.getColor(this@BudgetsActivity, R.color.debt_orange))
                                 itemBinding.progressCategory.setIndicatorColor(ContextCompat.getColor(this@BudgetsActivity, R.color.debt_orange))
                             }
                             else -> {
-                                itemBinding.tvStatusChip.text = "✓ স্বাভাবিক • On Track (${b.usedPercentage}%)"
+                                itemBinding.tvStatusChip.text = "${getString(R.string.status_active)} (${b.usedPercentage}%)"
                                 itemBinding.tvStatusChip.setBackgroundResource(R.drawable.bg_badge_cash)
                                 itemBinding.tvStatusChip.setTextColor(ContextCompat.getColor(this@BudgetsActivity, R.color.secondary_mint))
                                 itemBinding.progressCategory.setIndicatorColor(ContextCompat.getColor(this@BudgetsActivity, R.color.secondary_mint))

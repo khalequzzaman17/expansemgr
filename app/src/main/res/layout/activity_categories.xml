@@ -35,7 +35,7 @@
                     android:background="@drawable/bg_pill_sync"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
-                    android:text="Categories &amp; Tags"
+                    android:text="@string/categories_header_title"
                     android:textColor="@color/teal_primary"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-bold"
-                    android:text="খাত ও লেবেল ব্যবস্থাপনা"
+                    android:text="@string/categories_management"
                     android:textColor="@color/text_primary"
                     android:textSize="16sp" />
 
@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="মোট সক্রিয় খাত"
+                    android:text="@string/total_active_categories"
                     android:textColor="@color/text_muted"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_button_teal"
-                android:text="+ নতুন খাত"
+                android:text="@string/add_new_category"
                 android:textColor="@color/text_inverse"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="ব্যয় খাত (Expense)"
+                    android:text="@string/expense_tab"
                     android:textAlignment="center"
                     android:textColor="@color/teal_primary"
                     app:chipBackgroundColor="@color/surface_navy_elevated" />
@@ -131,7 +131,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="আয় খাত (Income)"
+                    android:text="@string/income_tab"
                     android:textAlignment="center"
                     android:textColor="@color/text_secondary"
                     app:chipBackgroundColor="@color/surface_navy" />
@@ -160,7 +160,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:background="@null"
-                android:hint="খাত বা ট্যাগ খুঁজুন... (Search)"
+                android:hint="@string/search_category_hint"
                 android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_muted"
                 android:textSize="13sp" />
@@ -205,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="কোন ক্যাটাগরি পাওয়া যায়নি"
+                android:text="@string/no_categories_found"
                 android:textColor="@color/text_primary"
                 android:textSize="15sp" />
 
@@ -214,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:text="নতুন খাত যুক্ত করতে উপরের বাটনে চাপ দিন"
+                android:text="@string/categories_empty_hint"
                 android:textColor="@color/text_muted"
                 android:textSize="12sp" />
         </LinearLayout>

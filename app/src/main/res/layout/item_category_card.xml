@@ -66,7 +66,7 @@
                     android:background="@drawable/bg_chip_bengal"
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="1dp"
-                    android:text="ডিফল্ট"
+                    android:text="@string/default_badge"
                     android:textColor="@color/text_muted"
                     android:textSize="9sp" />
             </LinearLayout>

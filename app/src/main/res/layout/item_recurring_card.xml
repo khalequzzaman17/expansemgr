@@ -184,7 +184,7 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:paddingHorizontal="10dp"
-                android:text="স্থগিত করুন"
+                android:text="@string/pause_action"
                 android:textColor="@color/text_muted"
                 android:textSize="11sp"
                 app:backgroundTint="@color/surface_container_highest"

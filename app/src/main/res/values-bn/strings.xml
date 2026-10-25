@@ -332,4 +332,156 @@
     <string name="confirm_restore_msg">\"%1$s\" ফাইল থেকে ডাটা রিস্টোর করতে চান?</string>
     <string name="restore_error">রিস্টোরে ত্রুটি: %1$s</string>
     <string name="backup_error">ব্যাকআপ তৈরিতে সমস্যা: %1$s</string>
+
+    <!-- Account Screen Additions -->
+    <string name="all_accounts_synced">সব অ্যাকাউন্ট সিঙ্কড</string>
+    <string name="active_accounts_label">সক্রিয় অ্যাকাউন্ট</string>
+    <string name="growth_this_month">+১২.৪% এই মাসে বৃদ্ধি</string>
+    <string name="last_30_days">গত ৩০ দিন</string>
+    <string name="add_new_account">+ নতুন অ্যাকাউন্ট</string>
+    <string name="transfer_funds_action">⇄ ট্রান্সফার করুন</string>
+    <string name="asset_allocation">ফান্ড বিতরণ</string>
+    <string name="all_categorized">১০০% ক্যাটাগরাইজড</string>
+    <string name="bank_label">ব্যাংক</string>
+    <string name="mfs_label">এমএফএস</string>
+    <string name="cash_label">নগদ</string>
+    <string name="accounts_count">%1$dটি অ্যাকাউন্ট যুক্ত</string>
+
+    <!-- Add/Edit Transaction Additions -->
+    <string name="transaction_type_label">লেনদেনের ধরন</string>
+    <string name="amount_label">টাকার পরিমাণ</string>
+    <string name="quick_add_100">+৳ ১০০</string>
+    <string name="quick_add_500">+৳ ৫০০</string>
+    <string name="quick_add_1000">+৳ ১,০০০</string>
+    <string name="quick_add_5000">+৳ ৫,০০০</string>
+    <string name="clear_amount">মুছুন ✕</string>
+    <string name="description_label">বিবরণ</string>
+    <string name="description_hint">কী খাতে খরচ হলো লিখুন...</string>
+    <string name="category_select_label">ক্যাটাগরি নির্বাচন</string>
+    <string name="paid_from_label">হিসাব মাধ্যম</string>
+    <string name="destination_account_label">গন্তব্য হিসাব</string>
+    <string name="payment_method_label">পেমেন্ট মাধ্যম (বিকাশ / নগদ / ব্যাংক / ক্যাশ)</string>
+    <string name="date_time_label">তারিখ ও সময়</string>
+    <string name="notes_tags_label">নোট ও ট্যাগ</string>
+    <string name="notes_hint">অতিরিক্ত বিবরণ লিখুন...</string>
+    <string name="tags_hint">ট্যাগ (যেমন #মাসিকবাজার, #পরিবার)</string>
+    <string name="save_transaction_btn">লেনদেন সংরক্ষণ করুন</string>
+    <string name="aes_security_badge">AES-256 সুরক্ষিত</string>
+
+    <!-- Budgets Screen Additions -->
+    <string name="spending_targets_subtitle">বাজেটের গতিপ্রকৃতি</string>
+    <string name="master_monthly_cap">মাসিক মোট বাজেট</string>
+    <string name="safe_left_label">অবশিষ্ট তহবিল</string>
+    <string name="daily_safe_spending">⚡ দৈনিক নিরাপদ ব্যয়ের সীমা</string>
+    <string name="category_budget_heading">খাতভিত্তিক বাজেট ও খরচ</string>
+    <string name="add_new_budget_btn">+ নতুন বাজেট</string>
+    <string name="no_budgets_this_month">এই মাসে কোনো বাজেট নির্ধারণ করা হয়নি</string>
+    <string name="edit_budget_btn">বাজেট সম্পাদনা</string>
+
+    <!-- Categories Screen Additions -->
+    <string name="total_active_categories">মোট সক্রিয় খাত</string>
+    <string name="categories_header_title">খাত ও লেবেল ব্যবস্থাপনা</string>
+
+    <!-- Debts Screen Additions -->
+    <string name="tab_all">সব</string>
+    <string name="tab_owed">আমি পাব</string>
+    <string name="tab_i_owe">আমি দেব</string>
+    <string name="tab_settled">পরিশোধিত</string>
+    <string name="debt_settled_btn">পরিশোধিত</string>
+
+    <!-- Recurring Screen Additions -->
+    <string name="recurring_subtitle">সাবস্ক্রিপশন, ইউটিলিটি বিল ও নিয়মিত লেনদেন</string>
+    <string name="active_recurring_count">%1$dটি সচল</string>
+    <string name="resume_label">পুনরায় চালু</string>
+    <string name="due_today">আজকেই প্রদেয়!</string>
+    <string name="overdue_label">বকেয়া আছে</string>
+    <string name="days_remaining">আর %1$d দিন বাকি</string>
+    <string name="spent_label">মোট খরচ</string>
+    <string name="pdf_label">PDF</string>
+    <string name="csv_label">CSV</string>
+    <string name="action_add_expense">খরচ যোগ</string>
+    <string name="action_add_income">আয় যোগ</string>
+    <string name="action_transfer">ট্রান্সফার</string>
+    <string name="action_budget">বাজেট</string>
+    <string name="search_transactions_hint">লেনদেন অনুসন্ধান করুন...</string>
+
+    <!-- Reports Screen Additions -->
+    <string name="pdf_xls_label">PDF/XLS</string>
+    <string name="analytics_full_title">পূর্ণ হিসাব ও বিশ্লেষণ</string>
+    <string name="cashflow_flow_label">মাসিক তুলনামূলক প্রবাহ</string>
+    <string name="category_share_label">ক্যাটাগরি অনুযায়ী খরচের অনুপাত</string>
+    <string name="financial_tip_title">স্মার্ট আর্থিক পরামর্শ</string>
+
+    <!-- Settings Screen Additions -->
+    <string name="personal_vault_subtitle">ব্যক্তিগত লেজার • অফলাইন ও সুরক্ষিত</string>
+    <string name="mfs_db_active">● MFS ও স্থানীয় ডাটাবেজ সক্রিয়</string>
+    <string name="financial_modules_section">ফিন্যান্স মডিউল</string>
+    <string name="categories_sub">আয় ও ব্যয়ের ক্যাটাগরি</string>
+    <string name="savings_sub">সঞ্চয় লক্ষ্য ও মাইলফলক</string>
+    <string name="debts_sub">ধার ও দেনা-পাওনা খাতা</string>
+    <string name="recurring_sub">নিয়মিত বিল ও সাবস্ক্রিপশন</string>
+    <string name="data_backup_section">ডাটা ও ব্যাকআপ</string>
+    <string name="export_data_sub">CSV, PDF অথবা JSON ফরম্যাটে সংরক্ষণ করুন</string>
+    <string name="backup_restore_sub">সুরক্ষিত এনক্রিপ্টেড ব্যাকআপ ফাইল</string>
+    <string name="security_pin_section">নিরাপত্তা ও লক</string>
+    <string name="app_pin_lock_sub">পিন সুরক্ষিত অ্যাপ্লিকেশন</string>
+    <string name="about_section">অ্যাপ পরিচিতি</string>
+    <string name="app_tagline">Bengal Ledger • স্মার্ট হিসাব খাতা</string>
+    <string name="app_version_crafted">ভার্সন ১.০.০ • Crafted for Bangladesh</string>
+    <string name="pin_status_enabled">পিন লক সক্রিয় (Protected)</string>
+    <string name="pin_status_disabled">পিন লক বন্ধ (Disabled)</string>
+    <string name="select_language_title">ভাষা নির্বাচন করুন</string>
+
+    <!-- Transaction Detail Additions -->
+    <string name="tx_status_completed">সফল লেনদেন</string>
+    <string name="tx_status_credited">আয় জমা হয়েছে</string>
+    <string name="tx_status_transferred">স্থানান্তরিত</string>
+    <string name="tx_breakdown_label">লেনদেনের বিস্তারিত</string>
+    <string name="tx_type_label">ধরন</string>
+    <string name="tx_category_label">ক্যাটাগরি</string>
+    <string name="tx_account_label">হিসাব মাধ্যম</string>
+    <string name="tx_date_label">তারিখ ও সময়</string>
+    <string name="tx_note_label">নোট ও মেমো</string>
+    <string name="tx_edit_action">সম্পাদনা করুন</string>
+    <string name="tx_delete_action">মুছে ফেলুন</string>
+    <string name="tx_deleted_success">লেনদেন মুছে ফেলা হয়েছে</string>
+    <string name="default_general_category">সাধারণ</string>
+    <string name="default_account_label">ডিফল্ট হিসাব</string>
+
+    <!-- Dashboard Additions -->
+    <string name="dashboard_greeting">শুভ দিন ✨</string>
+    <string name="mfs_synced">এমএফএস সিঙ্কড</string>
+    <string name="vs_last_month">গত মাসের তুলনায়</string>
+    <string name="action_expense_short">খরচ যোগ</string>
+    <string name="action_income_short">আয় যোগ</string>
+    <string name="action_transfer_short">ট্রান্সফার</string>
+    <string name="action_budget_short">বাজেট</string>
+    <string name="view_analysis">বিশ্লেষণ ›</string>
+    <string name="transactions_header_title">লেনদেনের খাতা</string>
+    <string name="transactions_header_subtitle">আয়, ব্যয় ও স্থানান্তরের বিস্তারিত তালিকা</string>
+    <string name="progress_completed">%1$d%% সম্পন্ন</string>
+    <string name="status_completed_badge">✓ অর্জিত</string>
+    <string name="status_active_badge">চলমান</string>
+    <string name="remaining_amount_format">আর %1$s বাকি</string>
+    <string name="no_specific_due_date">কোন নির্দিষ্ট মেয়াদ নেই</string>
+    <string name="goals_count_format">%1$dটি লক্ষ্য</string>
+    <string name="goals_status_summary">%1$dটি চলমান • %2$dটি অর্জিত</string>
+    <string name="percentage_achieved">%1$d%% অর্জিত</string>
+    <string name="dialog_enter_amount">টাকার পরিমাণ লিখুন</string>
+    <string name="btn_deposit_action">জমা দিন</string>
+    <string name="repayment_dialog_title">পরিশোধ গ্রহণ • %1$s</string>
+    <string name="dialog_remaining_balance">বকেয়া পরিমাণ: %1$s</string>
+
+    <!-- Security & PIN additions -->
+    <string name="pin_security_header">হিসাব খাতা নিরাপত্তা</string>
+    <string name="pin_security_subtitle">আপনার হিসাব খাতা সুরক্ষিত রাখতে ৪-সংখ্যার পিন দিন</string>
+    <string name="pin_security_prompt">আপনার ৪-সংখ্যার সিকিউরিটি পিন দিন</string>
+    <string name="enter_new_pin">নতুন PIN দিন</string>
+    <string name="confirm_new_pin">PIN নিশ্চিত করুন</string>
+    <string name="save_pin_action">✓ PIN সংরক্ষণ করুন</string>
+    <string name="biometric_unlock_title">বায়োমেট্রিক আনলক</string>
+    <string name="biometric_unlock_desc">হিসাব খাতা খুলতে আঙুলের ছাপ দিন</string>
+    <string name="use_pin_instead">পিন ব্যবহার করুন</string>
+    <string name="forgot_pin_label">পিন মনে নেই?</string>
+    <string name="pin_forgot_hint">অনুগ্রহ করে আপনার মাস্টার সিকিউরিটি ব্যাকআপ ব্যবহার করুন</string>
 </resources>

@@ -52,7 +52,7 @@ class RecurringActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     val updated = item.copy(isPaused = !item.isPaused)
                     app.repository.updateRecurring(updated)
-                    val statusMsg = if (updated.isPaused) "লেনদেন স্থগিত করা হয়েছে" else "লেনদেন সক্রিয় করা হয়েছে"
+                    val statusMsg = if (updated.isPaused) getString(R.string.recurring_paused) else getString(R.string.recurring_resumed)
                     Toast.makeText(this@RecurringActivity, statusMsg, Toast.LENGTH_SHORT).show()
                 }
             },
@@ -120,12 +120,12 @@ class RecurringActivity : AppCompatActivity() {
             }
         }
 
-        binding.tvActiveRecurringCount.text = "${activeCount}টি সচল"
-        binding.tvMonthlyRecurringTotal.text = "${MoneyUtils.formatCents(monthlyTotalCents, currencySymbol)} / মাস"
+        binding.tvActiveRecurringCount.text = getString(R.string.active_recurring_count, activeCount)
+        binding.tvMonthlyRecurringTotal.text = "${MoneyUtils.formatCents(monthlyTotalCents, currencySymbol)} / ${getString(R.string.freq_monthly)}"
 
         if (upcoming7DaysCount > 0) {
             binding.llUpcomingAlert.visibility = View.VISIBLE
-            binding.tvUpcomingAlertText.text = "${upcoming7DaysCount}টি বিলের পরিশোধের তারিখ কাছাকাছি"
+            binding.tvUpcomingAlertText.text = getString(R.string.upcoming_alert_desc)
             binding.tvUpcomingAlertAmount.text = MoneyUtils.formatCents(upcoming7DaysAmount, currencySymbol)
         } else {
             binding.llUpcomingAlert.visibility = View.GONE
@@ -151,16 +151,16 @@ class RecurringActivity : AppCompatActivity() {
 
     private fun confirmDelete(item: RecurringTransactionEntity) {
         AlertDialog.Builder(this)
-            .setTitle("বিল মুছবেন?")
-            .setMessage("\"${item.title}\" পুনরাবৃত্ত লেনদেনটি মুছে ফেলতে চান?")
-            .setPositiveButton("মুছুন") { _, _ ->
+            .setTitle(getString(R.string.confirm_delete_recurring_title))
+            .setMessage(getString(R.string.confirm_delete_recurring_msg, item.title))
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
                 val app = application as ExpenseTrackerApp
                 lifecycleScope.launch {
                     app.repository.deleteRecurring(item)
-                    Toast.makeText(this@RecurringActivity, "মুছে ফেলা হয়েছে", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@RecurringActivity, getString(R.string.tx_deleted_success), Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("বাতিল", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 }

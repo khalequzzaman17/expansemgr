@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.sysninja.expensetracker.ExpenseTrackerApp
+import com.sysninja.expensetracker.R
 import com.sysninja.expensetracker.databinding.ActivitySettingsBinding
 import com.sysninja.expensetracker.domain.LocaleManager
 import com.sysninja.expensetracker.ui.about.AboutActivity
@@ -76,11 +77,11 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun showLanguageDialog() {
         val currentLang = LocaleManager.getCurrentLanguage()
-        val languages = arrayOf("English (Default)", "বাংলা (Bangla)")
+        val languages = arrayOf(getString(R.string.english), getString(R.string.bangla))
         val checkedItem = if (currentLang == LocaleManager.LANG_BN) 1 else 0
 
         AlertDialog.Builder(this)
-            .setTitle(if (currentLang == LocaleManager.LANG_BN) "ভাষা নির্বাচন করুন" else "Select Language")
+            .setTitle(getString(R.string.select_language_title))
             .setSingleChoiceItems(languages, checkedItem) { dialog, which ->
                 val selectedLang = if (which == 1) LocaleManager.LANG_BN else LocaleManager.LANG_EN
                 LocaleManager.switchLanguage(this, selectedLang) {
@@ -88,7 +89,7 @@ class SettingsActivity : AppCompatActivity() {
                     dialog.dismiss()
                 }
             }
-            .setNegativeButton(if (currentLang == LocaleManager.LANG_BN) "বাতিল" else "Cancel", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 
@@ -107,7 +108,7 @@ class SettingsActivity : AppCompatActivity() {
         val app = application as ExpenseTrackerApp
         lifecycleScope.launch {
             val isPinEnabled = app.preferencesManager.isPinEnabledFlow.first()
-            binding.tvPinStatus.text = if (isPinEnabled) "পিন লক সক্রিয় (Protected)" else "পিন লক বন্ধ (Disabled)"
+            binding.tvPinStatus.text = if (isPinEnabled) getString(R.string.pin_status_enabled) else getString(R.string.pin_status_disabled)
         }
     }
 

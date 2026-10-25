@@ -35,7 +35,7 @@
                     android:background="@drawable/bg_pill_sync"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
-                    android:text="Debts &amp; Lending"
+                    android:text="@string/debts_title"
                     android:textColor="@color/mint_secondary"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -72,7 +72,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="মোট দেনা-পাওনা • Net Debt Position"
+                        android:text="@string/net_debt_position"
                         android:textColor="@color/text_muted"
                         android:textSize="12sp" />
 
@@ -113,7 +113,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="আমি পাব (Owed to Me)"
+                                    android:text="@string/owed_to_me"
                                     android:textColor="@color/mint_secondary"
                                     android:textSize="11sp" />
 
@@ -158,7 +158,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="আমি দেব (I Owe)"
+                                    android:text="@string/i_owe"
                                     android:textColor="@color/rose_error"
                                     android:textSize="11sp" />
 
@@ -193,7 +193,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="14dp"
                 android:background="@drawable/bg_button_teal"
-                android:text="+ নতুন ধার যোগ করুন"
+                android:text="@string/add_new_debt"
                 android:textColor="@color/text_inverse"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -221,7 +221,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="সব (All)"
+                        android:text="@string/tab_all"
                         android:textColor="@color/text_primary"
                         app:chipBackgroundColor="@color/surface_navy_elevated" />
 
@@ -230,7 +230,7 @@
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="আমি পাব (Owed)"
+                        android:text="@string/tab_owed"
                         android:textColor="@color/mint_secondary"
                         app:chipBackgroundColor="@color/surface_navy_elevated" />
 
@@ -239,7 +239,7 @@
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="আমি দেব (I Owe)"
+                        android:text="@string/i_owe"
                         android:textColor="@color/rose_error"
                         app:chipBackgroundColor="@color/surface_navy_elevated" />
 
@@ -248,7 +248,7 @@
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="পরিশোধিত (Settled)"
+                        android:text="@string/tab_settled"
                         android:textColor="@color/text_muted"
                         app:chipBackgroundColor="@color/surface_navy_elevated" />
                 </com.google.android.material.chip.ChipGroup>
@@ -293,7 +293,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="কোন দেনা-পাওনা রেকর্ড নেই"
+                    android:text="@string/no_debts_found"
                     android:textColor="@color/text_primary"
                     android:textSize="15sp" />
 
@@ -302,7 +302,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:text="বন্ধু বা আত্মীয়দের দেওয়া ধার কিংবা ঋণ সহজে ট্র্যাক করুন"
+                    android:text="@string/debts_empty_hint"
                     android:textColor="@color/text_muted"
                     android:textSize="12sp" />
             </LinearLayout>

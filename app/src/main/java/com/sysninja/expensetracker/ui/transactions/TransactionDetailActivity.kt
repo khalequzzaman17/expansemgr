@@ -40,7 +40,7 @@ class TransactionDetailActivity : AppCompatActivity() {
             val app = application as ExpenseTrackerApp
             lifecycleScope.launch {
                 app.repository.deleteTransactionById(transactionId)
-                Toast.makeText(this@TransactionDetailActivity, "লেনদেন মুছে ফেলা হয়েছে", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@TransactionDetailActivity, getString(R.string.tx_deleted_success), Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
@@ -70,10 +70,10 @@ class TransactionDetailActivity : AppCompatActivity() {
                 binding.layoutNote.visibility = View.GONE
             }
 
-            val catName = txWithDetails.category?.name ?: "সাধারণ / General"
+            val catName = txWithDetails.category?.name ?: getString(R.string.default_general_category)
             binding.tvCategory.text = catName
 
-            val fromAcc = txWithDetails.account?.name ?: "ডিফল্ট হিসাব"
+            val fromAcc = txWithDetails.account?.name ?: getString(R.string.default_account_label)
             val toAcc = txWithDetails.toAccount?.name
             binding.tvAccount.text = if (toAcc != null) "$fromAcc → $toAcc" else fromAcc
 
@@ -82,8 +82,8 @@ class TransactionDetailActivity : AppCompatActivity() {
                 "INCOME" -> {
                     binding.tvAmount.text = "+ $amt"
                     binding.tvAmount.setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.secondary_mint))
-                    binding.tvType.text = "আয় • Income"
-                    binding.tvStatusChip.text = "আয় জমা হয়েছে • Credited"
+                    binding.tvType.text = getString(R.string.type_income)
+                    binding.tvStatusChip.text = getString(R.string.tx_status_credited)
                     binding.ivCategoryAvatarBg.setBackgroundResource(R.drawable.bg_badge_cash)
                     binding.ivCategoryIcon.setImageResource(R.drawable.ic_income)
                     binding.ivCategoryIcon.setColorFilter(ContextCompat.getColor(this@TransactionDetailActivity, R.color.secondary_mint))
@@ -91,8 +91,8 @@ class TransactionDetailActivity : AppCompatActivity() {
                 "EXPENSE" -> {
                     binding.tvAmount.text = "- $amt"
                     binding.tvAmount.setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.expense_red))
-                    binding.tvType.text = "ব্যয় • Expense"
-                    binding.tvStatusChip.text = "সফল লেনদেন • Completed"
+                    binding.tvType.text = getString(R.string.type_expense)
+                    binding.tvStatusChip.text = getString(R.string.tx_status_completed)
                     binding.ivCategoryAvatarBg.setBackgroundResource(R.drawable.bg_badge_expense)
                     binding.ivCategoryIcon.setImageResource(R.drawable.ic_expense)
                     binding.ivCategoryIcon.setColorFilter(ContextCompat.getColor(this@TransactionDetailActivity, R.color.expense_red))
@@ -100,8 +100,8 @@ class TransactionDetailActivity : AppCompatActivity() {
                 else -> {
                     binding.tvAmount.text = "⇄ $amt"
                     binding.tvAmount.setTextColor(ContextCompat.getColor(this@TransactionDetailActivity, R.color.teal_primary))
-                    binding.tvType.text = "স্থানান্তর • Transfer"
-                    binding.tvStatusChip.text = "স্থানান্তরিত • Transferred"
+                    binding.tvType.text = getString(R.string.type_transfer)
+                    binding.tvStatusChip.text = getString(R.string.tx_status_transferred)
                     binding.ivCategoryAvatarBg.setBackgroundResource(R.drawable.bg_badge_bank)
                     binding.ivCategoryIcon.setImageResource(R.drawable.ic_transfer)
                     binding.ivCategoryIcon.setColorFilter(ContextCompat.getColor(this@TransactionDetailActivity, R.color.teal_primary))

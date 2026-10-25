@@ -32,7 +32,7 @@ class SetPinActivity : AppCompatActivity() {
             orientation = LinearLayout.VERTICAL
             setBackgroundColor(ContextCompat.getColor(context, R.color.bg_navy_dark))
         }
-        root.addView(stitchToolbar("Security PIN", "হিসাব খাতা • নিরাপত্তা", ::finish))
+        root.addView(stitchToolbar(getString(R.string.pin_security_header), getString(R.string.settings_title), ::finish))
 
         val scroll = ScrollView(this)
         val content = LinearLayout(this).apply {
@@ -52,26 +52,26 @@ class SetPinActivity : AppCompatActivity() {
         }
         content.addView(icon, LinearLayout.LayoutParams(dp(72), dp(72)))
         content.addView(TextView(this).apply {
-            text = "নিরাপত্তা পিন • Set PIN"
+            text = getString(R.string.set_pin)
             setTextColor(ContextCompat.getColor(context, R.color.text_primary))
             textSize = 21f
             setTypeface(typeface, android.graphics.Typeface.BOLD)
             setPadding(0, dp(12), 0, dp(4))
         })
         content.addView(TextView(this).apply {
-            text = "আপনার হিসাব খাতা সুরক্ষিত রাখতে ৪-সংখ্যার পিন দিন"
+            text = getString(R.string.pin_security_subtitle)
             setTextColor(ContextCompat.getColor(context, R.color.text_secondary))
             textSize = 13f
             gravity = Gravity.CENTER
         })
 
-        val pinEt = pinField("নতুন PIN  •  Enter PIN")
-        val confirmEt = pinField("Confirm PIN  •  PIN নিশ্চিত করুন")
+        val pinEt = pinField(getString(R.string.enter_new_pin))
+        val confirmEt = pinField(getString(R.string.confirm_new_pin))
         content.addView(pinEt, LinearLayout.LayoutParams(-1, dp(58)).apply { topMargin = dp(22) })
         content.addView(confirmEt, LinearLayout.LayoutParams(-1, dp(58)).apply { topMargin = dp(10) })
 
         val saveBtn = MaterialButton(this).apply {
-            text = "✓  PIN সংরক্ষণ করুন  •  Save PIN"
+            text = getString(R.string.save_pin_action)
             setBackgroundResource(R.drawable.bg_button_teal)
             setTextColor(ContextCompat.getColor(context, R.color.text_inverse))
             textSize = 14f
@@ -86,14 +86,14 @@ class SetPinActivity : AppCompatActivity() {
             radius = dp(16).toFloat()
             val row = LinearLayout(context).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(14), dp(12), dp(14), dp(12)) }
             row.addView(TextView(context).apply { text = "⌁"; textSize = 24f; setTextColor(primaryLight) }, LinearLayout.LayoutParams(dp(36), dp(36)))
-            row.addView(TextView(context).apply { text = "বায়োমেট্রিক আনলক\nTouch fingerprint sensor"; setTextColor(ContextCompat.getColor(context, R.color.text_primary)); textSize = 12f; setPadding(dp(10), 0, 0, 0) }, LinearLayout.LayoutParams(0, -2, 1f))
-            row.addView(TextView(context).apply { text = "সক্রিয়"; setTextColor(primaryLight); textSize = 11f })
+            row.addView(TextView(context).apply { text = "${getString(R.string.biometric_unlock_title)}\n${getString(R.string.biometric_unlock_desc)}"; setTextColor(ContextCompat.getColor(context, R.color.text_primary)); textSize = 12f; setPadding(dp(10), 0, 0, 0) }, LinearLayout.LayoutParams(0, -2, 1f))
+            row.addView(TextView(context).apply { text = getString(R.string.status_active); setTextColor(primaryLight); textSize = 11f })
             addView(row)
         }
         content.addView(biometric, LinearLayout.LayoutParams(-1, dp(68)).apply { topMargin = dp(16) })
 
         val disableBtn = MaterialButton(this).apply {
-            text = "Disable PIN Lock"
+            text = getString(R.string.pin_status_disabled)
             setBackgroundResource(R.drawable.bg_card_rounded)
             backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.surface_navy_elevated))
             setTextColor(ContextCompat.getColor(context, R.color.expense_red))

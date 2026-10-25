@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:text="সব অ্যাকাউন্ট সিঙ্কড • All Synced"
+                        android:text="@string/all_accounts_synced"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="অ্যাকাউন্ট ও ওয়ালেট / Wallets"
+                    android:text="@string/accounts_title"
                     android:textColor="@color/text_primary"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -118,7 +118,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:text="মোট ব্যালেন্স • TOTAL BALANCE"
+                            android:text="@string/total_balance"
                             android:textColor="@color/text_secondary"
                             android:textSize="11sp"
                             android:textStyle="bold" />
@@ -133,7 +133,7 @@
                         android:background="@drawable/bg_pill_sync"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="3dp"
-                        android:text="সক্রিয় অ্যাকাউন্ট"
+                        android:text="@string/active_accounts_label"
                         android:textColor="@color/teal_light"
                         android:textSize="11sp"
                         android:textStyle="bold" />
@@ -164,7 +164,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="▲ +১২.৪% এই মাসে বৃদ্ধি"
+                        android:text="@string/growth_this_month"
                         android:textColor="@color/secondary_mint"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -172,7 +172,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="গত ৩০ দিন"
+                        android:text="@string/last_30_days"
                         android:textColor="@color/text_secondary"
                         android:textSize="11sp" />
                 </LinearLayout>
@@ -195,7 +195,7 @@
                 android:layout_marginEnd="6dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/teal_primary"
-                android:text="+ নতুন অ্যাকাউন্ট"
+                android:text="@string/add_new_account"
                 android:textColor="@color/text_inverse"
                 android:textSize="13sp"
                 android:textStyle="bold"
@@ -209,7 +209,7 @@
                 android:layout_marginStart="6dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/surface_container"
-                android:text="⇄ ট্রান্সফার করুন"
+                android:text="@string/transfer_funds_action"
                 android:textColor="@color/text_primary"
                 android:textSize="13sp"
                 android:textStyle="bold"
@@ -242,7 +242,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ফান্ড বিতরণ • Asset Allocation"
+                        android:text="@string/asset_allocation"
                         android:textColor="@color/text_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -251,7 +251,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="১০০% ক্যাটাগরাইজড"
+                        android:text="@string/all_categorized"
                         android:textColor="@color/text_muted"
                         android:textSize="11sp" />
                 </RelativeLayout>
@@ -318,7 +318,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ব্যাংক (Bank)"
+                            android:text="@string/bank_label"
                             android:textColor="@color/text_muted"
                             android:textSize="10sp" />
                     </LinearLayout>
@@ -345,7 +345,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="এমএফএস"
+                            android:text="@string/mfs_label"
                             android:textColor="@color/text_muted"
                             android:textSize="10sp" />
                     </LinearLayout>
@@ -372,7 +372,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="নগদ (Cash)"
+                            android:text="@string/cash_label"
                             android:textColor="@color/text_muted"
                             android:textSize="10sp" />
                     </LinearLayout>

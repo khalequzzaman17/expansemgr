@@ -63,27 +63,25 @@ class SavingsGoalAdapter(
             }
             val clampedPct = pct.coerceIn(0, 100)
             binding.progressBarGoal.progress = clampedPct
-            binding.tvProgressPercentage.text = "$clampedPct% সম্পন্ন"
+            binding.tvProgressPercentage.text = context.getString(R.string.progress_completed, clampedPct)
 
             if (goal.isCompleted || clampedPct >= 100) {
-                binding.tvCompletionBadge.text = "✓ অর্জিত"
+                binding.tvCompletionBadge.text = context.getString(R.string.status_completed_badge)
                 binding.tvCompletionBadge.setTextColor(ContextCompat.getColor(context, R.color.teal_primary))
                 binding.progressBarGoal.setIndicatorColor(ContextCompat.getColor(context, R.color.teal_primary))
             } else {
-                binding.tvCompletionBadge.text = "চলমান"
+                binding.tvCompletionBadge.text = context.getString(R.string.status_active_badge)
                 binding.tvCompletionBadge.setTextColor(ContextCompat.getColor(context, R.color.mint_secondary))
                 binding.progressBarGoal.setIndicatorColor(ContextCompat.getColor(context, R.color.tertiary_lavender))
             }
 
+            val remainingCents = (goal.targetAmountCents - goal.currentAmountCents).coerceAtLeast(0)
+            binding.tvRemainingInfo.text = context.getString(R.string.remaining_amount_format, MoneyUtils.formatCents(remainingCents, currencySymbol))
             if (goal.targetDate != null && goal.targetDate > 0) {
                 val sdf = SimpleDateFormat("MMM yyyy", Locale.getDefault())
                 binding.tvTargetDate.text = sdf.format(Date(goal.targetDate))
-                val remainingCents = (goal.targetAmountCents - goal.currentAmountCents).coerceAtLeast(0)
-                binding.tvRemainingInfo.text = "আর ${MoneyUtils.formatCents(remainingCents, currencySymbol)} বাকি"
             } else {
-                binding.tvTargetDate.text = "কোন নির্দিষ্ট মেয়াদ নেই"
-                val remainingCents = (goal.targetAmountCents - goal.currentAmountCents).coerceAtLeast(0)
-                binding.tvRemainingInfo.text = "আর ${MoneyUtils.formatCents(remainingCents, currencySymbol)} বাকি"
+                binding.tvTargetDate.text = context.getString(R.string.no_specific_due_date)
             }
 
             binding.cardSavingsGoal.setOnClickListener { onGoalClick(goal) }

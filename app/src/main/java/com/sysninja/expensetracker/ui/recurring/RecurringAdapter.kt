@@ -53,14 +53,14 @@ class RecurringAdapter(
             binding.tvRecurringTitle.text = item.title
 
             val freqText = when (item.frequency.uppercase()) {
-                "DAILY" -> "দৈনিক"
-                "WEEKLY" -> "সাপ্তাহিক"
-                "YEARLY" -> "বাৎসরিক"
-                else -> "মাসিক"
+                "DAILY" -> context.getString(R.string.freq_daily)
+                "WEEKLY" -> context.getString(R.string.freq_weekly)
+                "YEARLY" -> context.getString(R.string.freq_yearly)
+                else -> context.getString(R.string.freq_monthly)
             }
             binding.tvFrequencyChip.text = freqText
 
-            binding.tvRecurringSubtitle.text = item.note ?: "${item.type} • অটো-লগ"
+            binding.tvRecurringSubtitle.text = item.note ?: "${item.type}"
 
             val isExpense = !item.type.equals("INCOME", ignoreCase = true)
             val amountFormatted = MoneyUtils.formatCents(item.amountCents, currencySymbol)
@@ -73,32 +73,32 @@ class RecurringAdapter(
             }
 
             if (item.isPaused) {
-                binding.tvRecurringStatus.text = "স্থগিত"
+                binding.tvRecurringStatus.text = context.getString(R.string.status_paused)
                 binding.tvRecurringStatus.setTextColor(ContextCompat.getColor(context, R.color.text_muted))
-                binding.btnTogglePause.text = "পুনরায় চালু"
+                binding.btnTogglePause.text = context.getString(R.string.resume_label)
             } else {
-                binding.tvRecurringStatus.text = "সচল"
+                binding.tvRecurringStatus.text = context.getString(R.string.status_active)
                 binding.tvRecurringStatus.setTextColor(ContextCompat.getColor(context, R.color.teal_primary))
-                binding.btnTogglePause.text = "স্থগিত করুন"
+                binding.btnTogglePause.text = context.getString(R.string.pause_action)
             }
 
             // Next due date
             val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
-            binding.tvNextDueDate.text = "পরবর্তী তারিখ: ${sdf.format(Date(item.nextDueDate))}"
+            binding.tvNextDueDate.text = context.getString(R.string.next_due, sdf.format(Date(item.nextDueDate)))
 
             val diffMs = item.nextDueDate - System.currentTimeMillis()
             val diffDays = TimeUnit.MILLISECONDS.toDays(diffMs)
             when {
                 diffDays < 0 -> {
-                    binding.tvDaysRemaining.text = "বকেয়া আছে"
+                    binding.tvDaysRemaining.text = context.getString(R.string.overdue_label)
                     binding.tvDaysRemaining.setTextColor(ContextCompat.getColor(context, R.color.rose_error))
                 }
                 diffDays == 0L -> {
-                    binding.tvDaysRemaining.text = "আজকেই প্রদেয়!"
+                    binding.tvDaysRemaining.text = context.getString(R.string.due_today)
                     binding.tvDaysRemaining.setTextColor(ContextCompat.getColor(context, R.color.amber_primary))
                 }
                 else -> {
-                    binding.tvDaysRemaining.text = "আর $diffDays দিন বাকি"
+                    binding.tvDaysRemaining.text = context.getString(R.string.days_remaining, diffDays)
                     binding.tvDaysRemaining.setTextColor(ContextCompat.getColor(context, R.color.amber_primary))
                 }
             }

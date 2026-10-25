@@ -51,13 +51,13 @@ class ExportActivity : AppCompatActivity() {
             binding.cardFormatPdf.strokeWidth = 4
             binding.cardFormatCsv.strokeColor = ContextCompat.getColor(this, R.color.stroke_subtle)
             binding.cardFormatCsv.strokeWidth = 2
-            binding.btnExecuteExport.text = "PDF অডিট স্টেটমেন্ট ডাউনলোড করুন"
+            binding.btnExecuteExport.text = getString(R.string.download_pdf_file)
         } else {
             binding.cardFormatCsv.strokeColor = ContextCompat.getColor(this, R.color.teal_primary)
             binding.cardFormatCsv.strokeWidth = 4
             binding.cardFormatPdf.strokeColor = ContextCompat.getColor(this, R.color.stroke_subtle)
             binding.cardFormatPdf.strokeWidth = 2
-            binding.btnExecuteExport.text = "CSV স্প্রেডশিট ডাউনলোড করুন"
+            binding.btnExecuteExport.text = getString(R.string.download_csv_file)
         }
     }
 
@@ -82,12 +82,12 @@ class ExportActivity : AppCompatActivity() {
                     val fos = FileOutputStream(file)
                     PdfExporter.generatePdfReport(
                         transactions = transactions,
-                        periodTitle = "সব লেনদেন (All Records)",
+                        periodTitle = getString(R.string.range_all_records),
                         outputStream = fos,
                         currencySymbol = currency
                     )
                     fos.close()
-                    Toast.makeText(this@ExportActivity, "PDF সফলভাবে ডাউনলোড হয়েছে: ${file.name}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@ExportActivity, "${getString(R.string.export_success)}: ${file.name}", Toast.LENGTH_LONG).show()
                 } else {
                     val file = File(dir, "bengal_ledger_export_$timestamp.csv")
                     val fos = FileOutputStream(file)
@@ -97,10 +97,10 @@ class ExportActivity : AppCompatActivity() {
                         currencySymbol = currency
                     )
                     fos.close()
-                    Toast.makeText(this@ExportActivity, "CSV সফলভাবে ডাউনলোড হয়েছে: ${file.name}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@ExportActivity, "${getString(R.string.export_success)}: ${file.name}", Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@ExportActivity, "এক্সপোর্টে সমস্যা হয়েছে: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ExportActivity, getString(R.string.backup_error, e.message ?: ""), Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -37,7 +37,7 @@
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:paddingHorizontal="10dp"
-                    android:text="PDF/XLS"
+                    android:text="@string/pdf_xls_label"
                     android:textColor="@color/teal_primary"
                     android:textSize="11sp"
                     app:backgroundTint="@color/surface_navy_elevated"
@@ -63,7 +63,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="মাসিক আয়, ব্যয় ও সঞ্চয়ের বিস্তারিত চিত্র • Analytics"
+                android:text="@string/analytics_subtitle"
                 android:textColor="@color/text_muted"
                 android:textSize="13sp" />
 
@@ -91,7 +91,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="সাপ্তাহিক"
+                        android:text="@string/weekly_tab"
                         android:textAlignment="center"
                         android:textColor="@color/text_secondary"
                         app:chipBackgroundColor="@color/surface_navy" />
@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:checked="true"
-                        android:text="মাসিক"
+                        android:text="@string/monthly_tab"
                         android:textAlignment="center"
                         android:textColor="@color/teal_primary"
                         app:chipBackgroundColor="@color/surface_navy_elevated" />
@@ -114,7 +114,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="বাৎসরিক"
+                        android:text="@string/yearly_tab"
                         android:textAlignment="center"
                         android:textColor="@color/text_secondary"
                         app:chipBackgroundColor="@color/surface_navy" />
@@ -167,7 +167,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="পূর্ণ হিসাব ও বিশ্লেষণ"
+                            android:text="@string/analytics_full_title"
                             android:textColor="@color/mint_secondary"
                             android:textSize="10sp" />
                     </LinearLayout>
@@ -212,7 +212,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="মোট আয়"
+                            android:text="@string/total_income"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
 
@@ -230,7 +230,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="+৮% বৃদ্ধি"
+                            android:text="@string/growth_vs_last_month"
                             android:textColor="@color/mint_secondary"
                             android:textSize="9sp" />
                     </LinearLayout>
@@ -257,7 +257,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="মোট ব্যয়"
+                            android:text="@string/total_expense"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
 
@@ -275,7 +275,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="-৪% নিয়ন্ত্রিত"
+                            android:text="@string/expenses_controlled"
                             android:textColor="@color/mint_secondary"
                             android:textSize="9sp" />
                     </LinearLayout>
@@ -302,7 +302,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="সঞ্চয় হার"
+                            android:text="@string/savings_rate_label"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
 
@@ -320,7 +320,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="চমৎকার সঞ্চয়"
+                            android:text="@string/savings_rate_badge"
                             android:textColor="@color/teal_primary"
                             android:textSize="9sp" />
                     </LinearLayout>
@@ -360,14 +360,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-medium"
-                                android:text="আয় বনাম ব্যয় পর্যালোচনা"
+                                android:text="@string/cashflow_comparison"
                                 android:textColor="@color/text_primary"
                                 android:textSize="15sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="মাসিক তুলনামূলক প্রবাহ • Cash Flow"
+                                android:text="@string/cashflow_flow_label"
                                 android:textColor="@color/text_muted"
                                 android:textSize="11sp" />
                         </LinearLayout>
@@ -388,7 +388,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
-                                android:text="আয়"
+                                android:text="@string/type_income"
                                 android:textColor="@color/text_muted"
                                 android:textSize="10sp" />
 
@@ -402,7 +402,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
-                                android:text="ব্যয়"
+                                android:text="@string/type_expense"
                                 android:textColor="@color/text_muted"
                                 android:textSize="10sp" />
                         </LinearLayout>
@@ -437,14 +437,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
-                        android:text="খরচের খাতভিত্তিক বিশ্লেষণ"
+                        android:text="@string/category_breakdown_title"
                         android:textColor="@color/text_primary"
                         android:textSize="15sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ক্যাটাগরি অনুযায়ী খরচের অনুপাত • Category Share"
+                        android:text="@string/category_share_label"
                         android:textColor="@color/text_muted"
                         android:textSize="11sp" />
 
@@ -500,7 +500,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="স্মার্ট আর্থিক পরামর্শ • Smart Tip"
+                            android:text="@string/financial_tip_title"
                             android:textColor="@color/teal_primary"
                             android:textSize="13sp" />
 
@@ -510,7 +510,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:lineSpacingExtra="2dp"
-                            android:text="বাজার ও মুদি কেনাকাটায় গত মাসের তুলনায় ৬% সাশ্রয় হয়েছে। সঞ্চয়ের লক্ষ্যমাত্রা বজায় রাখতে নিয়মিত হিসাব রাখা চালিয়ে যান।"
+                            android:text="@string/smart_tip_content"
                             android:textColor="@color/text_primary"
                             android:textSize="12sp" />
                     </LinearLayout>

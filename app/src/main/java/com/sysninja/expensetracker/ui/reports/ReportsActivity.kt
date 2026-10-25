@@ -105,7 +105,7 @@ class ReportsActivity : AppCompatActivity() {
                 totalIncome += tx.amountCents
             } else if (tx.type.equals("EXPENSE", ignoreCase = true)) {
                 totalExpense += tx.amountCents
-                val catName = item.category?.name ?: "অন্যান্য (Other)"
+                val catName = item.category?.name ?: getString(R.string.cat_other_expense)
                 categoryExpenseMap[catName] = (categoryExpenseMap[catName] ?: 0L) + tx.amountCents
             }
         }
@@ -207,7 +207,7 @@ class ReportsActivity : AppCompatActivity() {
         binding.chartDonut.setData(
             slices,
             MoneyUtils.formatCents(totalExpense, currencySymbol),
-            "মোট ব্যয়"
+            getString(R.string.total_expense)
         )
     }
 

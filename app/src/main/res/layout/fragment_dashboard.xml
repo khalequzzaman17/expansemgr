@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
-                    android:text="হিসাব খাতা • Home"
+                    android:text="@string/nav_home"
                     android:textColor="@color/teal_primary"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -166,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Welcome back | শুভ দিন ✨"
+                    android:text="@string/dashboard_greeting"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -191,7 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:text="MFS Synced"
+                    android:text="@string/mfs_synced"
                     android:textColor="@color/secondary_mint"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -235,7 +235,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:text="মোট ব্যালেন্স • Total Balance"
+                            android:text="@string/total_balance"
                             android:textColor="@color/text_secondary"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -285,7 +285,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="▲ +12.4% vs last month"
+                            android:text="@string/growth_this_month"
                             android:textColor="@color/secondary_mint"
                             android:textSize="11sp"
                             android:textStyle="bold" />
@@ -300,7 +300,7 @@
                         android:background="@drawable/bg_pill_sync"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="3dp"
-                        android:text="৪টি অ্যাকাউন্ট যুক্ত"
+                        android:text="@string/accounts_summary"
                         android:textColor="@color/text_secondary"
                         android:textSize="11sp" />
                 </LinearLayout>
@@ -334,7 +334,7 @@
                     style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="আজ / Today"
+                    android:text="@string/period_today"
                     android:textColor="@color/chip_text" />
 
                 <com.google.android.material.chip.Chip
@@ -342,7 +342,7 @@
                     style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="এই সপ্তাহ / Week"
+                    android:text="@string/period_this_week"
                     android:textColor="@color/chip_text" />
 
                 <com.google.android.material.chip.Chip
@@ -351,7 +351,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="এই মাস / This Month"
+                    android:text="@string/period_this_month"
                     android:textColor="@color/chip_text" />
 
                 <com.google.android.material.chip.Chip
@@ -359,7 +359,7 @@
                     style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="গত মাস / Last Month"
+                    android:text="@string/period_last_month"
                     android:textColor="@color/chip_text" />
 
                 <com.google.android.material.chip.Chip
@@ -367,7 +367,7 @@
                     style="@style/ChipCustom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="এই বছর / Year"
+                    android:text="@string/period_this_year"
                     android:textColor="@color/chip_text" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
@@ -433,7 +433,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="আয় • Income"
+                        android:text="@string/type_income"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
@@ -502,7 +502,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="ব্যয় • Expense"
+                        android:text="@string/type_expense"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
@@ -551,7 +551,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="নিট ক্যাশ ফ্লো: "
+                        android:text="@string/net_cashflow"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
@@ -629,17 +629,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="খরচ যোগ"
+                        android:text="@string/action_add_expense"
                         android:textColor="@color/text_primary"
                         android:textSize="11sp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expense"
-                        android:textColor="@color/text_muted"
-                        android:textSize="9sp" />
                 </LinearLayout>
 
                 <!-- Add Income Action -->
@@ -672,17 +665,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="আয় যোগ"
+                        android:text="@string/action_add_income"
                         android:textColor="@color/text_primary"
                         android:textSize="11sp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Income"
-                        android:textColor="@color/text_muted"
-                        android:textSize="9sp" />
                 </LinearLayout>
 
                 <!-- Transfer Action -->
@@ -713,17 +699,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="ট্রান্সফার"
+                        android:text="@string/action_transfer"
                         android:textColor="@color/text_primary"
                         android:textSize="11sp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Transfer"
-                        android:textColor="@color/text_muted"
-                        android:textSize="9sp" />
                 </LinearLayout>
 
                 <!-- Budget Target Action -->
@@ -754,17 +733,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="বাজেট"
+                        android:text="@string/action_budget"
                         android:textColor="@color/text_primary"
                         android:textSize="11sp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Budget"
-                        android:textColor="@color/text_muted"
-                        android:textSize="9sp" />
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -814,7 +786,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="বাজেট অবস্থা"
+                                android:text="@string/budget_overview"
                                 android:textColor="@color/text_primary"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -822,7 +794,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Monthly Budget"
+                                android:text="@string/monthly_budget"
                                 android:textColor="@color/text_muted"
                                 android:textSize="11sp" />
                         </LinearLayout>
@@ -908,7 +880,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="খরচের খাতসমূহ"
+                            android:text="@string/spending_breakdown"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -916,7 +888,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Spending Breakdown"
+                            android:text="@string/spending_breakdown"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -927,7 +899,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:text="বিশ্লেষণ >"
+                        android:text="@string/view_analysis"
                         android:textColor="@color/teal_primary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -960,7 +932,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:text="সাম্প্রতিক লেনদেন • Recent"
+                android:text="@string/recent_transactions"
                 android:textColor="@color/text_primary"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -972,7 +944,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:padding="4dp"
-                android:text="সব দেখুন >"
+                android:text="@string/see_all"
                 android:textColor="@color/teal_primary"
                 android:textSize="12sp"
                 android:textStyle="bold" />

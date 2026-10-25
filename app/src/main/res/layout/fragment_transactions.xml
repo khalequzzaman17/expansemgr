@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="লেনদেনের খাতা • Transactions"
+            android:text="@string/transactions_header_title"
             android:textColor="@color/text_primary"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="আয়, ব্যয় ও স্থানান্তরের বিস্তারিত তালিকা"
+            android:text="@string/transactions_header_subtitle"
             android:textColor="@color/teal_primary"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -54,7 +54,7 @@
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="10dp"
             android:drawableTint="@color/teal_light"
-            android:hint="লেনদেন অনুসন্ধান করুন..."
+            android:hint="@string/search_transactions_hint"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="সব • All"
+                android:text="@string/filter_all"
                 android:textColor="@color/chip_text" />
 
             <com.google.android.material.chip.Chip
@@ -101,7 +101,7 @@
                 style="@style/ChipCustom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ব্যয় • Expense"
+                android:text="@string/type_expense"
                 android:textColor="@color/chip_text" />
 
             <com.google.android.material.chip.Chip
@@ -109,7 +109,7 @@
                 style="@style/ChipCustom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="আয় • Income"
+                android:text="@string/type_income"
                 android:textColor="@color/chip_text" />
 
             <com.google.android.material.chip.Chip
@@ -117,7 +117,7 @@
                 style="@style/ChipCustom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="স্থানান্তর • Transfer"
+                android:text="@string/type_transfer"
                 android:textColor="@color/chip_text" />
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>

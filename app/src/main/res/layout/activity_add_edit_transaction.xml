@@ -46,7 +46,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="লেনদেনের ধরন • Transaction Type"
+                    android:text="@string/transaction_type_label"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="ব্যয় • Expense"
+                        android:text="@string/type_expense"
                         android:textColor="@color/expense_red" />
 
                     <com.google.android.material.chip.Chip
@@ -72,7 +72,7 @@
                         style="@style/ChipCustom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="আয় • Income"
+                        android:text="@string/type_income"
                         android:textColor="@color/secondary_mint" />
 
                     <com.google.android.material.chip.Chip
@@ -80,7 +80,7 @@
                         style="@style/ChipCustom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ট্রান্সফার • Transfer"
+                        android:text="@string/type_transfer"
                         android:textColor="@color/teal_primary" />
                 </com.google.android.material.chip.ChipGroup>
             </LinearLayout>
@@ -104,7 +104,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="টাকার পরিমাণ • Amount"
+                        android:text="@string/amount_label"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -160,7 +160,7 @@
                                 android:background="@drawable/bg_pill_sync"
                                 android:gravity="center"
                                 android:paddingHorizontal="10dp"
-                                android:text="+৳ ১০০"
+                                android:text="@string/quick_add_100"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -173,7 +173,7 @@
                                 android:background="@drawable/bg_pill_sync"
                                 android:gravity="center"
                                 android:paddingHorizontal="10dp"
-                                android:text="+৳ ৫০০"
+                                android:text="@string/quick_add_500"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -186,7 +186,7 @@
                                 android:background="@drawable/bg_pill_sync"
                                 android:gravity="center"
                                 android:paddingHorizontal="10dp"
-                                android:text="+৳ ১,০০০"
+                                android:text="@string/quick_add_1000"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -199,7 +199,7 @@
                                 android:background="@drawable/bg_pill_sync"
                                 android:gravity="center"
                                 android:paddingHorizontal="10dp"
-                                android:text="+৳ ৫,০০০"
+                                android:text="@string/quick_add_5000"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -211,7 +211,7 @@
                                 android:background="@drawable/bg_badge_expense"
                                 android:gravity="center"
                                 android:paddingHorizontal="10dp"
-                                android:text="Clear ✕"
+                                android:text="@string/clear_amount"
                                 android:textColor="@color/expense_red"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -239,7 +239,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="বিবরণ / Description"
+                        android:text="@string/description_label"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -250,7 +250,7 @@
                         android:layout_height="46dp"
                         android:layout_marginTop="6dp"
                         android:background="@drawable/bg_pill_sync"
-                        android:hint="কী খাতে খরচ হলো লিখুন..."
+                        android:hint="@string/description_hint"
                         android:inputType="textCapSentences"
                         android:maxLines="1"
                         android:paddingHorizontal="14dp"
@@ -280,7 +280,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ক্যাটাগরি নির্বাচন • Select Category"
+                        android:text="@string/category_select_label"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -315,7 +315,7 @@
                         android:id="@+id/tvAccountLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="হিসাব মাধ্যম • Paid From"
+                        android:text="@string/paid_from_label"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -351,7 +351,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="গন্তব্য হিসাব • Destination Account"
+                        android:text="@string/destination_account_label"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -385,7 +385,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="পেমেন্ট মাধ্যম • Method (bKash / Nagad / Bank / Cash)"
+                        android:text="@string/payment_method_label"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -419,7 +419,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="তারিখ ও সময় • Date &amp; Time"
+                        android:text="@string/date_time_label"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -459,7 +459,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="নোট ও ট্যাগ • Notes &amp; Tags"
+                        android:text="@string/notes_tags_label"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -471,7 +471,7 @@
                         android:layout_marginTop="6dp"
                         android:background="@drawable/bg_pill_sync"
                         android:gravity="top|start"
-                        android:hint="অতিরিক্ত বিবরণ লিখুন..."
+                        android:hint="@string/notes_hint"
                         android:inputType="textMultiLine"
                         android:minLines="2"
                         android:padding="12dp"
@@ -485,7 +485,7 @@
                         android:layout_height="44dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/bg_pill_sync"
-                        android:hint="ট্যাগ (যেমন #MonthlyBazar, #Family)"
+                        android:hint="@string/tags_hint"
                         android:inputType="text"
                         android:maxLines="1"
                         android:paddingHorizontal="14dp"
@@ -513,7 +513,7 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/teal_primary"
-                android:text="লেনদেন সংরক্ষণ করুন • Save Transaction"
+                android:text="@string/save_transaction_btn"
                 android:textColor="@color/text_inverse"
                 android:textSize="14sp"
                 android:textStyle="bold"

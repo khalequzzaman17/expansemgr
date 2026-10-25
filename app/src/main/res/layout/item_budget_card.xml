@@ -148,7 +148,7 @@
                 android:background="@drawable/bg_pill_sync"
                 android:gravity="center"
                 android:paddingHorizontal="12dp"
-                android:text="✏ এডিট / Edit"
+                android:text="@string/edit_budget_btn"
                 android:textColor="@color/teal_primary"
                 android:textSize="11sp"
                 android:textStyle="bold" />

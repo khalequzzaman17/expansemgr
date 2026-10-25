@@ -35,7 +35,7 @@
                     android:background="@drawable/bg_pill_sync"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
-                    android:text="Recurring Bills"
+                    android:text="@string/recurring_title"
                     android:textColor="@color/mint_secondary"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -57,7 +57,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="সাবস্ক্রিপশন, ইউটিলিটি বিল ও নিয়মিত লেনদেন"
+                android:text="@string/recurring_subtitle"
                 android:textColor="@color/text_muted"
                 android:textSize="13sp" />
 
@@ -88,7 +88,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="মাসিক পুনরাবৃত্ত ব্যয় • Monthly Total"
+                            android:text="@string/monthly_recurring_total"
                             android:textColor="@color/text_muted"
                             android:textSize="12sp" />
 
@@ -99,7 +99,7 @@
                             android:background="@drawable/bg_pill_sync"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="3dp"
-                            android:text="০টি সচল"
+                            android:text="@string/status_active"
                             android:textColor="@color/mint_secondary"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -149,7 +149,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-medium"
-                                android:text="আসন্ন ৭ দিনে বকেয়া বিল"
+                                android:text="@string/upcoming_7_days"
                                 android:textColor="@color/amber_primary"
                                 android:textSize="12sp" />
 
@@ -157,7 +157,7 @@
                                 android:id="@+id/tvUpcomingAlertText"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="পরিশোধের তারিখ কাছাকাছি"
+                                android:text="@string/upcoming_alert_desc"
                                 android:textColor="@color/text_muted"
                                 android:textSize="11sp" />
                         </LinearLayout>
@@ -181,7 +181,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="14dp"
                 android:background="@drawable/bg_button_teal"
-                android:text="+ নতুন বিল বা সাবস্ক্রিপশন যোগ করুন"
+                android:text="@string/add_new_recurring"
                 android:textColor="@color/text_inverse"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -209,7 +209,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="সব (All)"
+                        android:text="@string/tab_all"
                         android:textColor="@color/text_primary"
                         app:chipBackgroundColor="@color/surface_navy_elevated" />
 
@@ -218,7 +218,7 @@
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="মাসিক (Monthly)"
+                        android:text="@string/freq_monthly"
                         android:textColor="@color/text_primary"
                         app:chipBackgroundColor="@color/surface_navy_elevated" />
 
@@ -227,7 +227,7 @@
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="সাপ্তাহিক (Weekly)"
+                        android:text="@string/freq_weekly"
                         android:textColor="@color/text_primary"
                         app:chipBackgroundColor="@color/surface_navy_elevated" />
 
@@ -236,7 +236,7 @@
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="বাৎসরিক (Yearly)"
+                        android:text="@string/freq_yearly"
                         android:textColor="@color/text_primary"
                         app:chipBackgroundColor="@color/surface_navy_elevated" />
                 </com.google.android.material.chip.ChipGroup>
@@ -281,7 +281,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="কোন নিয়মিত বিল বা সাবস্ক্রিপশন নেই"
+                    android:text="@string/no_recurring_found"
                     android:textColor="@color/text_primary"
                     android:textSize="15sp" />
 
@@ -290,7 +290,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:text="বাসা ভাড়া, ওয়াইফাই বিল ও সাবস্ক্রিপশন যুক্ত করে স্বয়ংক্রিয় হিসাব রাখুন"
+                    android:text="@string/recurring_empty_hint"
                     android:textColor="@color/text_muted"
                     android:textSize="12sp" />
             </LinearLayout>

@@ -62,29 +62,29 @@ class DebtAdapter(
             binding.tvAvatarInitials.text = initials
 
             binding.tvPersonName.text = debt.personName
-            binding.tvDebtNotes.text = debt.notes ?: if (isReceivable) "ধার দেওয়া হয়েছে" else "ধার নেওয়া হয়েছে"
+            binding.tvDebtNotes.text = debt.notes ?: if (isReceivable) context.getString(R.string.owed_to_me) else context.getString(R.string.i_owe)
 
             if (isReceivable) {
-                binding.tvDebtTypeTag.text = "আমি পাব"
+                binding.tvDebtTypeTag.text = context.getString(R.string.tab_owed)
                 binding.tvDebtTypeTag.setTextColor(ContextCompat.getColor(context, R.color.mint_secondary))
                 binding.tvDebtAmount.setTextColor(ContextCompat.getColor(context, R.color.mint_secondary))
                 binding.tvDebtAmount.text = "+${MoneyUtils.formatCents(debt.outstandingBalanceCents, currencySymbol)}"
-                binding.btnRecordSettlement.text = "পরিশোধ গ্রহণ"
+                binding.btnRecordSettlement.text = context.getString(R.string.collect_payment)
             } else {
-                binding.tvDebtTypeTag.text = "আমি দেব"
+                binding.tvDebtTypeTag.text = context.getString(R.string.tab_i_owe)
                 binding.tvDebtTypeTag.setTextColor(ContextCompat.getColor(context, R.color.rose_error))
                 binding.tvDebtAmount.setTextColor(ContextCompat.getColor(context, R.color.rose_error))
                 binding.tvDebtAmount.text = "-${MoneyUtils.formatCents(debt.outstandingBalanceCents, currencySymbol)}"
-                binding.btnRecordSettlement.text = "পরিশোধ দিন"
+                binding.btnRecordSettlement.text = context.getString(R.string.record_payment)
             }
 
             if (isPaid) {
-                binding.tvStatusChip.text = "পরিশোধিত • Settled"
+                binding.tvStatusChip.text = context.getString(R.string.settled_chip)
                 binding.tvStatusChip.setTextColor(ContextCompat.getColor(context, R.color.teal_primary))
                 binding.llProgressContainer.visibility = android.view.View.GONE
                 binding.btnRecordSettlement.visibility = android.view.View.GONE
             } else {
-                binding.tvStatusChip.text = "চলমান • Active"
+                binding.tvStatusChip.text = context.getString(R.string.active_chip)
                 binding.tvStatusChip.setTextColor(ContextCompat.getColor(context, R.color.tertiary_lavender))
                 binding.llProgressContainer.visibility = android.view.View.VISIBLE
                 binding.btnRecordSettlement.visibility = android.view.View.VISIBLE
@@ -96,15 +96,15 @@ class DebtAdapter(
                 val clamped = pct.coerceIn(0, 100)
 
                 binding.progressBarDebt.progress = clamped
-                binding.tvPaidProgress.text = "${MoneyUtils.formatCents(paid, currencySymbol)} পরিশোধিত ($clamped%)"
-                binding.tvRemainingDebt.text = "${MoneyUtils.formatCents(outstanding, currencySymbol)} বাকি"
+                binding.tvPaidProgress.text = context.getString(R.string.repaid_progress, MoneyUtils.formatCents(paid, currencySymbol), clamped)
+                binding.tvRemainingDebt.text = context.getString(R.string.remaining_debt, MoneyUtils.formatCents(outstanding, currencySymbol))
             }
 
             if (debt.dueDate != null && debt.dueDate > 0) {
                 val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
-                binding.tvDueDate.text = "মেয়াদ: ${sdf.format(Date(debt.dueDate))}"
+                binding.tvDueDate.text = context.getString(R.string.due_date_prefix, sdf.format(Date(debt.dueDate)))
             } else {
-                binding.tvDueDate.text = "নির্দিষ্ট কোনো মেয়াদ নেই"
+                binding.tvDueDate.text = context.getString(R.string.no_due_date_debt)
             }
 
             binding.cardDebt.setOnClickListener { onDebtClick(debt) }

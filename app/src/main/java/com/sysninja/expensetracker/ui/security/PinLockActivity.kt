@@ -28,7 +28,7 @@ class PinLockActivity : AppCompatActivity() {
         setupBiometric()
 
         binding.btnForgotPin.setOnClickListener {
-            Toast.makeText(this, "অনুগ্রহ করে আপনার মাস্টার সিকিউরিটি ব্যাকআপ ব্যবহার করুন", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.pin_forgot_hint), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -115,9 +115,9 @@ class PinLockActivity : AppCompatActivity() {
             })
 
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                .setTitle("বায়োমেট্রিক আনলক • Biometric Unlock")
-                .setSubtitle("হিসাব খাতা খুলতে আঙুলের ছাপ দিন")
-                .setNegativeButtonText("পিন ব্যবহার করুন")
+                .setTitle(getString(R.string.biometric_unlock_title))
+                .setSubtitle(getString(R.string.biometric_unlock_desc))
+                .setNegativeButtonText(getString(R.string.use_pin_instead))
                 .build()
 
             biometricPrompt.authenticate(promptInfo)

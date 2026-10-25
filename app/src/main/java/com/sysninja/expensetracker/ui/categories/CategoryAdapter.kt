@@ -49,7 +49,7 @@ class CategoryAdapter(
             binding.tvCategoryName.text = category.name
 
             val isExpense = category.type.equals("EXPENSE", ignoreCase = true)
-            binding.tvCategoryType.text = if (isExpense) "ব্যয় খাত (Expense)" else "আয় খাত (Income)"
+            binding.tvCategoryType.text = if (isExpense) context.getString(R.string.type_expense) else context.getString(R.string.type_income)
 
             if (category.isDefault) {
                 binding.tvDefaultBadge.visibility = View.VISIBLE

@@ -67,7 +67,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="বাজেটের গতিপ্রকৃতি • Spending Targets"
+                                android:text="@string/spending_targets_subtitle"
                                 android:textColor="@color/text_primary"
                                 android:textSize="13sp"
                                 android:textStyle="bold" />
@@ -76,7 +76,7 @@
                                 android:id="@+id/tvMasterCapSubtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Master Monthly Cap"
+                                android:text="@string/master_monthly_cap"
                                 android:textColor="@color/text_muted"
                                 android:textSize="11sp" />
                         </LinearLayout>
@@ -127,7 +127,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="6dp"
-                                android:text="মোট খরচ (Spent)"
+                                android:text="@string/spent_label"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp" />
                         </LinearLayout>
@@ -161,7 +161,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="6dp"
-                                android:text="অবশিষ্ট তহবিল (Safe Left)"
+                                android:text="@string/safe_left_label"
                                 android:textColor="@color/secondary_mint"
                                 android:textSize="11sp" />
 
@@ -210,7 +210,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="⚡ দৈনিক নিরাপদ ব্যয়ের সীমা"
+                        android:text="@string/daily_safe_spending"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
@@ -244,7 +244,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="খাতভিত্তিক বাজেট ও খরচ"
+                    android:text="@string/category_budget_heading"
                     android:textColor="@color/text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -271,7 +271,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:backgroundTint="@color/teal_primary"
-                android:text="+ নতুন বাজেট"
+                android:text="@string/add_new_budget_btn"
                 android:textColor="@color/text_inverse"
                 android:textSize="11sp"
                 android:textStyle="bold"
@@ -295,7 +295,7 @@
             android:layout_marginTop="24dp"
             android:gravity="center"
             android:padding="24dp"
-            android:text="এই মাসে কোনো বাজেট নির্ধারণ করা হয়নি"
+            android:text="@string/no_budgets_this_month"
             android:textColor="@color/text_muted"
             android:textSize="13sp"
             android:visibility="gone" />

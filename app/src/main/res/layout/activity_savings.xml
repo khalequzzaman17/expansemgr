@@ -35,7 +35,7 @@
                     android:background="@drawable/bg_pill_sync"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
-                    android:text="Wealth Builder"
+                    android:text="@string/tag_wealth_builder"
                     android:textColor="@color/mint_secondary"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -57,7 +57,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="সঞ্চয় ও আর্থিক লক্ষ্য • Milestones Tracker"
+                android:text="@string/savings_milestones_tracker"
                 android:textColor="@color/text_muted"
                 android:textSize="13sp" />
 
@@ -90,7 +90,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="মোট জমাকৃত সঞ্চয় • Total Saved"
+                            android:text="@string/total_saved"
                             android:textColor="@color/text_muted"
                             android:textSize="12sp" />
 
@@ -148,7 +148,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="মোট লক্ষ্য (Target)"
+                                android:text="@string/total_target"
                                 android:textColor="@color/text_muted"
                                 android:textSize="11sp" />
 
@@ -178,7 +178,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="লক্ষ্যের অবস্থা"
+                                android:text="@string/goals_status"
                                 android:textColor="@color/text_muted"
                                 android:textSize="11sp" />
 
@@ -203,7 +203,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="14dp"
                 android:background="@drawable/bg_button_teal"
-                android:text="+ নতুন সঞ্চয় লক্ষ্য যোগ করুন"
+                android:text="@string/add_new_goal"
                 android:textColor="@color/text_inverse"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -226,7 +226,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
-                    android:text="চলমান লক্ষ্যসমূহ"
+                    android:text="@string/active_goals"
                     android:textColor="@color/text_primary"
                     android:textSize="16sp" />
 
@@ -280,7 +280,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="কোন সঞ্চয় লক্ষ্য যুক্ত করা হয়নি"
+                    android:text="@string/no_savings_goals"
                     android:textColor="@color/text_primary"
                     android:textSize="15sp" />
 
@@ -289,7 +289,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:text="আপনার স্বপ্ন ও ভবিষ্যতের জন্য সঞ্চয় লক্ষ্য নির্ধারণ করুন"
+                    android:text="@string/savings_empty_hint"
                     android:textColor="@color/text_muted"
                     android:textSize="12sp" />
             </LinearLayout>

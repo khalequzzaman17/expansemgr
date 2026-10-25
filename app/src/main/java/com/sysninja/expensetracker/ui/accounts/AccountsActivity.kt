@@ -47,7 +47,7 @@ class AccountsActivity : AppCompatActivity() {
 
                 val totalCents = balances.sumOf { it.balanceCents }
                 binding.tvHeroTotalBalance.text = MoneyUtils.formatCents(totalCents, currency)
-                binding.tvActiveAccountsChip.text = "${balances.size}টি সক্রিয় অ্যাকাউন্ট"
+                binding.tvActiveAccountsChip.text = "${balances.size} ${getString(R.string.active_accounts_label)}"
 
                 // Calculate asset allocation
                 var bankCents = 0L
@@ -105,39 +105,39 @@ class AccountsActivity : AppCompatActivity() {
                     when {
                         lower.contains("bkash") || lower.contains("বিকাশ") -> {
                             itemBinding.ivAccountAvatarBg.setBackgroundResource(R.drawable.bg_badge_bkash)
-                            itemBinding.tvAvatarLetter.text = "বি"
+                            itemBinding.tvAvatarLetter.text = "B"
                             itemBinding.tvAvatarLetter.setTextColor(ContextCompat.getColor(this@AccountsActivity, R.color.bkash_text))
                             itemBinding.tvBadgeChip.text = "bKash"
                             itemBinding.tvBadgeChip.setBackgroundResource(R.drawable.bg_badge_bkash)
                             itemBinding.tvBadgeChip.setTextColor(ContextCompat.getColor(this@AccountsActivity, R.color.bkash_text))
-                            itemBinding.tvAccountSubtitle.text = "MFS Wallet • bKash"
+                            itemBinding.tvAccountSubtitle.text = getString(R.string.pm_bkash)
                         }
                         lower.contains("nagad") || lower.contains("নগদ") -> {
                             itemBinding.ivAccountAvatarBg.setBackgroundResource(R.drawable.bg_badge_nagad)
-                            itemBinding.tvAvatarLetter.text = "ন"
+                            itemBinding.tvAvatarLetter.text = "N"
                             itemBinding.tvAvatarLetter.setTextColor(ContextCompat.getColor(this@AccountsActivity, R.color.nagad_text))
                             itemBinding.tvBadgeChip.text = "Nagad"
                             itemBinding.tvBadgeChip.setBackgroundResource(R.drawable.bg_badge_nagad)
                             itemBinding.tvBadgeChip.setTextColor(ContextCompat.getColor(this@AccountsActivity, R.color.nagad_text))
-                            itemBinding.tvAccountSubtitle.text = "MFS Wallet • Postal Cash"
+                            itemBinding.tvAccountSubtitle.text = getString(R.string.pm_nagad)
                         }
                         lower.contains("cash") -> {
                             itemBinding.ivAccountAvatarBg.setBackgroundResource(R.drawable.bg_badge_cash)
-                            itemBinding.tvAvatarLetter.text = "৳"
+                            itemBinding.tvAvatarLetter.text = "C"
                             itemBinding.tvAvatarLetter.setTextColor(ContextCompat.getColor(this@AccountsActivity, R.color.cash_text))
-                            itemBinding.tvBadgeChip.text = "Cash"
+                            itemBinding.tvBadgeChip.text = getString(R.string.pm_cash)
                             itemBinding.tvBadgeChip.setBackgroundResource(R.drawable.bg_badge_cash)
                             itemBinding.tvBadgeChip.setTextColor(ContextCompat.getColor(this@AccountsActivity, R.color.cash_text))
-                            itemBinding.tvAccountSubtitle.text = "Physical Cash • নগদ নোট"
+                            itemBinding.tvAccountSubtitle.text = getString(R.string.pm_cash)
                         }
                         else -> {
                             itemBinding.ivAccountAvatarBg.setBackgroundResource(R.drawable.bg_badge_bank)
-                            itemBinding.tvAvatarLetter.text = "বা"
+                            itemBinding.tvAvatarLetter.text = "A"
                             itemBinding.tvAvatarLetter.setTextColor(ContextCompat.getColor(this@AccountsActivity, R.color.bank_text))
                             itemBinding.tvBadgeChip.text = item.accountType
                             itemBinding.tvBadgeChip.setBackgroundResource(R.drawable.bg_badge_bank)
                             itemBinding.tvBadgeChip.setTextColor(ContextCompat.getColor(this@AccountsActivity, R.color.bank_text))
-                            itemBinding.tvAccountSubtitle.text = "Bank Account • ব্যাংক"
+                            itemBinding.tvAccountSubtitle.text = getString(R.string.pm_bank)
                         }
                     }
 

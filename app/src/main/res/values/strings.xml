@@ -332,4 +332,156 @@
     <string name="confirm_restore_msg">Do you want to restore data from \"%1$s\"?</string>
     <string name="restore_error">Restore error: %1$s</string>
     <string name="backup_error">Backup error: %1$s</string>
+
+    <!-- Account Screen Additions -->
+    <string name="all_accounts_synced">All Accounts Synced</string>
+    <string name="active_accounts_label">Active Accounts</string>
+    <string name="growth_this_month">+12.4% this month</string>
+    <string name="last_30_days">Last 30 Days</string>
+    <string name="add_new_account">+ Add Account</string>
+    <string name="transfer_funds_action">⇄ Transfer Funds</string>
+    <string name="asset_allocation">Asset Allocation</string>
+    <string name="all_categorized">100% Categorized</string>
+    <string name="bank_label">Bank</string>
+    <string name="mfs_label">MFS</string>
+    <string name="cash_label">Cash</string>
+    <string name="accounts_count">%1$d Accounts Linked</string>
+
+    <!-- Add/Edit Transaction Additions -->
+    <string name="transaction_type_label">Transaction Type</string>
+    <string name="amount_label">Amount</string>
+    <string name="quick_add_100">+৳ 100</string>
+    <string name="quick_add_500">+৳ 500</string>
+    <string name="quick_add_1000">+৳ 1,000</string>
+    <string name="quick_add_5000">+৳ 5,000</string>
+    <string name="clear_amount">Clear ✕</string>
+    <string name="description_label">Description</string>
+    <string name="description_hint">What was this for?...</string>
+    <string name="category_select_label">Select Category</string>
+    <string name="paid_from_label">Paid From</string>
+    <string name="destination_account_label">Destination Account</string>
+    <string name="payment_method_label">Payment Method (bKash / Nagad / Bank / Cash)</string>
+    <string name="date_time_label">Date &amp; Time</string>
+    <string name="notes_tags_label">Notes &amp; Tags</string>
+    <string name="notes_hint">Additional notes...</string>
+    <string name="tags_hint">Tags (e.g. #MonthlyBazar, #Family)</string>
+    <string name="save_transaction_btn">Save Transaction</string>
+    <string name="aes_security_badge">AES-256 Secure</string>
+
+    <!-- Budgets Screen Additions -->
+    <string name="spending_targets_subtitle">Spending Targets</string>
+    <string name="master_monthly_cap">Master Monthly Cap</string>
+    <string name="safe_left_label">Safe Left</string>
+    <string name="daily_safe_spending">⚡ Daily Safe Spending Limit</string>
+    <string name="category_budget_heading">Category Budgets &amp; Spending</string>
+    <string name="add_new_budget_btn">+ Set New Budget</string>
+    <string name="no_budgets_this_month">No budgets set for this month</string>
+    <string name="edit_budget_btn">Edit Budget</string>
+
+    <!-- Categories Screen Additions -->
+    <string name="total_active_categories">Total Active Categories</string>
+    <string name="categories_header_title">Categories &amp; Tags</string>
+
+    <!-- Debts Screen Additions -->
+    <string name="tab_all">All</string>
+    <string name="tab_owed">Owed to Me</string>
+    <string name="tab_i_owe">I Owe</string>
+    <string name="tab_settled">Settled</string>
+    <string name="debt_settled_btn">Settled</string>
+
+    <!-- Recurring Screen Additions -->
+    <string name="recurring_subtitle">Subscriptions, utility bills &amp; recurring payments</string>
+    <string name="active_recurring_count">%1$d Active</string>
+    <string name="resume_label">Resume</string>
+    <string name="due_today">Due Today!</string>
+    <string name="overdue_label">Overdue</string>
+    <string name="days_remaining">%1$d days left</string>
+    <string name="spent_label">Spent</string>
+    <string name="pdf_label">PDF</string>
+    <string name="csv_label">CSV</string>
+    <string name="action_add_expense">Add Expense</string>
+    <string name="action_add_income">Add Income</string>
+    <string name="action_transfer">Transfer</string>
+    <string name="action_budget">Budget</string>
+    <string name="search_transactions_hint">Search transactions...</string>
+
+    <!-- Reports Screen Additions -->
+    <string name="pdf_xls_label">PDF/XLS</string>
+    <string name="analytics_full_title">Full Ledger &amp; Analytics</string>
+    <string name="cashflow_flow_label">Monthly Comparative Cash Flow</string>
+    <string name="category_share_label">Category Spending Share</string>
+    <string name="financial_tip_title">Smart Financial Tip</string>
+
+    <!-- Settings Screen Additions -->
+    <string name="personal_vault_subtitle">Personal Vault • Offline &amp; Secure</string>
+    <string name="mfs_db_active">● Local Database &amp; Storage Active</string>
+    <string name="financial_modules_section">FINANCIAL MODULES</string>
+    <string name="categories_sub">Income &amp; Expense Categories</string>
+    <string name="savings_sub">Savings Goals &amp; Milestones</string>
+    <string name="debts_sub">Debts &amp; Lending Ledger</string>
+    <string name="recurring_sub">Recurring Bills &amp; Subscriptions</string>
+    <string name="data_backup_section">DATA &amp; BACKUP</string>
+    <string name="export_data_sub">Save in CSV, PDF or JSON format</string>
+    <string name="backup_restore_sub">Secure encrypted local backup file</string>
+    <string name="security_pin_section">SECURITY &amp; PIN</string>
+    <string name="app_pin_lock_sub">PIN protected application</string>
+    <string name="about_section">ABOUT</string>
+    <string name="app_tagline">Bengal Ledger • Smart Financial Manager</string>
+    <string name="app_version_crafted">Version 1.0.0 • Crafted for Bangladesh</string>
+    <string name="pin_status_enabled">PIN Protected (Enabled)</string>
+    <string name="pin_status_disabled">PIN Lock Disabled</string>
+    <string name="select_language_title">Select Language</string>
+
+    <!-- Transaction Detail Additions -->
+    <string name="tx_status_completed">Completed</string>
+    <string name="tx_status_credited">Credited</string>
+    <string name="tx_status_transferred">Transferred</string>
+    <string name="tx_breakdown_label">Transaction Details</string>
+    <string name="tx_type_label">Type</string>
+    <string name="tx_category_label">Category</string>
+    <string name="tx_account_label">Account</string>
+    <string name="tx_date_label">Date &amp; Time</string>
+    <string name="tx_note_label">Note &amp; Memo</string>
+    <string name="tx_edit_action">Edit Transaction</string>
+    <string name="tx_delete_action">Delete</string>
+    <string name="tx_deleted_success">Transaction deleted successfully</string>
+    <string name="default_general_category">General</string>
+    <string name="default_account_label">Default Account</string>
+
+    <!-- Dashboard Additions -->
+    <string name="dashboard_greeting">Welcome back ✨</string>
+    <string name="mfs_synced">MFS Synced</string>
+    <string name="vs_last_month">vs last month</string>
+    <string name="action_expense_short">Expense</string>
+    <string name="action_income_short">Income</string>
+    <string name="action_transfer_short">Transfer</string>
+    <string name="action_budget_short">Budget</string>
+    <string name="view_analysis">Analysis ›</string>
+    <string name="transactions_header_title">Transactions Ledger</string>
+    <string name="transactions_header_subtitle">Detailed list of income, expenses &amp; transfers</string>
+    <string name="progress_completed">%1$d%% Completed</string>
+    <string name="status_completed_badge">✓ Completed</string>
+    <string name="status_active_badge">Active</string>
+    <string name="remaining_amount_format">%1$s remaining</string>
+    <string name="no_specific_due_date">No specific due date</string>
+    <string name="goals_count_format">%1$d Goals</string>
+    <string name="goals_status_summary">%1$d Active • %2$d Completed</string>
+    <string name="percentage_achieved">%1$d%% Achieved</string>
+    <string name="dialog_enter_amount">Enter Amount</string>
+    <string name="btn_deposit_action">Deposit</string>
+    <string name="repayment_dialog_title">Record Payment • %1$s</string>
+    <string name="dialog_remaining_balance">Remaining Balance: %1$s</string>
+
+    <!-- Security & PIN additions -->
+    <string name="pin_security_header">Security PIN</string>
+    <string name="pin_security_subtitle">Enter 4-digit PIN to secure your ledger</string>
+    <string name="pin_security_prompt">Enter your 4-digit PIN</string>
+    <string name="enter_new_pin">Enter New PIN</string>
+    <string name="confirm_new_pin">Confirm PIN</string>
+    <string name="save_pin_action">✓ Save PIN</string>
+    <string name="biometric_unlock_title">Biometric Unlock</string>
+    <string name="biometric_unlock_desc">Touch fingerprint sensor</string>
+    <string name="use_pin_instead">Use PIN</string>
+    <string name="forgot_pin_label">Forgot PIN?</string>
+    <string name="pin_forgot_hint">Please use your backup file or master credentials</string>
 </resources>

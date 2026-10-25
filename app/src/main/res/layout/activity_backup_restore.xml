@@ -35,7 +35,7 @@
                     android:background="@drawable/bg_pill_sync"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
-                    android:text="AES-256 Secure"
+                    android:text="@string/aes_security_badge"
                     android:textColor="@color/mint_secondary"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -94,7 +94,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="অফলাইন ও গোপনীয় ব্যাকআপ"
+                            android:text="@string/backup_offline_title"
                             android:textColor="@color/text_primary"
                             android:textSize="15sp" />
 
@@ -102,7 +102,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="আপনার আর্থিক ডাটা সম্পূর্ণ আপনার ডিভাইসে সুরক্ষিত থাকে"
+                            android:text="@string/backup_offline_subtitle"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -130,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-bold"
-                        android:text="নতুন ব্যাকআপ তৈরি করুন"
+                        android:text="@string/create_backup_title"
                         android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:lineSpacingExtra="2dp"
-                        android:text="লেনদেন, অ্যাকাউন্ট, সঞ্চয় লক্ষ্য ও দেনা-পাওনাসহ সম্পূর্ণ ডাটা একটি এনক্রিপ্টেড ব্যাকআপ ফাইলে সংরক্ষণ করুন।"
+                        android:text="@string/create_backup_desc"
                         android:textColor="@color/text_muted"
                         android:textSize="12sp" />
 
@@ -149,7 +149,7 @@
                         android:layout_height="48dp"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/bg_button_teal"
-                        android:text="+ সম্পূর্ণ ব্যাকআপ তৈরি করুন"
+                        android:text="@string/create_backup_cta"
                         android:textColor="@color/text_inverse"
                         android:textSize="13sp"
                         android:textStyle="bold"
@@ -181,7 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-bold"
-                        android:text="ব্যাকআপ থেকে রিস্টোর করুন"
+                        android:text="@string/restore_backup_title"
                         android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
@@ -190,7 +190,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:lineSpacingExtra="2dp"
-                        android:text="পূর্বে তৈরি করা ব্যাকআপ ফাইল নির্বাচন করে হিসাব খাতা পুনরায় রিস্টোর করুন।"
+                        android:text="@string/restore_backup_desc"
                         android:textColor="@color/text_muted"
                         android:textSize="12sp" />
 
@@ -200,7 +200,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="16dp"
-                        android:text="ব্যাকআপ ফাইল থেকে রিস্টোর"
+                        android:text="@string/restore_backup_cta"
                         android:textColor="@color/teal_primary"
                         android:textSize="13sp"
                         android:textStyle="bold"

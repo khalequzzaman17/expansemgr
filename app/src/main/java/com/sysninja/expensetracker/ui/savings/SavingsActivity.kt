@@ -70,11 +70,11 @@ class SavingsActivity : AppCompatActivity() {
                 if (goals.isEmpty()) {
                     binding.rvSavingsGoals.visibility = View.GONE
                     binding.llEmptySavings.visibility = View.VISIBLE
-                    binding.tvGoalsCountBadge.text = "০টি"
+                    binding.tvGoalsCountBadge.text = getString(R.string.goals_count_format, 0)
                 } else {
                     binding.rvSavingsGoals.visibility = View.VISIBLE
                     binding.llEmptySavings.visibility = View.GONE
-                    binding.tvGoalsCountBadge.text = "${goals.size}টি"
+                    binding.tvGoalsCountBadge.text = getString(R.string.goals_count_format, goals.size)
                 }
             }
         }
@@ -96,7 +96,7 @@ class SavingsActivity : AppCompatActivity() {
         val activeCount = goals.size - completedCount
         binding.tvTotalSavedAmount.text = MoneyUtils.formatCents(totalSavedCents, currencySymbol)
         binding.tvTotalTarget.text = MoneyUtils.formatCents(totalTargetCents, currencySymbol)
-        binding.tvGoalsStatusInfo.text = "${activeCount}টি চলমান • ${completedCount}টি অর্জিত"
+        binding.tvGoalsStatusInfo.text = getString(R.string.goals_status_summary, activeCount, completedCount)
 
         val pct = if (totalTargetCents > 0) {
             ((totalSavedCents.toDouble() / totalTargetCents.toDouble()) * 100).toInt()
@@ -105,12 +105,12 @@ class SavingsActivity : AppCompatActivity() {
         }
         val clampedPct = pct.coerceIn(0, 100)
         binding.progressBarMasterSavings.progress = clampedPct
-        binding.tvSavedPercentage.text = "$clampedPct% অর্জিত"
+        binding.tvSavedPercentage.text = getString(R.string.percentage_achieved, clampedPct)
     }
 
     private fun showQuickDepositDialog(goal: SavingsGoalEntity) {
         val input = EditText(this).apply {
-            hint = "টাকার পরিমাণ লিখুন (Amount)"
+            hint = getString(R.string.enter_amount_hint)
             inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
             setTextColor(getColor(R.color.text_primary))
             setHintTextColor(getColor(R.color.text_muted))
@@ -118,10 +118,10 @@ class SavingsActivity : AppCompatActivity() {
         }
 
         AlertDialog.Builder(this)
-            .setTitle("টাকা জমা করুন • Deposit to ${goal.name}")
-            .setMessage("বর্তমান জমার পরিমাণ: ${MoneyUtils.formatCents(goal.currentAmountCents, currencySymbol)}")
+            .setTitle(getString(R.string.deposit_dialog_title, goal.name))
+            .setMessage(getString(R.string.current_deposit_amount, MoneyUtils.formatCents(goal.currentAmountCents, currencySymbol)))
             .setView(input)
-            .setPositiveButton("জমা দিন") { _, _ ->
+            .setPositiveButton(getString(R.string.btn_deposit_action)) { _, _ ->
                 val amtStr = input.text.toString().trim()
                 val parsed = MoneyUtils.parseToCents(amtStr)
                 if (parsed != null && parsed > 0) {
@@ -135,13 +135,13 @@ class SavingsActivity : AppCompatActivity() {
                                 isCompleted = isComplete
                             )
                         )
-                        Toast.makeText(this@SavingsActivity, "সফলভাবে জমা হয়েছে!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@SavingsActivity, getString(R.string.deposit_success), Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this, "সঠিক পরিমাণ লিখুন", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_invalid_amount), Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("বাতিল", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 }

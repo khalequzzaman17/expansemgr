@@ -113,10 +113,10 @@ class DebtsActivity : AppCompatActivity() {
         binding.tvNetDebtAmount.text = "$netPrefix$netFormatted"
 
         binding.tvReceivableTotal.text = "+${MoneyUtils.formatCents(totalReceivable, currencySymbol)}"
-        binding.tvReceivableCount.text = "$countReceivable জন ব্যক্তি"
+        binding.tvReceivableCount.text = getString(R.string.persons_count, countReceivable)
 
         binding.tvPayableTotal.text = "-${MoneyUtils.formatCents(totalPayable, currencySymbol)}"
-        binding.tvPayableCount.text = "$countPayable জন ব্যক্তি"
+        binding.tvPayableCount.text = getString(R.string.persons_count, countPayable)
     }
 
     private fun applyFilter() {
@@ -150,10 +150,10 @@ class DebtsActivity : AppCompatActivity() {
 
     private fun showSettlementDialog(debt: DebtEntity) {
         val isReceivable = debt.type.equals("RECEIVABLE", ignoreCase = true)
-        val titleText = if (isReceivable) "পাওনা টাকা গ্রহণ • Settle Debt" else "দেনা পরিশোধ • Pay Debt"
+        val titleText = if (isReceivable) getString(R.string.repayment_dialog_title, debt.personName) else getString(R.string.pay_debt)
 
         val input = EditText(this).apply {
-            hint = "পরিশোধের পরিমাণ লিখুন (Amount)"
+            hint = getString(R.string.dialog_enter_amount)
             inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
             setText(MoneyUtils.toBigDecimal(debt.outstandingBalanceCents).toPlainString())
             setTextColor(getColor(R.color.text_primary))
@@ -163,37 +163,37 @@ class DebtsActivity : AppCompatActivity() {
 
         AlertDialog.Builder(this)
             .setTitle(titleText)
-            .setMessage("${debt.personName}\nবাকি পরিমাণ: ${MoneyUtils.formatCents(debt.outstandingBalanceCents, currencySymbol)}")
+            .setMessage("${debt.personName}\n${getString(R.string.dialog_remaining_balance, MoneyUtils.formatCents(debt.outstandingBalanceCents, currencySymbol))}")
             .setView(input)
-            .setPositiveButton("পরিশোধ নিশ্চিত করুন") { _, _ ->
+            .setPositiveButton(getString(R.string.confirm)) { _, _ ->
                 val amtStr = input.text.toString().trim()
                 val parsed = MoneyUtils.parseToCents(amtStr)
                 if (parsed != null && parsed > 0) {
                     val app = application as ExpenseTrackerApp
                     lifecycleScope.launch {
                         app.repository.recordDebtRepayment(debt.id, null, parsed, "Debt settlement")
-                        Toast.makeText(this@DebtsActivity, "পরিশোধ রেকর্ড করা হয়েছে!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@DebtsActivity, getString(R.string.repayment_recorded), Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this, "সঠিক পরিমাণ লিখুন", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_invalid_amount), Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("বাতিল", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 
     private fun confirmDeleteDebt(debt: DebtEntity) {
         AlertDialog.Builder(this)
-            .setTitle("ধার রেকর্ড মুছবেন?")
-            .setMessage("${debt.personName}-এর রেকর্ডটি মুছে ফেলতে চান?")
-            .setPositiveButton("মুছুন") { _, _ ->
+            .setTitle(getString(R.string.confirm_delete_debt_title))
+            .setMessage(getString(R.string.confirm_delete_debt_msg, debt.personName))
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
                 val app = application as ExpenseTrackerApp
                 lifecycleScope.launch {
                     app.repository.deleteDebt(debt)
-                    Toast.makeText(this@DebtsActivity, "রেকর্ড মুছে ফেলা হয়েছে", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@DebtsActivity, getString(R.string.tx_deleted_success), Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("বাতিল", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 }

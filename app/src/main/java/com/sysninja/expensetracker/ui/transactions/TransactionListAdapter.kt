@@ -51,22 +51,22 @@ class TransactionListAdapter(
                 binding.tvAccountTag.visibility = android.view.View.VISIBLE
                 when {
                     lower.contains("bkash") || lower.contains("বিকাশ") -> {
-                        binding.tvAccountTag.text = "bKash"
+                        binding.tvAccountTag.text = context.getString(R.string.pm_bkash)
                         binding.tvAccountTag.setBackgroundResource(R.drawable.bg_badge_bkash)
                         binding.tvAccountTag.setTextColor(ContextCompat.getColor(context, R.color.bkash_text))
                     }
                     lower.contains("nagad") || lower.contains("নগদ") -> {
-                        binding.tvAccountTag.text = "Nagad"
+                        binding.tvAccountTag.text = context.getString(R.string.pm_nagad)
                         binding.tvAccountTag.setBackgroundResource(R.drawable.bg_badge_nagad)
                         binding.tvAccountTag.setTextColor(ContextCompat.getColor(context, R.color.nagad_text))
                     }
                     lower.contains("bank") || lower.contains("ব্যাংক") || lower.contains("city") || lower.contains("brac") -> {
-                        binding.tvAccountTag.text = "Bank"
+                        binding.tvAccountTag.text = context.getString(R.string.pm_bank)
                         binding.tvAccountTag.setBackgroundResource(R.drawable.bg_badge_bank)
                         binding.tvAccountTag.setTextColor(ContextCompat.getColor(context, R.color.bank_text))
                     }
                     lower.contains("cash") -> {
-                        binding.tvAccountTag.text = "Cash"
+                        binding.tvAccountTag.text = context.getString(R.string.pm_cash)
                         binding.tvAccountTag.setBackgroundResource(R.drawable.bg_badge_cash)
                         binding.tvAccountTag.setTextColor(ContextCompat.getColor(context, R.color.cash_text))
                     }

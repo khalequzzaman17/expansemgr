@@ -195,7 +195,7 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:paddingHorizontal="10dp"
-                android:text="পরিশোধ গ্রহণ"
+                android:text="@string/collect_payment"
                 android:textColor="@color/teal_primary"
                 android:textSize="11sp"
                 app:backgroundTint="@color/surface_container_highest"

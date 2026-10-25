@@ -7,6 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.sysninja.expensetracker.ExpenseTrackerApp
+import com.sysninja.expensetracker.R
 import com.sysninja.expensetracker.databinding.ActivityBackupRestoreBinding
 import com.sysninja.expensetracker.domain.BackupManager
 import kotlinx.coroutines.launch
@@ -45,9 +46,9 @@ class BackupRestoreActivity : AppCompatActivity() {
                 val fos = FileOutputStream(file)
                 BackupManager.createBackup(app.database, fos)
                 fos.close()
-                Toast.makeText(this@BackupRestoreActivity, "ব্যাকআপ সফল হয়েছে: ${file.name}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@BackupRestoreActivity, "${getString(R.string.backup_success)}: ${file.name}", Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
-                Toast.makeText(this@BackupRestoreActivity, "ব্যাকআপ তৈরিতে সমস্যা: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@BackupRestoreActivity, getString(R.string.backup_error, e.message ?: ""), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -58,38 +59,38 @@ class BackupRestoreActivity : AppCompatActivity() {
             ?.sortedByDescending { it.lastModified() }
 
         if (backupFiles.isNullOrEmpty()) {
-            Toast.makeText(this, "কোন ব্যাকআপ ফাইল পাওয়া যায়নি", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.no_transactions_found), Toast.LENGTH_SHORT).show()
             return
         }
 
         val fileNames = backupFiles.map { it.name }.toTypedArray()
         AlertDialog.Builder(this)
-            .setTitle("রিস্টোর করার ফাইল নির্বাচন করুন")
+            .setTitle(getString(R.string.select_restore_file))
             .setItems(fileNames) { _, which ->
                 confirmRestore(backupFiles[which])
             }
-            .setNegativeButton("বাতিল", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 
     private fun confirmRestore(file: File) {
         AlertDialog.Builder(this)
-            .setTitle("রিস্টোর নিশ্চিতকরণ")
-            .setMessage("নির্বাচিত ফাইল (${file.name}) থেকে ডাটা রিস্টোর করতে চান?")
-            .setPositiveButton("রিস্টোর করুন") { _, _ ->
+            .setTitle(getString(R.string.confirm_restore_title))
+            .setMessage(getString(R.string.confirm_restore_msg, file.name))
+            .setPositiveButton(getString(R.string.restore_backup)) { _, _ ->
                 val app = application as ExpenseTrackerApp
                 lifecycleScope.launch {
                     try {
                         val fis = FileInputStream(file)
                         BackupManager.restoreBackup(app.database, fis)
                         fis.close()
-                        Toast.makeText(this@BackupRestoreActivity, "ডাটা সফলভাবে রিস্টোর হয়েছে!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@BackupRestoreActivity, getString(R.string.restore_success), Toast.LENGTH_SHORT).show()
                     } catch (e: Exception) {
-                        Toast.makeText(this@BackupRestoreActivity, "রিস্টোরে ত্রুটি: ${e.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@BackupRestoreActivity, getString(R.string.restore_error, e.message ?: ""), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
-            .setNegativeButton("বাতিল", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 }

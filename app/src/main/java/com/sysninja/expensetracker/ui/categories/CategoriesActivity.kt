@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sysninja.expensetracker.ExpenseTrackerApp
+import com.sysninja.expensetracker.R
 import com.sysninja.expensetracker.data.local.entity.CategoryEntity
 import com.sysninja.expensetracker.databinding.ActivityCategoriesBinding
 import kotlinx.coroutines.launch
@@ -81,7 +82,7 @@ class CategoriesActivity : AppCompatActivity() {
         lifecycleScope.launch {
             app.repository.getAllActiveCategories().collect { categories ->
                 allCategories = categories
-                binding.tvCategorySummary.text = "মোট ${categories.size}টি খাত নিবন্ধিত"
+                binding.tvCategorySummary.text = getString(R.string.categories_summary, categories.size)
                 filterCategories()
             }
         }
@@ -118,16 +119,16 @@ class CategoriesActivity : AppCompatActivity() {
 
     private fun confirmDelete(category: CategoryEntity) {
         AlertDialog.Builder(this)
-            .setTitle("খাত মুছবেন?")
-            .setMessage("\"${category.name}\" ক্যাটাগরিটি মুছে ফেলতে চান?")
-            .setPositiveButton("মুছুন") { _, _ ->
+            .setTitle(getString(R.string.confirm_delete_cat_title))
+            .setMessage(getString(R.string.confirm_delete_cat_msg, category.name))
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
                 val app = application as ExpenseTrackerApp
                 lifecycleScope.launch {
                     app.repository.deleteCategory(category)
-                    Toast.makeText(this@CategoriesActivity, "মুছে ফেলা হয়েছে", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CategoriesActivity, getString(R.string.tx_deleted_success), Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("বাতিল", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 }

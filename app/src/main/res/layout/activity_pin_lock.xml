@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="হিসাব খাতা নিরাপত্তা • Security"
+        android:text="@string/pin_security_header"
         android:textColor="@color/text_primary"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="আপনার ৪-সংখ্যার সিকিউরিটি পিন দিন"
+        android:text="@string/pin_security_prompt"
         android:textColor="@color/text_secondary"
         android:textSize="13sp" />
 
@@ -195,7 +195,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:padding="8dp"
-        android:text="পিন মনে নেই? • Forgot PIN?"
+        android:text="@string/forgot_pin_label"
         android:textColor="@color/teal_light"
         android:textSize="12sp"
         android:textStyle="bold" />

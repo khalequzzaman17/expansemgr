@@ -35,7 +35,7 @@
                     android:background="@drawable/bg_pill_sync"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
-                    android:text="হিসাব খাতা • Settings"
+                    android:text="@string/settings_title"
                     android:textColor="@color/teal_primary"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -107,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Bangladeshi Ledger • Personal Vault"
+                            android:text="@string/personal_vault_subtitle"
                             android:textColor="@color/text_muted"
                             android:textSize="12sp" />
 
@@ -118,7 +118,7 @@
                             android:background="@drawable/bg_pill_sync"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="2dp"
-                            android:text="● MFS ও স্থানীয় ডাটাবেজ সক্রিয়"
+                            android:text="@string/mfs_db_active"
                             android:textColor="@color/mint_secondary"
                             android:textSize="10sp" />
                     </LinearLayout>
@@ -133,7 +133,7 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="sans-serif-bold"
                 android:letterSpacing="0.04"
-                android:text="ফিন্যান্স মডিউল • FINANCIAL MODULES"
+                android:text="@string/financial_modules_section"
                 android:textColor="@color/teal_primary"
                 android:textSize="12sp" />
 
@@ -177,7 +177,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-medium"
-                            android:text="ক্যাটাগরি সমূহ"
+                            android:text="@string/categories_title"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
 
@@ -185,7 +185,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Income &amp; Expense Tags"
+                            android:text="@string/categories_sub"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -225,7 +225,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-medium"
-                            android:text="সঞ্চয় ও লক্ষ্য"
+                            android:text="@string/savings_title"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
 
@@ -233,7 +233,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Savings Goals Tracker"
+                            android:text="@string/savings_sub"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -281,7 +281,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-medium"
-                            android:text="ধার-দেনা ও ঋণ"
+                            android:text="@string/debts_title"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
 
@@ -289,7 +289,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Debts &amp; Lending Ledger"
+                            android:text="@string/debts_sub"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -329,7 +329,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-medium"
-                            android:text="পুনরাবৃত্ত বিল"
+                            android:text="@string/recurring_title"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
 
@@ -337,7 +337,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Recurring Subscriptions"
+                            android:text="@string/recurring_sub"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -352,7 +352,7 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="sans-serif-bold"
                 android:letterSpacing="0.04"
-                android:text="ডাটা ও ব্যাকআপ • DATA &amp; BACKUP"
+                android:text="@string/data_backup_section"
                 android:textColor="@color/teal_primary"
                 android:textSize="12sp" />
 
@@ -392,14 +392,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="ডাটা এক্সপোর্ট (Export Data)"
+                            android:text="@string/export_title"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="CSV, PDF অথবা JSON ফরম্যাটে সংরক্ষণ করুন"
+                            android:text="@string/export_data_sub"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -449,14 +449,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="ব্যাকআপ ও রিস্টোর (Backup &amp; Restore)"
+                            android:text="@string/backup_restore_title"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="সুরক্ষিত এনক্রিপ্টেড ব্যাকআপ ফাইল"
+                            android:text="@string/backup_restore_sub"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -477,7 +477,7 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="sans-serif-bold"
                 android:letterSpacing="0.04"
-                android:text="পছন্দ ও ভাষা • PREFERENCES &amp; LANGUAGE"
+                android:text="@string/preferences_language_section"
                 android:textColor="@color/teal_primary"
                 android:textSize="12sp" />
 
@@ -517,7 +517,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="ভাষা পরিবর্তন (App Language)"
+                            android:text="@string/app_language_title"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
 
@@ -552,7 +552,7 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="sans-serif-bold"
                 android:letterSpacing="0.04"
-                android:text="নিরাপত্তা ও লক • SECURITY &amp; PIN"
+                android:text="@string/security_pin_section"
                 android:textColor="@color/teal_primary"
                 android:textSize="12sp" />
 
@@ -592,7 +592,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="অ্যাপ পিন লক (PIN Security)"
+                            android:text="@string/app_lock"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
 
@@ -600,7 +600,7 @@
                             android:id="@+id/tvPinStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="পিন সুরক্ষিত"
+                            android:text="@string/app_pin_lock_sub"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -621,7 +621,7 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="sans-serif-bold"
                 android:letterSpacing="0.04"
-                android:text="অ্যাপ পরিচিতি • ABOUT"
+                android:text="@string/about_section"
                 android:textColor="@color/teal_primary"
                 android:textSize="12sp" />
 
@@ -662,14 +662,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="Bengal Ledger • হিসাব খাতা"
+                            android:text="@string/app_tagline"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ভার্সন ১.০.০ • Crafted for Bangladesh"
+                            android:text="@string/app_version_crafted"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
                     </LinearLayout>

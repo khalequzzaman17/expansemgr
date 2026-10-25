@@ -86,7 +86,7 @@
                         android:background="@drawable/bg_badge_cash"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="4dp"
-                        android:text="সফল লেনদেন • Completed"
+                        android:text="@string/tx_status_completed"
                         android:textColor="@color/secondary_mint"
                         android:textSize="11sp"
                         android:textStyle="bold" />
@@ -124,7 +124,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="লেনদেনের তথ্য • Breakdown"
+                        android:text="@string/tx_breakdown_label"
                         android:textColor="@color/text_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -143,7 +143,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ধরন • Type"
+                            android:text="@string/tx_type_label"
                             android:textColor="@color/text_secondary"
                             android:textSize="13sp" />
 
@@ -167,7 +167,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ক্যাটাগরি • Category"
+                            android:text="@string/tx_category_label"
                             android:textColor="@color/text_secondary"
                             android:textSize="13sp" />
 
@@ -191,7 +191,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="হিসাব মাধ্যম • Account"
+                            android:text="@string/tx_account_label"
                             android:textColor="@color/text_secondary"
                             android:textSize="13sp" />
 
@@ -215,7 +215,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="তারিখ ও সময় • Date"
+                            android:text="@string/tx_date_label"
                             android:textColor="@color/text_secondary"
                             android:textSize="13sp" />
 
@@ -240,7 +240,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="নোট ও মেমো • Note"
+                            android:text="@string/tx_note_label"
                             android:textColor="@color/text_secondary"
                             android:textSize="13sp" />
 
@@ -273,7 +273,7 @@
                     android:layout_marginEnd="6dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/teal_primary"
-                    android:text="✏ সম্পাদনা করুন • Edit"
+                    android:text="@string/tx_edit_action"
                     android:textColor="@color/text_inverse"
                     android:textSize="13sp"
                     android:textStyle="bold"
@@ -287,7 +287,7 @@
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/expense_red_bg"
-                    android:text="🗑 মুছে ফেলুন • Delete"
+                    android:text="@string/tx_delete_action"
                     android:textColor="@color/expense_red"
                     android:textSize="13sp"
                     android:textStyle="bold"

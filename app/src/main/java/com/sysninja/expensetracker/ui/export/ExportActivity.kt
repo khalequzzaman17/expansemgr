@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
+import java.util.Calendar
 
 class ExportActivity : AppCompatActivity() {
 
@@ -71,9 +72,31 @@ class ExportActivity : AppCompatActivity() {
         val app = application as ExpenseTrackerApp
         lifecycleScope.launch {
             try {
-                val transactions = app.repository.getAllTransactionsWithDetails().first()
-                val currency = app.preferencesManager.currencySymbolFlow.first()
+                val allTx = app.repository.getAllTransactionsWithDetails().first()
+                val (filteredTx, periodTitle) = when {
+                    binding.chipRange30Days.isChecked -> {
+                        val thirtyDaysAgo = System.currentTimeMillis() - 30L * 86400000L
+                        allTx.filter { it.transaction.timestamp >= thirtyDaysAgo } to getString(R.string.range_30_days)
+                    }
+                    binding.chipRangeFiscalYear.isChecked -> {
+                        val cal = Calendar.getInstance()
+                        val currentYear = cal.get(Calendar.YEAR)
+                        val currentMonth = cal.get(Calendar.MONTH) // July is 6
+                        val fyStartYear = if (currentMonth >= Calendar.JULY) currentYear else currentYear - 1
+                        val fyCalStart = Calendar.getInstance().apply {
+                            set(fyStartYear, Calendar.JULY, 1, 0, 0, 0)
+                            set(Calendar.MILLISECOND, 0)
+                        }
+                        val fyCalEnd = Calendar.getInstance().apply {
+                            set(fyStartYear + 1, Calendar.JUNE, 30, 23, 59, 59)
+                            set(Calendar.MILLISECOND, 999)
+                        }
+                        allTx.filter { it.transaction.timestamp in fyCalStart.timeInMillis..fyCalEnd.timeInMillis } to "${getString(R.string.range_fiscal_year)} (FY $fyStartYear-${(fyStartYear + 1) % 100})"
+                    }
+                    else -> allTx to getString(R.string.range_all_records)
+                }
 
+                val currency = app.preferencesManager.currencySymbolFlow.first()
                 val dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) ?: filesDir
                 val timestamp = System.currentTimeMillis()
 
@@ -81,8 +104,8 @@ class ExportActivity : AppCompatActivity() {
                     val file = File(dir, "bengal_ledger_export_$timestamp.pdf")
                     val fos = FileOutputStream(file)
                     PdfExporter.generatePdfReport(
-                        transactions = transactions,
-                        periodTitle = getString(R.string.range_all_records),
+                        transactions = filteredTx,
+                        periodTitle = periodTitle,
                         outputStream = fos,
                         currencySymbol = currency
                     )
@@ -92,7 +115,7 @@ class ExportActivity : AppCompatActivity() {
                     val file = File(dir, "bengal_ledger_export_$timestamp.csv")
                     val fos = FileOutputStream(file)
                     CsvExporter.exportTransactionsToCsv(
-                        transactions = transactions,
+                        transactions = filteredTx,
                         outputStream = fos,
                         currencySymbol = currency
                     )

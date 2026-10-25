@@ -82,7 +82,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="sans-serif-bold"
-                            android:text="U"
+                            tools:text="U"
                             android:textColor="@color/teal_primary"
                             android:textSize="22sp" />
                     </FrameLayout>

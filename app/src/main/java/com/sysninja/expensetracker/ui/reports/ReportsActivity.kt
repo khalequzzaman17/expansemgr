@@ -163,6 +163,36 @@ class ReportsActivity : AppCompatActivity() {
         }
         binding.tvExpenseControlled.text = getString(R.string.expenses_controlled, expVsLastFormatted)
 
+        val badgeRes = when {
+            savingsRate >= 30 -> R.string.savings_rate_badge_excellent
+            savingsRate >= 15 -> R.string.savings_rate_badge_good
+            savingsRate > 0 -> R.string.savings_rate_badge_moderate
+            else -> R.string.savings_rate_badge_low
+        }
+        binding.tvSavingsRateBadge.text = getString(badgeRes)
+
+        // Dynamic Smart Financial Tip
+        val netSavings = totalIncome - totalExpense
+        val tipText = when {
+            monthTx.isEmpty() -> getString(R.string.smart_tip_empty)
+            netSavings < 0 -> {
+                val deficitStr = MoneyUtils.formatCents(Math.abs(netSavings), currencySymbol)
+                getString(R.string.smart_tip_high_expense, deficitStr)
+            }
+            savingsRate >= 20 -> {
+                val savedStr = MoneyUtils.formatCents(netSavings, currencySymbol)
+                getString(R.string.smart_tip_good_savings, savedStr, savingsRate)
+            }
+            categoryExpenseMap.isNotEmpty() -> {
+                val topCat = categoryExpenseMap.maxByOrNull { it.value }!!
+                val catPct = if (totalExpense > 0) ((topCat.value.toDouble() / totalExpense.toDouble()) * 100).toInt() else 0
+                val catAmtStr = MoneyUtils.formatCents(topCat.value, currencySymbol)
+                getString(R.string.smart_tip_top_cat, topCat.key, catPct, catAmtStr)
+            }
+            else -> getString(R.string.smart_tip_content)
+        }
+        binding.tvSmartTipText.text = tipText
+
         // Bar Chart (last 4 months)
         val barData = mutableListOf<BarTrendChartView.BarGroup>()
         val barCal = Calendar.getInstance().apply { time = calendar.time }

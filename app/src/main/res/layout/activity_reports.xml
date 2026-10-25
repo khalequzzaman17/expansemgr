@@ -319,10 +319,11 @@
                             tools:text="৫০.৪%" />
 
                         <TextView
+                            android:id="@+id/tvSavingsRateBadge"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="@string/savings_rate_badge"
+                            tools:text="@string/savings_rate_badge"
                             android:textColor="@color/teal_primary"
                             android:textSize="9sp" />
                     </LinearLayout>
@@ -512,7 +513,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:lineSpacingExtra="2dp"
-                            android:text="@string/smart_tip_content"
+                            tools:text="@string/smart_tip_content"
                             android:textColor="@color/text_primary"
                             android:textSize="12sp" />
                     </LinearLayout>

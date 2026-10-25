@@ -13,6 +13,7 @@ import com.sysninja.expensetracker.ExpenseTrackerApp
 import com.sysninja.expensetracker.R
 import com.sysninja.expensetracker.data.model.TransactionWithDetails
 import com.sysninja.expensetracker.databinding.ActivityReportsBinding
+import com.sysninja.expensetracker.domain.DateUtils
 import com.sysninja.expensetracker.domain.MoneyUtils
 import com.sysninja.expensetracker.ui.export.ExportActivity
 import com.sysninja.expensetracker.ui.views.BarTrendChartView
@@ -120,6 +121,47 @@ class ReportsActivity : AppCompatActivity() {
             0
         }
         binding.tvSavingsRate.text = "$savingsRate%"
+
+        val lastMonthStart = DateUtils.getStartOfPreviousMonth(calendar.timeInMillis)
+        val lastMonthEnd = DateUtils.getEndOfPreviousMonth(calendar.timeInMillis)
+        val prevIncome = allTransactions
+            .filter { it.transaction.timestamp in lastMonthStart..lastMonthEnd && it.transaction.type.equals("INCOME", ignoreCase = true) }
+            .sumOf { it.transaction.amountCents }
+        val prevExpense = allTransactions
+            .filter { it.transaction.timestamp in lastMonthStart..lastMonthEnd && it.transaction.type.equals("EXPENSE", ignoreCase = true) }
+            .sumOf { it.transaction.amountCents }
+
+        val incVsLastPct = if (prevIncome > 0) {
+            ((totalIncome.toDouble() - prevIncome.toDouble()) / prevIncome.toDouble()) * 100.0
+        } else if (totalIncome > 0) {
+            100.0
+        } else {
+            0.0
+        }
+        val incVsLastFormatted = if (incVsLastPct > 0.0) {
+            String.format(Locale.getDefault(), "+%.0f%%", incVsLastPct)
+        } else if (incVsLastPct < 0.0) {
+            String.format(Locale.getDefault(), "%.0f%%", incVsLastPct)
+        } else {
+            "0%"
+        }
+        binding.tvIncomeGrowth.text = getString(R.string.growth_vs_last_month, incVsLastFormatted)
+
+        val expVsLastPct = if (prevExpense > 0) {
+            ((totalExpense.toDouble() - prevExpense.toDouble()) / prevExpense.toDouble()) * 100.0
+        } else if (totalExpense > 0) {
+            100.0
+        } else {
+            0.0
+        }
+        val expVsLastFormatted = if (expVsLastPct > 0.0) {
+            String.format(Locale.getDefault(), "+%.0f%%", expVsLastPct)
+        } else if (expVsLastPct < 0.0) {
+            String.format(Locale.getDefault(), "%.0f%%", expVsLastPct)
+        } else {
+            "0%"
+        }
+        binding.tvExpenseControlled.text = getString(R.string.expenses_controlled, expVsLastFormatted)
 
         // Bar Chart (last 4 months)
         val barData = mutableListOf<BarTrendChartView.BarGroup>()

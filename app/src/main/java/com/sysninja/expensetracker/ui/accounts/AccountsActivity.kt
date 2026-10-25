@@ -12,7 +12,9 @@ import com.sysninja.expensetracker.ExpenseTrackerApp
 import com.sysninja.expensetracker.R
 import com.sysninja.expensetracker.databinding.ActivityAccountsBinding
 import com.sysninja.expensetracker.databinding.ItemAccountCardBinding
+import com.sysninja.expensetracker.domain.DateUtils
 import com.sysninja.expensetracker.domain.MoneyUtils
+import java.util.Locale
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -48,6 +50,35 @@ class AccountsActivity : AppCompatActivity() {
                 val totalCents = balances.sumOf { it.balanceCents }
                 binding.tvHeroTotalBalance.text = MoneyUtils.formatCents(totalCents, currency)
                 binding.tvActiveAccountsChip.text = "${balances.size} ${getString(R.string.active_accounts_label)}"
+
+                // Dynamic MoM Net Worth Growth
+                val start = DateUtils.getStartOfMonth()
+                val end = DateUtils.getEndOfMonth()
+                val income = app.repository.getTotalIncomeInPeriod(start, end).first()
+                val expense = app.repository.getTotalExpenseInPeriod(start, end).first()
+                val netCash = income - expense
+                val startNetWorth = totalCents - netCash
+                val growthPct = when {
+                    startNetWorth > 0L -> ((netCash.toDouble() / startNetWorth.toDouble()) * 100.0).coerceIn(-999.0, 999.0)
+                    startNetWorth == 0L && totalCents > 0L -> 100.0
+                    startNetWorth == 0L && totalCents < 0L -> -100.0
+                    else -> 0.0
+                }
+                val growthFormatted = if (growthPct > 0.0) {
+                    String.format(Locale.getDefault(), "+%.1f%%", growthPct)
+                } else if (growthPct < 0.0) {
+                    String.format(Locale.getDefault(), "%.1f%%", growthPct)
+                } else {
+                    "0.0%"
+                }
+                binding.tvAccountsGrowth.text = getString(R.string.growth_this_month, growthFormatted)
+                if (growthPct >= 0) {
+                    binding.tvAccountsGrowth.setTextColor(ContextCompat.getColor(this@AccountsActivity, R.color.secondary_mint))
+                    binding.layoutAccountsGrowth.setBackgroundResource(R.drawable.bg_badge_cash)
+                } else {
+                    binding.tvAccountsGrowth.setTextColor(ContextCompat.getColor(this@AccountsActivity, R.color.expense_red))
+                    binding.layoutAccountsGrowth.setBackgroundResource(R.drawable.bg_badge_red)
+                }
 
                 // Calculate asset allocation
                 var bankCents = 0L

@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import java.util.Locale
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sysninja.expensetracker.ExpenseTrackerApp
 import com.sysninja.expensetracker.R
@@ -179,6 +181,68 @@ class DashboardFragment : Fragment() {
 
         val accountCount = state.accountBalances.size
         binding.tvAccountsCount.text = getString(R.string.accounts_count, accountCount)
+
+        // MoM Net Worth Growth badge
+        val growthPct = state.netWorthGrowthPct
+        val growthFormatted = if (growthPct > 0.0) {
+            String.format(Locale.getDefault(), "+%.1f%%", growthPct)
+        } else if (growthPct < 0.0) {
+            String.format(Locale.getDefault(), "%.1f%%", growthPct)
+        } else {
+            "0.0%"
+        }
+        val periodResId = when (state.period) {
+            PeriodType.TODAY -> R.string.growth_today
+            PeriodType.THIS_WEEK -> R.string.growth_this_week
+            PeriodType.THIS_MONTH, PeriodType.LAST_MONTH -> R.string.growth_this_month
+            PeriodType.THIS_YEAR -> R.string.growth_this_year
+            else -> R.string.growth_period
+        }
+        binding.tvNetWorthGrowth.text = getString(periodResId, growthFormatted)
+
+        if (growthPct >= 0) {
+            binding.tvNetWorthGrowth.setTextColor(ContextCompat.getColor(requireContext(), R.color.secondary_mint))
+            binding.layoutNetWorthGrowthBadge.setBackgroundResource(R.drawable.bg_badge_cash)
+        } else {
+            binding.tvNetWorthGrowth.setTextColor(ContextCompat.getColor(requireContext(), R.color.expense_red))
+            binding.layoutNetWorthGrowthBadge.setBackgroundResource(R.drawable.bg_badge_red)
+        }
+
+        // Income Growth Badge
+        val incPct = state.incomeGrowthPct
+        val incFormatted = if (incPct > 0.0) {
+            String.format(Locale.getDefault(), "+%.1f%%", incPct)
+        } else if (incPct < 0.0) {
+            String.format(Locale.getDefault(), "%.1f%%", incPct)
+        } else {
+            "0.0%"
+        }
+        binding.tvIncomeGrowthBadge.text = incFormatted
+        if (incPct >= 0.0) {
+            binding.tvIncomeGrowthBadge.setTextColor(ContextCompat.getColor(requireContext(), R.color.secondary_mint))
+            binding.tvIncomeGrowthBadge.setBackgroundResource(R.drawable.bg_badge_cash)
+        } else {
+            binding.tvIncomeGrowthBadge.setTextColor(ContextCompat.getColor(requireContext(), R.color.expense_red))
+            binding.tvIncomeGrowthBadge.setBackgroundResource(R.drawable.bg_badge_red)
+        }
+
+        // Expense Growth Badge
+        val expPct = state.expenseGrowthPct
+        val expFormatted = if (expPct > 0.0) {
+            String.format(Locale.getDefault(), "+%.1f%%", expPct)
+        } else if (expPct < 0.0) {
+            String.format(Locale.getDefault(), "%.1f%%", expPct)
+        } else {
+            "0.0%"
+        }
+        binding.tvExpenseGrowthBadge.text = expFormatted
+        if (expPct > 0.0) {
+            binding.tvExpenseGrowthBadge.setTextColor(ContextCompat.getColor(requireContext(), R.color.expense_red))
+            binding.tvExpenseGrowthBadge.setBackgroundResource(R.drawable.bg_badge_red)
+        } else {
+            binding.tvExpenseGrowthBadge.setTextColor(ContextCompat.getColor(requireContext(), R.color.secondary_mint))
+            binding.tvExpenseGrowthBadge.setBackgroundResource(R.drawable.bg_badge_cash)
+        }
 
         // Category breakdown donut chart
         if (state.categorySpending.isNotEmpty()) {

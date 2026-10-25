@@ -227,10 +227,11 @@
                             tools:text="৳ ৮৫,০০০" />
 
                         <TextView
+                            android:id="@+id/tvIncomeGrowth"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="@string/growth_vs_last_month"
+                            tools:text="+0% vs last month"
                             android:textColor="@color/mint_secondary"
                             android:textSize="9sp" />
                     </LinearLayout>
@@ -272,10 +273,11 @@
                             tools:text="৳ ৪২,১৫০" />
 
                         <TextView
+                            android:id="@+id/tvExpenseControlled"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="@string/expenses_controlled"
+                            tools:text="-0% vs last month"
                             android:textColor="@color/mint_secondary"
                             android:textSize="9sp" />
                     </LinearLayout>

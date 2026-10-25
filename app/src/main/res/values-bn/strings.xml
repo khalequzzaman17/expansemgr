@@ -280,8 +280,8 @@
     <string name="weekly_tab">সাপ্তাহিক</string>
     <string name="monthly_tab">মাসিক</string>
     <string name="yearly_tab">বাৎসরিক</string>
-    <string name="growth_vs_last_month">+৮% বৃদ্ধি</string>
-    <string name="expenses_controlled">-৪% নিয়ন্ত্রিত</string>
+    <string name="growth_vs_last_month">%1$s বিগত মাসের তুলনায়</string>
+    <string name="expenses_controlled">%1$s বিগত মাসের তুলনায়</string>
     <string name="savings_rate_label">সঞ্চয় হার</string>
     <string name="savings_rate_badge">চমৎকার সঞ্চয়</string>
     <string name="cashflow_comparison">আয় বনাম ব্যয় পর্যালোচনা</string>
@@ -336,7 +336,11 @@
     <!-- Account Screen Additions -->
     <string name="all_accounts_synced">সব অ্যাকাউন্ট সিঙ্কড</string>
     <string name="active_accounts_label">সক্রিয় অ্যাকাউন্ট</string>
-    <string name="growth_this_month">+১২.৪% এই মাসে বৃদ্ধি</string>
+    <string name="growth_this_month">%1$s এই মাসে</string>
+    <string name="growth_this_week">%1$s এই সপ্তাহে</string>
+    <string name="growth_today">%1$s আজকে</string>
+    <string name="growth_this_year">%1$s এই বছরে</string>
+    <string name="growth_period">%1$s এই সময়ে</string>
     <string name="last_30_days">গত ৩০ দিন</string>
     <string name="add_new_account">+ নতুন অ্যাকাউন্ট</string>
     <string name="transfer_funds_action">⇄ ট্রান্সফার করুন</string>

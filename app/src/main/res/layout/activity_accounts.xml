@@ -151,6 +151,7 @@
 
                 <!-- Growth Banner -->
                 <LinearLayout
+                    android:id="@+id/layoutAccountsGrowth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -161,10 +162,11 @@
                     android:paddingVertical="8dp">
 
                     <TextView
+                        android:id="@+id/tvAccountsGrowth"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/growth_this_month"
+                        tools:text="+0.0% this month"
                         android:textColor="@color/secondary_mint"
                         android:textSize="12sp"
                         android:textStyle="bold" />

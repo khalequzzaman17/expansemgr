@@ -280,8 +280,8 @@
     <string name="weekly_tab">Weekly</string>
     <string name="monthly_tab">Monthly</string>
     <string name="yearly_tab">Yearly</string>
-    <string name="growth_vs_last_month">+8% vs last month</string>
-    <string name="expenses_controlled">-4% controlled</string>
+    <string name="growth_vs_last_month">%1$s vs last month</string>
+    <string name="expenses_controlled">%1$s vs last month</string>
     <string name="savings_rate_label">Savings Rate</string>
     <string name="savings_rate_badge">Excellent</string>
     <string name="cashflow_comparison">Cash Flow Comparison</string>
@@ -336,7 +336,11 @@
     <!-- Account Screen Additions -->
     <string name="all_accounts_synced">All Accounts Synced</string>
     <string name="active_accounts_label">Active Accounts</string>
-    <string name="growth_this_month">+12.4% this month</string>
+    <string name="growth_this_month">%1$s this month</string>
+    <string name="growth_this_week">%1$s this week</string>
+    <string name="growth_today">%1$s today</string>
+    <string name="growth_this_year">%1$s this year</string>
+    <string name="growth_period">%1$s this period</string>
     <string name="last_30_days">Last 30 Days</string>
     <string name="add_new_account">+ Add Account</string>
     <string name="transfer_funds_action">⇄ Transfer Funds</string>

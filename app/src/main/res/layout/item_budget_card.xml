@@ -58,7 +58,7 @@
                     android:id="@+id/tvCategorySubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Groceries &amp; Supermarket"
+                    tools:text="Groceries &amp; Supermarket"
                     android:textColor="@color/text_muted"
                     android:textSize="11sp" />
             </LinearLayout>

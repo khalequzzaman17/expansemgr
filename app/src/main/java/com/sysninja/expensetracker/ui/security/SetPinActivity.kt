@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.content.res.ColorStateList
 import android.view.Gravity
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -19,6 +20,7 @@ import com.sysninja.expensetracker.R
 import com.sysninja.expensetracker.domain.SecurityManager
 import com.sysninja.expensetracker.ui.dp
 import com.sysninja.expensetracker.ui.stitchToolbar
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class SetPinActivity : AppCompatActivity() {
@@ -27,6 +29,11 @@ class SetPinActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Prevent screen capture / screen recording of PIN setup
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
 
         val root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
@@ -79,6 +86,13 @@ class SetPinActivity : AppCompatActivity() {
         }
         content.addView(saveBtn, LinearLayout.LayoutParams(-1, dp(52)).apply { topMargin = dp(18) })
 
+        // Interactive Biometric Card Toggle
+        val app = application as ExpenseTrackerApp
+        val bioStatusTv = TextView(this).apply {
+            textSize = 11f
+            setTextColor(primaryLight)
+        }
+
         val biometric = MaterialCardView(this).apply {
             setCardBackgroundColor(ContextCompat.getColor(context, R.color.surface_navy_elevated))
             strokeColor = ContextCompat.getColor(context, R.color.stroke_subtle)
@@ -87,10 +101,31 @@ class SetPinActivity : AppCompatActivity() {
             val row = LinearLayout(context).apply { gravity = Gravity.CENTER_VERTICAL; setPadding(dp(14), dp(12), dp(14), dp(12)) }
             row.addView(TextView(context).apply { text = "⌁"; textSize = 24f; setTextColor(primaryLight) }, LinearLayout.LayoutParams(dp(36), dp(36)))
             row.addView(TextView(context).apply { text = "${getString(R.string.biometric_unlock_title)}\n${getString(R.string.biometric_unlock_desc)}"; setTextColor(ContextCompat.getColor(context, R.color.text_primary)); textSize = 12f; setPadding(dp(10), 0, 0, 0) }, LinearLayout.LayoutParams(0, -2, 1f))
-            row.addView(TextView(context).apply { text = getString(R.string.status_active); setTextColor(primaryLight); textSize = 11f })
+            row.addView(bioStatusTv)
             addView(row)
+            setOnClickListener {
+                lifecycleScope.launch {
+                    val currentBio = app.preferencesManager.isBiometricEnabledFlow.first()
+                    val newBio = !currentBio
+                    app.preferencesManager.setBiometricEnabled(newBio)
+                    bioStatusTv.text = if (newBio) getString(R.string.biometric_enabled_status) else getString(R.string.biometric_disabled_status)
+                    bioStatusTv.setTextColor(if (newBio) primaryLight else ContextCompat.getColor(context, R.color.text_muted))
+                    Toast.makeText(
+                        this@SetPinActivity,
+                        if (newBio) getString(R.string.biometric_enabled_status) else getString(R.string.biometric_disabled_status),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
         content.addView(biometric, LinearLayout.LayoutParams(-1, dp(68)).apply { topMargin = dp(16) })
+
+        // Initialize biometric card status
+        lifecycleScope.launch {
+            val isBio = app.preferencesManager.isBiometricEnabledFlow.first()
+            bioStatusTv.text = if (isBio) getString(R.string.biometric_enabled_status) else getString(R.string.biometric_disabled_status)
+            bioStatusTv.setTextColor(if (isBio) primaryLight else ContextCompat.getColor(this@SetPinActivity, R.color.text_muted))
+        }
 
         val disableBtn = MaterialButton(this).apply {
             text = getString(R.string.pin_status_disabled)
@@ -121,7 +156,7 @@ class SetPinActivity : AppCompatActivity() {
         val pin1 = pinEt.text.toString().trim()
         val pin2 = confirmEt.text.toString().trim()
         if (pin1.length < 4) {
-            Toast.makeText(this, "PIN must be at least 4 digits", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.pin_min_digits), Toast.LENGTH_SHORT).show()
             return
         }
         if (pin1 != pin2) {
@@ -143,7 +178,8 @@ class SetPinActivity : AppCompatActivity() {
         val app = application as ExpenseTrackerApp
         lifecycleScope.launch {
             app.preferencesManager.disablePin()
-            Toast.makeText(this@SetPinActivity, "PIN lock disabled", Toast.LENGTH_SHORT).show()
+            SecurityManager.resetSession()
+            Toast.makeText(this@SetPinActivity, getString(R.string.pin_disabled), Toast.LENGTH_SHORT).show()
             finish()
         }
     }

@@ -484,4 +484,13 @@
     <string name="use_pin_instead">Use PIN</string>
     <string name="forgot_pin_label">Forgot PIN?</string>
     <string name="pin_forgot_hint">Please use your backup file or master credentials</string>
+    <string name="contribution_amount_hint">Contribution amount</string>
+    <string name="contribution_recorded">Contribution recorded!</string>
+    <string name="repayment_saved">Repayment saved!</string>
+    <string name="pin_min_digits">PIN must be at least 4 digits</string>
+    <string name="pin_disabled">PIN lock disabled</string>
+    <string name="remaining_total_format">Remaining: %1$s / Total: %2$s</string>
+    <string name="too_many_attempts_lockout">Too many attempts. Locked for %1$d seconds</string>
+    <string name="biometric_enabled_status">Biometric Enabled</string>
+    <string name="biometric_disabled_status">Biometric Disabled</string>
 </resources>

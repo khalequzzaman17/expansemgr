@@ -484,4 +484,13 @@
     <string name="use_pin_instead">পিন ব্যবহার করুন</string>
     <string name="forgot_pin_label">পিন মনে নেই?</string>
     <string name="pin_forgot_hint">অনুগ্রহ করে আপনার মাস্টার সিকিউরিটি ব্যাকআপ ব্যবহার করুন</string>
+    <string name="contribution_amount_hint">জমার পরিমাণ</string>
+    <string name="contribution_recorded">জমা সফলভাবে যোগ করা হয়েছে!</string>
+    <string name="repayment_saved">পরিশোধ সংরক্ষিত হয়েছে!</string>
+    <string name="pin_min_digits">পিন কমপক্ষে ৪ সংখ্যার হতে হবে</string>
+    <string name="pin_disabled">পিন লক নিষ্ক্রিয় করা হয়েছে</string>
+    <string name="remaining_total_format">বকেয়া: %1$s / মোট: %2$s</string>
+    <string name="too_many_attempts_lockout">অনেক ভুল চেষ্টা। অপেক্ষা করুন %1$d সেকেন্ড</string>
+    <string name="biometric_enabled_status">বায়োমেট্রিক সক্রিয়</string>
+    <string name="biometric_disabled_status">বায়োমেট্রিক নিষ্ক্রিয়</string>
 </resources>

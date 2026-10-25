@@ -65,7 +65,7 @@ class SavingsDetailActivity : AppCompatActivity() {
         content.addView(progressTv)
 
         val depositEt = EditText(this).apply {
-            hint = "Contribution amount"
+            hint = getString(R.string.contribution_amount_hint)
             inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
             setTextColor(ContextCompat.getColor(this@SavingsDetailActivity, R.color.text_primary))
             setHintTextColor(ContextCompat.getColor(this@SavingsDetailActivity, R.color.text_muted))
@@ -90,7 +90,7 @@ class SavingsDetailActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     val goal = app.repository.getSavingsGoalById(goalId) ?: return@launch
                     app.repository.updateSavingsGoal(goal.copy(currentAmountCents = goal.currentAmountCents + amt))
-                    Toast.makeText(this@SavingsDetailActivity, "Contribution recorded!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SavingsDetailActivity, getString(R.string.contribution_recorded), Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }

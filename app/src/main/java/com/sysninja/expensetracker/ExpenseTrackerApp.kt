@@ -30,6 +30,7 @@ class ExpenseTrackerApp : Application() {
 
         ReminderNotificationHelper.createNotificationChannel(this)
         com.sysninja.expensetracker.domain.LocaleManager.initAppLocale(this)
+        registerActivityLifecycleCallbacks(com.sysninja.expensetracker.domain.AppLockLifecycleManager(this))
         scheduleRecurringWorker()
     }
 

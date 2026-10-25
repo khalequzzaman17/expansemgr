@@ -92,7 +92,7 @@ class DebtDetailActivity : AppCompatActivity() {
                     val newRemaining = (debt.outstandingBalanceCents - amt).coerceAtLeast(0L)
                     val newStatus = if (newRemaining == 0L) "PAID" else "PENDING"
                     app.repository.updateDebt(debt.copy(outstandingBalanceCents = newRemaining, status = newStatus))
-                    Toast.makeText(this@DebtDetailActivity, "Repayment saved!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@DebtDetailActivity, getString(R.string.repayment_saved), Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }
@@ -107,7 +107,11 @@ class DebtDetailActivity : AppCompatActivity() {
             val currency = app.preferencesManager.currencySymbolFlow.first()
             val debt = app.repository.getDebtById(debtId) ?: return@launch
             titleTv.text = "${debt.personName} (${debt.type})"
-            amountTv.text = "Remaining: ${MoneyUtils.formatCents(debt.outstandingBalanceCents, currency)} / Total: ${MoneyUtils.formatCents(debt.originalAmountCents, currency)}"
+            amountTv.text = getString(
+                R.string.remaining_total_format,
+                MoneyUtils.formatCents(debt.outstandingBalanceCents, currency),
+                MoneyUtils.formatCents(debt.originalAmountCents, currency)
+            )
         }
     }
 }

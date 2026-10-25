@@ -77,11 +77,12 @@
                         android:background="@drawable/bg_circle_savings">
 
                         <TextView
+                            android:id="@+id/tvProfileAvatar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="sans-serif-bold"
-                            android:text="K"
+                            android:text="U"
                             android:textColor="@color/teal_primary"
                             android:textSize="22sp" />
                     </FrameLayout>
@@ -98,7 +99,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-bold"
-                            android:text="Khalequzzaman"
+                            android:text="@string/default_user_name"
                             android:textColor="@color/text_primary"
                             android:textSize="16sp" />
 

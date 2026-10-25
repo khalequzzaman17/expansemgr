@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.domain
+package com.sysninja.expensetracker.domain
 
 import android.graphics.Color
 import android.graphics.Paint
@@ -156,7 +156,7 @@ object PdfExporter {
         }
 
         // Footer
-        canvas.drawText("Page $pageNumber  |  Expense Tracker developed by Khalequzzaman", MARGIN.toFloat(), PAGE_HEIGHT - 20f, subTitlePaint)
+        canvas.drawText("Page $pageNumber  |  Expense Tracker Ledger Export", MARGIN.toFloat(), PAGE_HEIGHT - 20f, subTitlePaint)
 
         document.finishPage(page)
         document.writeTo(outputStream)

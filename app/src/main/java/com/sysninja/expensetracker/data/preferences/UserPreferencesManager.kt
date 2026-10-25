@@ -1,4 +1,4 @@
-﻿package com.sysninja.expensetracker.data.preferences
+package com.sysninja.expensetracker.data.preferences
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -14,6 +14,7 @@ class UserPreferencesManager(private val context: Context) {
     companion object {
         val KEY_CURRENCY = stringPreferencesKey("currency_symbol")
         val KEY_LANGUAGE = stringPreferencesKey("language")
+        val KEY_USER_NAME = stringPreferencesKey("user_name")
         val KEY_DEFAULT_PERIOD = stringPreferencesKey("default_period")
         val KEY_PIN_ENABLED = booleanPreferencesKey("pin_enabled")
         val KEY_PIN_HASH = stringPreferencesKey("pin_hash")
@@ -21,6 +22,10 @@ class UserPreferencesManager(private val context: Context) {
         val KEY_BIOMETRIC_ENABLED = booleanPreferencesKey("biometric_enabled")
         val KEY_NOTIFICATIONS_ENABLED = booleanPreferencesKey("notifications_enabled")
         val KEY_BUDGET_WARNING_THRESHOLD = intPreferencesKey("budget_warning_threshold")
+    }
+
+    val userNameFlow: Flow<String> = context.dataStore.data.map { prefs ->
+        prefs[KEY_USER_NAME] ?: ""
     }
 
     val currencySymbolFlow: Flow<String> = context.dataStore.data.map { prefs ->
@@ -98,5 +103,9 @@ class UserPreferencesManager(private val context: Context) {
 
     suspend fun setBudgetWarningThreshold(threshold: Int) {
         context.dataStore.edit { it[KEY_BUDGET_WARNING_THRESHOLD] = threshold }
+    }
+
+    suspend fun setUserName(name: String) {
+        context.dataStore.edit { it[KEY_USER_NAME] = name.trim() }
     }
 }

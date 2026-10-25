@@ -494,4 +494,10 @@
     <string name="biometric_enabled_status">বায়োমেট্রিক সক্রিয়</string>
     <string name="biometric_disabled_status">বায়োমেট্রিক নিষ্ক্রিয়</string>
     <string name="savings_rate_pct_label">%1$d%% সঞ্চয়</string>
+    <string name="welcome_title">হিসাব খাতায় স্বাগতম</string>
+    <string name="enter_your_name_prompt">আপনার হিসাব খাতা সাজাতে অনুগ্রহ করে আপনার নাম লিখুন</string>
+    <string name="enter_name_hint">আপনার নাম লিখুন</string>
+    <string name="save_name_action">এগিয়ে যান</string>
+    <string name="edit_name_title">নাম পরিবর্তন করুন</string>
+    <string name="default_user_name">ব্যবহারকারী</string>
 </resources>

@@ -14,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sysninja.expensetracker.ExpenseTrackerApp
 import com.sysninja.expensetracker.R
 import com.sysninja.expensetracker.data.model.PeriodType
 import com.sysninja.expensetracker.databinding.FragmentDashboardBinding
@@ -114,6 +115,17 @@ class DashboardFragment : Fragment() {
                 val msg = if (newLang == "bn") "ভাষা বাংলা নির্বাচন করা হয়েছে" else "Language switched to English"
                 android.widget.Toast.makeText(requireContext(), msg, android.widget.Toast.LENGTH_SHORT).show()
             }
+        }
+
+        val app = requireContext().applicationContext as ExpenseTrackerApp
+        viewLifecycleOwner.lifecycleScope.launch {
+            app.preferencesManager.userNameFlow.collect { name ->
+                binding.tvUserName.text = name.ifBlank { getString(R.string.default_user_name) }
+            }
+        }
+
+        binding.tvUserName.setOnClickListener {
+            showEditNameDialog()
         }
 
         binding.tvSeeAllTransactions.setOnClickListener {
@@ -227,6 +239,40 @@ class DashboardFragment : Fragment() {
             binding.rvRecentTransactions.visibility = View.GONE
             binding.tvNoRecentTransactions.visibility = View.VISIBLE
         }
+    }
+
+    private fun showEditNameDialog() {
+        val app = requireContext().applicationContext as ExpenseTrackerApp
+        val container = android.widget.FrameLayout(requireContext()).apply {
+            val padH = (24 * resources.displayMetrics.density).toInt()
+            val padV = (12 * resources.displayMetrics.density).toInt()
+            setPadding(padH, padV, padH, padV / 2)
+        }
+        val input = android.widget.EditText(requireContext()).apply {
+            hint = getString(R.string.enter_name_hint)
+            setText(binding.tvUserName.text.toString().takeIf { it != getString(R.string.default_user_name) } ?: "")
+            setTextColor(androidx.core.content.ContextCompat.getColor(requireContext(), R.color.text_primary))
+            setHintTextColor(androidx.core.content.ContextCompat.getColor(requireContext(), R.color.text_muted))
+            setBackgroundResource(R.drawable.bg_edit_text)
+            val pad = (14 * resources.displayMetrics.density).toInt()
+            setPadding(pad, pad, pad, pad)
+            isSingleLine = true
+        }
+        container.addView(input)
+
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.edit_name_title))
+            .setView(container)
+            .setPositiveButton(getString(R.string.save_name_action)) { dialog, _ ->
+                val entered = input.text.toString().trim()
+                val finalName = if (entered.isNotBlank()) entered else getString(R.string.default_user_name)
+                viewLifecycleOwner.lifecycleScope.launch {
+                    app.preferencesManager.setUserName(finalName)
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
     }
 
     override fun onDestroyView() {

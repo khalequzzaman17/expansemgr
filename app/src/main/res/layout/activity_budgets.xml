@@ -23,7 +23,7 @@
             app:navigationIconTint="@color/text_primary"
             app:subtitle="@string/budget_overview"
             app:subtitleTextColor="@color/teal_primary"
-            app:title="@string/budgets_hub_title"
+            app:title="@string/budgets_title"
             app:titleTextColor="@color/text_primary" />
 
         <!-- Master Monthly Cap Hero Card -->

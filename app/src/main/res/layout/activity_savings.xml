@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="@color/text_primary"
-            app:title="সঞ্চয় ও লক্ষ্য"
+            app:title="@string/savings_goals_title"
             app:titleTextColor="@color/text_primary">
 
             <LinearLayout
@@ -101,7 +101,7 @@
                             android:background="@drawable/bg_pill_sync"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="3dp"
-                            android:text="০% অর্জিত"
+                            tools:text="0%"
                             android:textColor="@color/mint_secondary"
                             android:textSize="11sp"
                             android:textStyle="bold" />

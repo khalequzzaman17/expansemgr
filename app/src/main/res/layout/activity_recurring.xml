@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="@color/text_primary"
-            app:title="পুনরাবৃত্ত লেনদেন"
+            app:title="@string/recurring_bills_title"
             app:titleTextColor="@color/text_primary">
 
             <LinearLayout

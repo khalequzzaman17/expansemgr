@@ -21,9 +21,9 @@
             android:background="@color/surface_lowest"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="@color/text_primary"
-            app:subtitle="হিসাব খাতা • Spending Targets"
+            app:subtitle="@string/budget_overview"
             app:subtitleTextColor="@color/teal_primary"
-            app:title="বাজেট ও খরচ সীমা"
+            app:title="@string/budgets_hub_title"
             app:titleTextColor="@color/text_primary" />
 
         <!-- Master Monthly Cap Hero Card -->

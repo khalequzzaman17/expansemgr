@@ -493,4 +493,5 @@
     <string name="too_many_attempts_lockout">অনেক ভুল চেষ্টা। অপেক্ষা করুন %1$d সেকেন্ড</string>
     <string name="biometric_enabled_status">বায়োমেট্রিক সক্রিয়</string>
     <string name="biometric_disabled_status">বায়োমেট্রিক নিষ্ক্রিয়</string>
+    <string name="savings_rate_label">%1$d%% সঞ্চয়</string>
 </resources>

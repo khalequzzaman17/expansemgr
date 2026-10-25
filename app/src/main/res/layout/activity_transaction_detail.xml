@@ -17,9 +17,9 @@
             android:layout_height="60dp"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="@color/text_primary"
-            app:subtitle="লেনদেনের বিবরণ"
+            app:subtitle="@string/app_name"
             app:subtitleTextColor="@color/teal_primary"
-            app:title="Transaction Details"
+            app:title="@string/transaction_details"
             app:titleTextColor="@color/text_primary" />
     </com.google.android.material.appbar.AppBarLayout>
 

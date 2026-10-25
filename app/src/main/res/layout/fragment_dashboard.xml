@@ -83,7 +83,7 @@
                     android:background="@drawable/bg_pill_sync"
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
-                    android:text="EN | বাং"
+                    tools:text="বাংলা"
                     android:textColor="@color/text_secondary"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -574,7 +574,7 @@
                     android:background="@drawable/bg_badge_cash"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="3dp"
-                    android:text="50.4% সঞ্চয়"
+                    tools:text="50.4%"
                     android:textColor="@color/teal_light"
                     android:textSize="11sp"
                     android:textStyle="bold" />

@@ -24,6 +24,9 @@ class AppLockLifecycleManager(private val app: ExpenseTrackerApp) : Application.
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+        // Enforce active locale synchronously on activity resources
+        LocaleManager.applyLocaleDirect(activity, LocaleManager.getPersistedLanguage(activity))
+
         // Enforce FLAG_SECURE on sensitive security activities
         if (activity is PinLockActivity || activity is SetPinActivity) {
             activity.window.setFlags(

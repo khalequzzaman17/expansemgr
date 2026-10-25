@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="@color/text_primary"
-            app:title="ব্যাকআপ ও রিস্টোর"
+            app:title="@string/backup_restore_title"
             app:titleTextColor="@color/text_primary">
 
             <LinearLayout

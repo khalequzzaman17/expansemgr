@@ -1,46 +1,84 @@
 package com.sysninja.expensetracker.domain
 
+import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import com.sysninja.expensetracker.ExpenseTrackerApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 object LocaleManager {
 
     const val LANG_EN = "en"
     const val LANG_BN = "bn"
 
+    private const val PREF_NAME = "locale_preferences"
+    private const val KEY_SELECTED_LANGUAGE = "selected_language"
+
+    private fun getPrefs(context: Context): SharedPreferences {
+        return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+    }
+
+    /**
+     * Gets the currently persisted language synchronously. Default is English ("en").
+     */
+    fun getPersistedLanguage(context: Context): String {
+        return getPrefs(context).getString(KEY_SELECTED_LANGUAGE, LANG_EN) ?: LANG_EN
+    }
+
     /**
      * Initializes the locale from preferences or defaults to English.
      */
     fun initAppLocale(app: ExpenseTrackerApp) {
-        CoroutineScope(Dispatchers.Main).launch {
-            val savedLang = app.preferencesManager.languageFlow.first()
-            val currentLocales = AppCompatDelegate.getApplicationLocales()
-            val currentTag = if (!currentLocales.isEmpty) currentLocales.toLanguageTags() else ""
-
-            val targetLang = if (savedLang.startsWith("bn", ignoreCase = true)) LANG_BN else LANG_EN
-            if (!currentTag.startsWith(targetLang, ignoreCase = true)) {
-                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(targetLang))
-            }
-        }
+        val lang = getPersistedLanguage(app)
+        applyLocaleDirect(app, lang)
+        val appLocales = LocaleListCompat.forLanguageTags(lang)
+        AppCompatDelegate.setApplicationLocales(appLocales)
     }
 
     /**
-     * Switches the app language, saves to preferences, and applies the locale.
+     * Applies locale configuration directly to resources.
+     */
+    fun applyLocaleDirect(context: Context, lang: String): Context {
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+
+        val res = context.resources
+        val config = Configuration(res.configuration)
+        config.setLocale(locale)
+        config.setLayoutDirection(locale)
+
+        @Suppress("DEPRECATION")
+        res.updateConfiguration(config, res.displayMetrics)
+        return context.createConfigurationContext(config)
+    }
+
+    /**
+     * Switches the app language, saves to preferences synchronously, and applies the locale.
      */
     fun switchLanguage(context: Context, newLang: String, onComplete: (() -> Unit)? = null) {
-        val app = context.applicationContext as ExpenseTrackerApp
         val targetLang = if (newLang.startsWith("bn", ignoreCase = true)) LANG_BN else LANG_EN
+        getPrefs(context).edit().putString(KEY_SELECTED_LANGUAGE, targetLang).commit()
 
-        CoroutineScope(Dispatchers.Main).launch {
-            app.preferencesManager.setLanguage(targetLang)
-            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(targetLang))
-            onComplete?.invoke()
+        val app = context.applicationContext as? ExpenseTrackerApp
+        app?.let {
+            CoroutineScope(Dispatchers.Main).launch {
+                it.preferencesManager.setLanguage(targetLang)
+            }
+        }
+
+        applyLocaleDirect(context, targetLang)
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(targetLang))
+
+        onComplete?.invoke()
+
+        if (context is Activity) {
+            context.recreate()
         }
     }
 
@@ -48,7 +86,7 @@ object LocaleManager {
      * Toggles between English and Bangla.
      */
     fun toggleLanguage(context: Context, onComplete: ((String) -> Unit)? = null) {
-        val current = getCurrentLanguage()
+        val current = getCurrentLanguage(context)
         val next = if (current == LANG_BN) LANG_EN else LANG_BN
         switchLanguage(context, next) {
             onComplete?.invoke(next)
@@ -58,7 +96,10 @@ object LocaleManager {
     /**
      * Gets current language code: "en" or "bn"
      */
-    fun getCurrentLanguage(): String {
+    fun getCurrentLanguage(context: Context? = null): String {
+        context?.let {
+            return getPersistedLanguage(it)
+        }
         val appLocales = AppCompatDelegate.getApplicationLocales()
         if (!appLocales.isEmpty) {
             val tag = appLocales.toLanguageTags()
@@ -70,7 +111,7 @@ object LocaleManager {
     /**
      * Human readable display label for toggle button.
      */
-    fun getToggleLabel(): String {
-        return if (getCurrentLanguage() == LANG_BN) "EN | বাং" else "বাং | EN"
+    fun getToggleLabel(context: Context? = null): String {
+        return if (getCurrentLanguage(context) == LANG_BN) "English" else "বাংলা"
     }
 }

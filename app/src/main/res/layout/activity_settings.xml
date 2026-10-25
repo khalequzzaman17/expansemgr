@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="@color/text_primary"
-            app:title="সেটিংস ও পছন্দ"
+            app:title="@string/settings_title"
             app:titleTextColor="@color/text_primary">
 
             <LinearLayout
@@ -525,7 +525,7 @@
                             android:id="@+id/tvCurrentLanguage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="English (Default) • switch to বাংলা"
+                            android:text="@string/english"
                             android:textColor="@color/text_muted"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -537,7 +537,7 @@
                         android:background="@drawable/bg_pill_sync"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="4dp"
-                        android:text="EN | বাং"
+                        android:text="@string/english"
                         android:textColor="@color/teal_primary"
                         android:textSize="11sp"
                         android:textStyle="bold" />

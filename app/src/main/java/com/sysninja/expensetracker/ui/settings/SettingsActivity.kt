@@ -94,13 +94,13 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun updateLanguageUI() {
-        val current = LocaleManager.getCurrentLanguage()
+        val current = LocaleManager.getCurrentLanguage(this)
         if (current == LocaleManager.LANG_BN) {
-            binding.tvCurrentLanguage.text = "বাংলা (Bangla) • ইংরেজি করতে চাপুন"
-            binding.tvLangBadge.text = "বাং | EN"
+            binding.tvCurrentLanguage.text = getString(R.string.bangla)
+            binding.tvLangBadge.text = "বাং"
         } else {
-            binding.tvCurrentLanguage.text = "English (Default) • switch to বাংলা"
-            binding.tvLangBadge.text = "EN | বাং"
+            binding.tvCurrentLanguage.text = getString(R.string.english)
+            binding.tvLangBadge.text = "EN"
         }
     }
 

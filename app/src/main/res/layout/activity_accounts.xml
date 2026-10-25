@@ -21,9 +21,9 @@
             android:background="@color/surface_lowest"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="@color/text_primary"
-            app:subtitle="হিসাব খাতা • Wallets"
+            app:subtitle="@string/all_accounts_synced"
             app:subtitleTextColor="@color/teal_primary"
-            app:title="Accounts &amp; Wallets"
+            app:title="@string/accounts_summary"
             app:titleTextColor="@color/text_primary" />
 
         <!-- Greeting & Context Indicator -->
@@ -310,7 +310,7 @@
                             android:id="@+id/tvPctBank"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="৬০%"
+                            tools:text="60%"
                             android:textColor="@color/teal_primary"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -337,7 +337,7 @@
                             android:id="@+id/tvPctMfs"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="২৫%"
+                            tools:text="25%"
                             android:textColor="@color/tertiary_container"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -364,7 +364,7 @@
                             android:id="@+id/tvPctCash"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="১৫%"
+                            tools:text="15%"
                             android:textColor="@color/secondary_mint"
                             android:textSize="13sp"
                             android:textStyle="bold" />

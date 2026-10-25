@@ -108,9 +108,9 @@ class DashboardFragment : Fragment() {
             })
         }
 
-        binding.btnLangToggle.text = if (com.sysninja.expensetracker.domain.LocaleManager.getCurrentLanguage() == "bn") "বাং | EN" else "EN | বাং"
+        binding.btnLangToggle.text = com.sysninja.expensetracker.domain.LocaleManager.getToggleLabel(requireContext())
         binding.btnLangToggle.setOnClickListener {
-            com.sysninja.expensetracker.domain.LocaleManager.toggleLanguage(requireContext()) { newLang ->
+            com.sysninja.expensetracker.domain.LocaleManager.toggleLanguage(requireActivity()) { newLang ->
                 val msg = if (newLang == "bn") "ভাষা বাংলা নির্বাচন করা হয়েছে" else "Language switched to English"
                 android.widget.Toast.makeText(requireContext(), msg, android.widget.Toast.LENGTH_SHORT).show()
             }
@@ -159,6 +159,11 @@ class DashboardFragment : Fragment() {
 
         val cashFlowPrefix = if (state.netCashFlow >= 0) "+ " else ""
         binding.tvNetCashFlow.text = "$cashFlowPrefix${MoneyUtils.formatCents(state.netCashFlow, currency)}"
+
+        val savingsPct = if (state.totalIncome > 0) {
+            ((state.netCashFlow.toDouble() / state.totalIncome.toDouble()) * 100).coerceAtLeast(0.0).toInt()
+        } else 0
+        binding.tvSavingsRate.text = getString(R.string.savings_rate_label, savingsPct)
 
         val accountCount = state.accountBalances.size
         binding.tvAccountsCount.text = getString(R.string.accounts_count, accountCount)

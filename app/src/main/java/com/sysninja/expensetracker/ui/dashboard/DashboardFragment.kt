@@ -163,7 +163,7 @@ class DashboardFragment : Fragment() {
         val savingsPct = if (state.totalIncome > 0) {
             ((state.netCashFlow.toDouble() / state.totalIncome.toDouble()) * 100).coerceAtLeast(0.0).toInt()
         } else 0
-        binding.tvSavingsRate.text = getString(R.string.savings_rate_badge, savingsPct)
+        binding.tvSavingsRate.text = getString(R.string.savings_rate_pct_label, savingsPct)
 
         val accountCount = state.accountBalances.size
         binding.tvAccountsCount.text = getString(R.string.accounts_count, accountCount)
